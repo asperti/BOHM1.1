@@ -1,0 +1,50 @@
+{This file contains a mergesort algorithm operating over
+ arrays of integers represented as functions, i.e. a[i] =  a(i).}
+
+{merge of two "arrays"}
+def merge = rec merge1 
+            = \f1.\f2.\i. 
+                 let f11 = (f1 1) in
+                 let f21 = (f2 1) in
+                   if f11 < f21 then 
+                      if i == 1 then f11
+                                else (merge1 \x.(f1 x+1) f2 i-1)
+                   else 
+                      if i == 1 then f21
+                                else (merge1 f1 \x.(f2 x+1) i-1);;
+
+{mergesort}
+def mergesort = rec mergesort1 
+                = \f.\m.\n. 
+                if m == n then \x.if x == 1 then (f m) else 10000
+                          else let half = (m+n) div 2 in
+                               let f1 = (mergesort1 f m half) in
+                               let f2 = (mergesort1 f half+1 n) in
+                          (merge f1 f2);;
+
+{examples of "arrays". In all examples, integers are
+ initially presented in reverse order.}
+
+def venti = \x.21-x;;
+
+def quaranta = \x.41-x;;
+
+def cinquanta = \x.51-x;;
+
+def sessanta = \x.61-x;;
+
+def settanta = \x.71-x;;
+
+{examples of invocations of mergesort. The parameters of
+ mergesort are the function representing the array, and the
+ initial and final index of the array.}
+
+def ventiord = (mergesort venti 1 20);;
+
+def quarantaord = (mergesort quaranta 1 40);;
+
+def cinquantaord = (mergesort cinquanta 1 50);;
+
+def sessantaord = (mergesort sessanta 1 60);;
+
+

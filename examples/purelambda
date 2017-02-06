@@ -1,0 +1,101 @@
+{This file contains some examples of pure lambda terms}
+
+{booleans}
+def T = \x.\y.x;;
+def F = \x.\y.y;;
+
+def neg = \b.\x.\y.(b y x);;
+def andb = \b1.\b2.\x.\y.(b1 (b2 x y) y);;
+def orb = \b1.\b2.\x.\y.(b1 x (b2 x y));;
+
+
+{main combinatorial constants}
+def I = \x.x;;
+def K = \x.\y.x;;
+def S = \x.\y.\z.(x z (y z));;
+
+{Church numerals}
+def zero = \x.\y.y;;
+def one = \x.\y.(x y);;
+def two = \x.\y.(x (x y));;
+def three = \x.\y.(x (x (x y)));;
+def four = \x.\y.(x (x (x (x y))));;
+def five = \x.\y.(x (x (x (x (x y)))));;
+def six = \x.\y.(x (x (x (x (x (x y))))));;
+def seven = \x.\y.(x (x (x (x (x (x (x y)))))));;
+def eight = \x.\y.(x (x (x (x (x (x (x (x y))))))));;
+def nine = \x.\y.(x (x (x (x (x (x (x (x (x y)))))))));;
+def ten  = \x.\y.(x (x (x (x (x (x (x (x (x (x y))))))))));;
+
+{Fixpoint}
+def A = \x.\y.(y (x x y));;
+def Y = (A A);;
+
+{Arithmetics}
+def Succ = \n.\x.\y.(x (n x y));;
+def Add = \n.\m.\x.\y.(n x (m x y));;
+def Mult = \n.\m.\x.(n (m x));;
+def Test = \n.\x.\y.(n (K y) x);;
+
+{Lists and Projections}
+def Pair = \x.\y.\z.(z x y);;
+def Fst = \x.\y.x;;
+def Snd = \x.\y.y;;
+
+{Tuples}
+def t2 = \x.\y.\t.(t x y);;
+def t3 = \x.\y.\z.\t.(t x y z);;
+
+{Predecessor}
+def Next = \p.let n = (p Snd) in (Pair n (Succ n));;
+def Pred = \n.(n Next (Pair zero zero) Fst);;
+
+def Pred1 = \n.\x.\y.(n \p.let s = (p Snd) in (Pair s (x s)) (Pair y y) Fst);;
+def Pred2 = \n.\x.\y.(n \p.(T I x (p Snd)) (T I I y) Fst);;
+def Pred3 = \n.\x.\y.(n \p.(Pair (p Snd) (x (p Snd))) (Pair y y) Fst);;
+
+{Subtraction and relational operations}
+def Sub = \n.\m.(m Pred n);;
+def Subabs = \n.\m.(Add (Sub n m) (Sub m n));;
+def Comp = \n.\m.(Test (Subabs n m));;
+def Moreorequal = \n.\m.(Test (Sub m n));;
+def Lessorequal = \n.\m.(Test (Sub n m));;
+
+{Factorial (general recursive)}
+def Factaux = \f.\n.(Test n one (Mult n (f (Pred n))));;
+def Factrec = (Y Factaux);;
+
+def MuFact = rec MuFact 
+             = \n.(Test n one (Mult n (MuFact (Pred n))));;
+
+{Factorial (primitive recursive)}
+def Next1 = \p.let n1 = (p Fst) in 
+               let n2 = (Succ (p Snd)) in 
+                 (Pair (Mult n1 n2) n2);;
+
+def Factprim = \n.(n Next1 (Pair one zero) Fst);;
+
+{Fibonacci (general recursive)}
+def Testone = \n.(Test (Pred n));;
+
+def Fiboaux = \f.\n.(Test n zero
+		 	let pn = (Pred n) in
+                          (Test pn one
+                             (Add (f pn) (f (Pred pn)))));;
+
+def Fiborec = (Y Fiboaux);;
+
+{Fibonacci (primitive recursive)}
+
+def MuFibo = rec MuFibo 
+             = \n.(Test n zero
+		      let pn = (Pred n) in
+			(Test pn one
+			  (Add (MuFibo pn) (MuFibo (Pred pn)))));;
+
+def Nextfibo = \p.let n1 = (p Fst) in 
+                  let n2 = (p Snd) in
+                  (Pair (Add n1 n2) n1);;
+
+def Fiboprim = \n.(n Nextfibo (Pair zero one) Fst);;
+

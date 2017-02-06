@@ -1,0 +1,25 @@
+{This file contains an example of function for computing the 
+ transitive closure of a graph based on Roy-Warshall algorithm.
+ Nodes are supposed to be integers, and the graph is represented 
+ by the characteristic function f of its edges, i.e. f(n,m) = 1
+ iff there is an edge from n to m (and 0 otherwise).}
+
+{(iterate n g f) = (g n (g n-1 (g n-2 (... (g 1 f))))) }
+def iterate = rec it 
+              = \n.\g.\f. if n == 0 then f 
+			  else (g n (it (n-1) g f));;
+
+{Roy-Warshall's function phi}
+def phi = \n.\g.\a.\b. let ga = (g a) in
+                       if (((ga n) == 1) and ((g n b) == 1)) 
+                          then 1
+                          else (ga b);;
+
+{transitive closure of a graph with n nodes}
+def tranclos = \n. (iterate n phi);;
+
+{the following function represents a graph where each node n
+ is connected to its predecessor}
+def g = \n.\m. if (n == (m+1)) then 1 else 0;;
+
+

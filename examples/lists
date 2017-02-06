@@ -1,0 +1,80 @@
+{This file contains some examples of programs over lists}
+
+{lenght of a list}
+def lenght = rec l = \x.if isnil(x) then 0 
+                                       else 1 + (l tail(x));;
+
+{append}
+def append = rec a = \l1.\l2. if isnil(l1) 
+                 then l2 
+                 else cons(head(l1),(a tail(l1) l2));;
+
+{revert}
+def rev = rec r = \x. if isnil(x) 
+                 then x 
+                 else (append (r tail(x)) [head(x)]);;
+
+{sum of the elements of an integer list}
+def sigma = rec s = \x. if isnil(x) 
+                 then 0 
+                 else head(x) + (s tail(x));;
+
+{product of the elements of an integer list}
+def pi = rec p = \x. if isnil(x) 
+                 then 1 
+                 else head(x) * (p tail(x));;
+{mapfun}
+def map = rec m = \f.\y. if isnil(y) 
+                 then y 
+                 else cons((f head(y)),(m f tail(y)));;
+
+{flat tansforms a list of lists into a flat list of all elements}
+def flat = rec f = \x. if isnil(x) 
+                 then x 
+                 else (append head(x) (f tail(x)));;
+
+{listIt}
+def listIt = rec lIt = \f.\l.\e.
+		if isnil(l) then e else (f head(l) (lIt f tail(l) e));;
+
+{itList}
+def itList = rec itL = \f.\e.\l.
+		if isnil(l) then e else  (itL f (f e head(l)) tail(l));;
+
+{partition takes a boolean test function t, a list of elements l, 
+ and split it into two sub-lists, according to the the test}
+def partition = \t.\l.
+                let switch = \e.\l2.
+                    if (t e) then [head(l2),cons(e,head(tail(l2)))]
+                             else [cons(e,head(l2)),head(tail(l2))]
+		in (listIt switch l [nil,nil]);; 
+
+{quicksort}
+def filter = \t.\l.head(tail((partition t l)));;
+
+def insert = rec ins = \e.\l. if isnil(l) 
+               then [e] 
+	       else if e <= head(l) 
+                   then cons(e,l)
+		   else cons(head(l),(ins e tail(l)));;
+
+def quicksort = rec qs = \l. if isnil(l) 
+                then nil 
+                else if (lenght l) == 1 
+                  then l 
+                  else let l1 = head((partition \x.head(l) <= x tail(l))) 
+                       in let l2 = head(tail((partition \y.head(l) < y tail(l)))) 
+                          in (append (qs l1) cons(head(l),(qs l2)));;  
+
+{genlist takes an integer n and generates the list of integers 
+ from n to 0 in decreasing order}
+
+def genlist = rec gen = \n.if n == 0 then nil else cons(n,(gen (n-1)));;
+
+ 
+
+
+
+
+
+

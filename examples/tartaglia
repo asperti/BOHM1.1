@@ -1,0 +1,38 @@
+{Tartaglia's triangle (known abroad as Newton's triangle)}
+
+{row 0}
+def init = \x. if x == 1 then 1 else 0;;
+
+{the function "eval" evaluates an input function f in 
+ the interval 0-n}
+
+{next row in tartaglia's triangle}
+def next = \f.\x. (f (x-1))+(f x);;
+
+{tartaglia m n gives the n-th element in the m-th row of
+tartaglia's triangle}
+
+def tartaglia = rec tartaux = \m.
+                  if m == 0 then init
+                  else (next (tartaux (m-1)));;
+
+{A different implementation of Tartaglia, to explain that we are
+not sharing calls to (f x) with different histories.}
+
+{the following function "forces" the evaluation of f up to m, realizing
+a naive form of memoization; semantically, for any m, eval f m = f}
+
+def eval = \f.\m.\n. if n >= m then (f n)
+                     else ((rec force = \i.
+                             if n==i then (f i)
+			     else (force (i-1))) m);; 
+		    
+def tartaglia1 = rec tartaux = \m.
+                   if m == 0
+                     then init
+                     else (eval (next (tartaux (m-1))) (m-1));; 
+
+{tartaglia1 is faster than tartaglia}
+
+
+

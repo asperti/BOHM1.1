@@ -1,0 +1,16 @@
+{Bohm is lazy: you can work with lazy types such as streams}
+
+def intsFrom = rec intsFrom = \n.cons(n,(intsFrom (n+1)));;
+
+def filter = rec filter =
+  \p.\l.
+    let h=head(l) in
+      let t=tail(l) in
+        if (p h) then cons(h,(filter p t))
+                 else (filter p t);;
+
+def foo=(filter (\x.(x mod 2)<>0) (intsFrom 2));;
+def nth = rec nth = \x.\l.if x<=1 then head(l) else (nth (x-1) tail(l));;
+
+
+

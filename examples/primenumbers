@@ -1,0 +1,33 @@
+{The following program computes Erathostenes' sieve.}
+
+{starting approximation function}
+def constOne = \n.1;;
+
+{(min g n m) is the n-th input value k of g (larger than m) 
+such that (g k)<>0 }
+def min = rec mi 
+          = \g.\n.\m. if ((g m) <> 0) 
+              then if n == 0 then m 
+                           else (mi g (n-1) (m+1))
+	      else (mi g n (m+1));;
+
+{(minIn g n) is the n-th input value k of g such that (g k) <> 0} 
+def minIn = \g.\n. (min g n 1);;
+
+{criv computes the next approximation function in 
+Erathostenes' sieve}
+def criv = \n.\g.\x. let a = (minIn g n) in
+			if ((x mod a) <> 0 or (x == a)) 
+                        then (g x)
+			else 0;;
+
+{(iterate n g f) = (g n (g n-1 (g n-2 (.... (g 1 f)...))))}
+def iterate = rec it 
+              = \n.\g.\f. if n == 0 then f 
+				    else (g n (it (n-1) g f));;
+
+{(prime n x) is 1 if x is prime w.r.t. the n first prime numbers, 
+and 0 otherwise}
+def prime = \n. (iterate n criv constOne);;
+
+
