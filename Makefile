@@ -1,35 +1,5 @@
 YFLAGS = -dv
 
-SRC = \
-	copy.c \
-	destroyer.c \
-	save.c \
-	readback.c \
-	garbage.c \
-	loader.c \
-	reducer.c \
-	m_stack.c \
-	scope_analysis.c \
-	graphgenerator.c \
-	main.c \
-	sthandler.c \
-	menu.c \
-	inspect.c \
-	crashhandler.c \
-	errorhandler.c \
-	numberhandler.c \
-	dynallhandler.c \
-	filehandler.c \
-	stringhandler.c
-
-YLSRC = $(SRC) \
-	lambda_parser.y \
-	lambda_lexan.l
-
-GENSRC = $(SRC) \
-	lambda_parser.c \
-	lambda_lexan.c
-
 OBJS = \
 	bohm.a(lambda_parser.o) \
 	bohm.a(lambda_lexan.o) \
@@ -64,23 +34,12 @@ bohm: bohm.a
 
 bohm.a: $(OBJS)
 
-$(OBJS): y.tab.h
+$(OBJS): bohm.h y.tab.h
+
+lambda_lexan.c: y.tab.h
 
 y.tab.h: lambda_parser.c
-
-# lint the whole code.  Expect a lot of warnings!
-lint: $(GENSRC)
-	$(LINT.c) $(GENSRC)
-
-# rebuild the TAGS file for emacs
-etags: 
-	etags $(YLSRC)
-
-# rebuild the tags file for vi
-ctags: 
-	ctags $(YLSRC)
 
 clean:
 	-rm -f bohm bohm.a *.o
 	-rm -f lambda_parser.c lambda_lexan.c y.*
-	-rm -f TAGS tags
