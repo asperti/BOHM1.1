@@ -14,18 +14,15 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/const.h"
-#include		"h/types.h"
-#include		<stdio.h>
-#include		<string.h>
-#include		<malloc.h>
+#include "bohm.h"
 
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
-
-#include		"e/crashhandler.e"
 
 
 /****************************************************************/

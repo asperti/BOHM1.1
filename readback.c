@@ -14,9 +14,9 @@
 /* Inclusion of header files.	  			        */
 /****************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
-#include "h/types.h"
-#include "h/const.h"
 
 /****************************************************************/
 /* Declaration of variables strictly local to the module.	*/

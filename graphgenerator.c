@@ -89,16 +89,11 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/const.h"
-#include		"h/types.h"
-#include                <stdio.h>
-#include                <malloc.h>
-#include                <stdlib.h>
-#include		"e/menu.e"
-#include		"e/copy.e"
-#include                "e/destroyer.e"
-#include                "e/dynallhandler.e"
-#include                "e/graphgenerator.e"
+#include "bohm.h"
+
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

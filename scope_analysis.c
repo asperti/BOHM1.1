@@ -7,9 +7,9 @@
 /* Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/types.h"
-#include		<stdio.h>
+#include "bohm.h"
 
+#include <stdio.h>
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/

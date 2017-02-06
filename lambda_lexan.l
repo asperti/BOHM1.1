@@ -36,11 +36,11 @@
  /***************************************************************/
 
 %{
-#include                <malloc.h>
-#include                <string.h>
-#include		"h/const.h"
-#include		"h/types.h"
-#include		"y.tab.h"
+#include "bohm.h"
+#include "y.tab.h"
+
+#include <malloc.h>
+#include <string.h>
 %}
 
 
@@ -48,13 +48,6 @@
  /* 2. Inclusion of declarations that are being imported.	*/
  /***************************************************************/
 
-%{
-#include		"e/sthandler.e"
-#include		"e/errorhandler.e"
-#include		"e/dynallhandler.e"
-#include		"e/stringhandler.e"
-#include		"e/lambda_parser.e" 
-%}
 
  /***************************************************************/
  /* 3. Definitions of variables to be exported.			*/

@@ -25,11 +25,10 @@
 /* 1. Inclusion of header files.                                           */
 /***************************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-
 
 HIDDEN BOOLEAN do_menu1();
 HIDDEN BOOLEAN do_menu2();

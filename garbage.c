@@ -29,22 +29,18 @@
 /* 1. Inclusion of header files.                                         */
 /*************************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include <time.h>
 #include <sys/types.h>
 #include <sys/times.h>
-#include "h/const.h"
-#include "h/types.h"
 
 /*************************************************************************/
 /* 2. Inclusion of declarations that are being imported.                 */
 /*************************************************************************/
-
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
-#include "e/menu.e"
 
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */

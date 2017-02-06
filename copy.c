@@ -35,12 +35,10 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <malloc.h>
-#include "h/types.h"
-#include "h/const.h"
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

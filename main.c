@@ -11,19 +11,12 @@
 /* Inclusion of header files.           			*/
 /****************************************************************/
 
+#include "bohm.h"
+#include "y.tab.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "y.tab.h"
-#include "e/sthandler.e"
-#include "e/lambda_lexan.e"
-#include "e/lambda_parser.e"
-#include "e/loader.e"
-#include "e/menu.e"
-#include "e/destroyer.e"
-#include "e/garbage.e"
 
 /****************************************************************/
 /* Main program.               			                */

@@ -12,8 +12,7 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/const.h"
-
+#include "bohm.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

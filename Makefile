@@ -1,37 +1,5 @@
 YFLAGS = -dv
 
-SUPPORT = \
-	e/crashhandler.e \
-	e/dynallhandler.e \
-	e/save.e \
-	e/copy.e \
-	e/errorhandler.e \
-	e/filehandler.e \
-	e/garbage.e \
-	e/graphgenerator.e \
-	e/inspect.e \
-	e/lambda_lexan.e \
-	e/lambda_parser.e \
-	e/listinghandler.e \
-	e/loader.e \
-	e/m_stack.e \
-	e/menu.e \
-	e/numberhandler.e \
-	destroyer.c \
-	e/readback.e \
-	e/reducer.e \
-	e/scope_analysis.e \
-	e/sthandler.e \
-	e/stringhandler.e \
-	h/const.h \
-	h/crashmsgs.h \
-	h/errormsgs.h \
-	h/iolibrary.h \
-	h/keywords.h \
-	h/types.h \
-	y.tab.h \
-	Makefile
-
 SRC = \
 	copy.c \
 	destroyer.c \
@@ -96,7 +64,7 @@ bohm: bohm.a
 
 bohm.a: $(OBJS)
 
-$(OBJS): $(SUPPORT)
+$(OBJS): y.tab.h
 
 y.tab.h: lambda_parser.c
 

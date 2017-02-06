@@ -20,8 +20,8 @@
 /* Inclusion of header files.       				*/
 /****************************************************************/
 
-#include "h/const.h"
-#include "h/types.h"
+#include "bohm.h"
+
 #include <stdio.h>
 
 /****************************************************************/

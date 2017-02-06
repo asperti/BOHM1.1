@@ -98,31 +98,16 @@
  /***************************************************************/
 
 %{
-#include                <malloc.h>
-#include		<stdio.h>
-#include		"h/const.h"
-#include		"h/types.h"
+#include "bohm.h"
+
+#include <malloc.h>
+#include <stdio.h>
 %}
 
 
  /***************************************************************/
  /* 2. Inclusion of declarations that are being imported.	*/
  /***************************************************************/
-
-%{
-#include		"e/lambda_lexan.e"
-#include		"e/graphgenerator.e"
-#include		"e/sthandler.e"
-#include		"e/errorhandler.e"
-#include		"e/scope_analysis.e"
-#include		"e/reducer.e"
-#include		"e/inspect.e"
-#include		"e/loader.e"
-#include		"e/garbage.e"
-#include		"e/menu.e"
-#include		"e/destroyer.e"
-#include		"e/save.e"
-%}
 
 %{
 int yylex();

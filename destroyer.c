@@ -31,13 +31,10 @@
 /* 1. Inclusion of header files                                   */
 /******************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <malloc.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
-#include "e/garbage.e"
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/

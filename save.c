@@ -27,11 +27,11 @@
 
 #define	ENTRY		17
 #define	NUM		13
+
+#include "bohm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "e/dynallhandler.e"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
