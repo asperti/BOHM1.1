@@ -1,12 +1,10 @@
 /****************************************************************/
-/*		         ERRORHANDLER.C			        */
+/*		          FILEHANDLER.C			        */
 /****************************************************************/
-/* This module supplies routines for error handling.		*/
-/* Upon error detection, the corresponding error message is	*/
-/* printed on the screen.                                	*/
-/* - signal_error(): it signals lexical, syntax and semantic	*/
-/*		     errors;					*/
-/* - signal_warning(): it signals warnings.			*/
+/* This module supplies routines for file handling.		*/
+/* It consists of the following function:			*/
+/* - fopen_f(): it opens a given file; if it is unable to open	*/
+/*		the file, it signals this fact.			*/
 /****************************************************************/
 
 
@@ -14,8 +12,8 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../h/const.h"
-#include		"../h/types.h"
+#include		"h/const.h"
+#include		"h/types.h"
 #include		<stdio.h>
 
 
@@ -23,50 +21,44 @@
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include		"../e/lambda_lexan.e"
+#include		"e/crashhandler.e"
 
 
 /****************************************************************/
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN			error_detected;
-			      /* flag indicating whether an */
-			      /* error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
-
-#include		"../h/errormsgs.h"
 
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function signals lexical, syntax and semantic */
- /* errors. */
-void signal_error(error_msg_num)
-	int		error_msg_num;
-					/* error message number */
+ /* The following function implements a control interface for the */
+ /* library function fopen(). */
+FILE *
+fopen_f(file_name, access)
+	STRING		file_name,
+					/* name of the file to be opened */
+			access;
+					/* access kind */
 {
-	error_detected = TRUE;
-	fprintf(stderr,
-		"line %-5d\t--->\t%s\n",
-		lines,
-		error_msgs[error_msg_num]);
-}
+	FILE		*f;
 
- /* The following function signals warnings. */
-void signal_warning(warning_msg_num)
-	int		warning_msg_num;
-					/* warning message number */
-{
-	fprintf(stderr,
-		"line %-5d\t--->\t%s\n",
-		lines,
-		warning_msgs[warning_msg_num]);
+	f = fopen(file_name, access);
+	if (f != NULL)
+		return(f);
+	else
+	{
+		fprintf(stderr,
+			"%s: ",
+			file_name);
+		signal_crash(UNABLETOOPENFILE);
+	}
 }
 
 

@@ -1,10 +1,10 @@
 /****************************************************************/
-/*		          FILEHANDLER.C			        */
+/*		         NUMBERHANDLER.C			*/
 /****************************************************************/
-/* This module supplies routines for file handling.		*/
+/* This module supplies routines for number handling.		*/
 /* It consists of the following function:			*/
-/* - fopen_f(): it opens a given file; if it is unable to open	*/
-/*		the file, it signals this fact.			*/
+/* - digits_n(): it computes the number of digits of a given	*/
+/*		 integer.					*/
 /****************************************************************/
 
 
@@ -12,16 +12,12 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../h/const.h"
-#include		"../h/types.h"
-#include		<stdio.h>
+#include		"h/const.h"
 
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
-
-#include		"../e/crashhandler.e"
 
 
 /****************************************************************/
@@ -38,32 +34,20 @@
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function implements a control interface for the */
- /* library function fopen(). */
-FILE *
-fopen_f(file_name, access)
-	STRING		file_name,
-					/* name of the file to be opened */
-			access;
-					/* access kind */
+ /* The following function computes the number of digits of a given */
+ /* integer. */
+int digits_n(n)
+	int		n;
+					/* integer whose number of */
+					/* digits is to be computed */
 {
-	FILE		*f;
+	int		digits;
 
-	f = fopen(file_name, access);
-	if (f != NULL)
-		return(f);
-	else
-	{
-		fprintf(stderr,
-			"%s: ",
-			file_name);
-		signal_crash(UNABLETOOPENFILE);
-	}
+	for (digits = 1; (n = n / NUMBASE) != 0; digits++);
+	return(digits);
 }
 
 
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
-

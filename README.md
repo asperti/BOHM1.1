@@ -27,7 +27,7 @@ Cambridge University Press, 1998, isbn = 9780521621120
 About the current syntax, please be aware that applications
 _always_ require parenthesis around them (left associative,
 of course), the rest is more or less as expected.  Please consult
-the original README below or the examples for more information.
+the full README below or the examples for more information.
 
 ```
 /***************************************************************/
@@ -70,7 +70,7 @@ if you want to use the GNU C compiler.  This step will create an
 executable called `opt'.  You may always return to the original state
 of the distribution by typing
 
-  make distclean
+  make clean
 
 USAGE
 
@@ -212,7 +212,7 @@ CONTENTS
 
 The main directory contains the following files
 
-- README
+- README.md
 - Makefile
 - copy.c
 - destroyer.c
@@ -231,7 +231,7 @@ The main directory contains the following files
 - scope_analysis.c
 - sthandler.c
 
-Moreover, there are three directories: "e", "h" and "utility".
+Moreover, there are two directories: "e" and "h".
 
 The directory "e" contains the following export files:
 - copy.e
@@ -256,6 +256,12 @@ The directory "e" contains the following export files:
 - scope_analysis.e
 - sthandler.e
 - stringhandler.e
+- crashhandler.c
+- errorhandler.c
+- stringhandler.c
+- dynallhandler.c
+- filehandler.c
+- numberhandler.c
 
 The directory "h" contains the following header files:
 - const.h
@@ -264,12 +270,4 @@ The directory "h" contains the following header files:
 - iolibrary.h
 - keywords.h
 - types.h
-
-The directory "utility" contains the following utility handlers:
-- crashhandler.c
-- errorhandler.c
-- stringhandler.c
-- dynallhandler.c
-- filehandler.c
-- numberhandler.c
 ```

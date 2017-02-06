@@ -1,10 +1,12 @@
 /****************************************************************/
-/*		         NUMBERHANDLER.C			*/
+/*		         DYNALLHANDLER.C			*/
 /****************************************************************/
-/* This module supplies routines for number handling.		*/
-/* It consists of the following function:			*/
-/* - digits_n(): it computes the number of digits of a given	*/
-/*		 integer.					*/
+/* This module supplies routines for dynamic allocation.	*/
+/* It consists of the following functions:			*/
+/* - malloc_da(): it allocates a given amount of bytes; if it	*/
+/*		  is unable to allocate, it signals this fact;	*/
+/* - strdup_da(): it allocates a given string; if it is unable	*/
+/*		  to allocate, it signals this fact.		*/
 /****************************************************************/
 
 
@@ -12,12 +14,18 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"../h/const.h"
+#include		"h/const.h"
+#include		"h/types.h"
+#include		<stdio.h>
+#include		<string.h>
+#include		<malloc.h>
 
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
+
+#include		"e/crashhandler.e"
 
 
 /****************************************************************/
@@ -34,19 +42,38 @@
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function computes the number of digits of a given */
- /* integer. */
-int digits_n(n)
-	int		n;
-					/* integer whose number of */
-					/* digits is to be computed */
+ /* The following function implements a control interface for the */
+ /* library function malloc(). */
+STRING
+malloc_da(size)
+	unsigned	size;
+					/* size of the object to be */
+					/* allocated */
 {
-	int		digits;
+	STRING		p;
 
-	for (digits = 1; (n = n / NUMBASE) != 0; digits++);
-	return(digits);
+	p = (STRING)malloc(size);
+	if (p != NULL)
+		return(p);
+	else
+		signal_crash(NOTENOUGHMEMORY);
 }
 
+ /* The following function implements a control interface for the */
+ /* library function strdup(). */
+STRING
+strdup_da(s)
+	STRING		s;
+					/* string to be allocated */
+{
+	STRING		p;
+
+	p = strdup(s);
+	if (p != NULL)
+		return(p);
+	else
+		signal_crash(NOTENOUGHMEMORY);
+}
 
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
