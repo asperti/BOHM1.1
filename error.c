@@ -1,12 +1,10 @@
 /****************************************************************/
-/*		          CRASHHANDLER.C			*/
-/****************************************************************/
-/* This module supplies routines for unrecoverable error	*/
-/* handling.							*/
-/* It consists of the following function:			*/
-/* signal_crash(): it prints on the screen the message		*/
-/*		   corresponding to the unrecoverable error	*/
-/*		   that occurred, then exits.			*/
+/* This module supplies routines for error handling.		*/
+/* Upon error detection, the corresponding error message is	*/
+/* printed on the screen.                                	*/
+/* - signal_error(): it signals lexical, syntax and semantic	*/
+/*		     errors;					*/
+/* - signal_warning(): it signals warnings.			*/
 /****************************************************************/
 
 
@@ -17,7 +15,6 @@
 #include "bohm.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -28,6 +25,9 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
+BOOLEAN			error_detected;
+			      /* flag indicating whether an */
+			      /* error has been detected */
 
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
@@ -38,24 +38,33 @@
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function signals errors causing abort. */
-void signal_crash(crash_type)
-	int		crash_type;
-					/* crash type */
+ /* The following function signals lexical, syntax and semantic */
+ /* errors. */
+void signal_error(error_msg_num)
+	int		error_msg_num;
+					/* error message number */
 {
+	error_detected = TRUE;
 	fprintf(stderr,
-		"%s\n",
-		crash_msgs[crash_type]);
-	exit(COMPILERCRASH);
+		"line %-5d\t--->\t%s\n",
+		lines,
+		error_msgs[error_msg_num]);
 }
 
-	
+ /* The following function signals warnings. */
+void signal_warning(warning_msg_num)
+	int		warning_msg_num;
+					/* warning message number */
+{
+	fprintf(stderr,
+		"line %-5d\t--->\t%s\n",
+		lines,
+		warning_msgs[warning_msg_num]);
+}
+
+
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
-
-
-
-
 
 

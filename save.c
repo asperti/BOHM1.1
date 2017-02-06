@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		            	SAVE.C    			*/
-/****************************************************************/
 /* This modules carries out the storing of a graph on a textual */
 /* file, to permit consultation.                                */
 /* In particular, a list is stored of all the links existing    */

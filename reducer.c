@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		            REDUCER.C    			*/
-/****************************************************************/
 /* This module implements the interaction-net rewriting rules   */
 /* for reducing the graph representing a lambda term.           */
 /* Reduction is "weak". It looks for the leftmost outermost     */

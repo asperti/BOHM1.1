@@ -1,10 +1,10 @@
 /****************************************************************/
-/*		         NUMBERHANDLER.C			*/
-/****************************************************************/
-/* This module supplies routines for number handling.		*/
+/* This module supplies routines for unrecoverable error	*/
+/* handling.							*/
 /* It consists of the following function:			*/
-/* - digits_n(): it computes the number of digits of a given	*/
-/*		 integer.					*/
+/* signal_crash(): it prints on the screen the message		*/
+/*		   corresponding to the unrecoverable error	*/
+/*		   that occurred, then exits.			*/
 /****************************************************************/
 
 
@@ -13,6 +13,9 @@
 /****************************************************************/
 
 #include "bohm.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -33,20 +36,24 @@
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
 
- /* The following function computes the number of digits of a given */
- /* integer. */
-int digits_n(n)
-	int		n;
-					/* integer whose number of */
-					/* digits is to be computed */
+ /* The following function signals errors causing abort. */
+void signal_crash(crash_type)
+	int		crash_type;
+					/* crash type */
 {
-	int		digits;
-
-	for (digits = 1; (n = n / NUMBASE) != 0; digits++);
-	return(digits);
+	fprintf(stderr,
+		"%s\n",
+		crash_msgs[crash_type]);
+	exit(COMPILERCRASH);
 }
 
-
+	
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/
 /****************************************************************/
+
+
+
+
+
+

@@ -1,6 +1,4 @@
  /***************************************************************/
- /*		         LAMBDA_PARSER.Y			*/
- /***************************************************************/
  /* This module is the YACC_specification of the parser.        */
  /* All inputs must be terminated by a double simicolon         */
  /* An input is either a term or a directive.                   */

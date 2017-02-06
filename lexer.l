@@ -1,6 +1,4 @@
  /***************************************************************/
- /*		          LAMBDA_LEXAN   			*/
- /***************************************************************/
  /* This module is the lex specification of the lexical         */
  /* analyzer.			                                */
  /* It is able to recognize the following tokens:		*/

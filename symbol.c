@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		          STHANDLER.C			        */
-/****************************************************************/
 /* This module supplies routines for symbol table handling.	*/
 /* The symbol table consists of two parts: a dictionary and a	*/
 /* scope stack.							*/

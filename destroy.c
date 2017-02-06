@@ -1,6 +1,4 @@
 /******************************************************************/
-/*                        DESTROYER.C                             */
-/******************************************************************/
 /* This module implements the destroyer operator, that is to be	  */
 /* applied  at the end of a term. 				  */	
 /* If the last term is a global defination the graph is stored,   */

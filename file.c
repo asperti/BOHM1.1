@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		          FILEHANDLER.C			        */
-/****************************************************************/
 /* This module supplies routines for file handling.		*/
 /* It consists of the following function:			*/
 /* - fopen_f(): it opens a given file; if it is unable to open	*/

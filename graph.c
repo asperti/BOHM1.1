@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		         GRAPHGENERATOR.C                       */
-/****************************************************************/
 /* This module contains routines for generating the graph       */
 /* representation of lambda-terms.                              */
 /* The translation which has been implemented is the one        */

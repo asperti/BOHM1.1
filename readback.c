@@ -1,6 +1,4 @@
 /****************************************************************/
-/*			     READBACK.C			        */
-/****************************************************************/
 /* This module implements the readback procedure as defined     */
 /* is Asperti Laneve: Interaction Systems II.                   */
 /* The only external function is                                */

@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		             MAIN.C          			*/
-/****************************************************************/
 /* This module implements the main function.			*/
 /* It analizes the input parameters, initializes some variable,	*/
 /* the symbol table, the destroyer, the garbage and call the 	*/

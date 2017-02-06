@@ -1,6 +1,4 @@
 /*************************************************************************/
-/*                               GARBAGE.C                               */
-/*************************************************************************/
 /* This module implements the garbage collector.                         */
 /* It works by local interactions, propagating all the erase-operators   */
 /* in the graph. Each erase-operator terminates its travelling either by */

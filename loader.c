@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		          LOADER.C          			*/
-/****************************************************************/
 /* This module implements the "load" directive, that is used 	*/
 /* to load a source file.		                        */
 /* There is only one external function:                         */

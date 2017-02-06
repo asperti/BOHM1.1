@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		            	COPY.C    			*/
-/****************************************************************/
 /* This module carries out graph duplication. This is done in   */
 /* a top-down manner, starting off from the root and going      */
 /* downwards. However, when entering a FAN, we have to take     */

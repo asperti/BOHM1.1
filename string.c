@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		         STRINGHANDLER.C			*/
-/****************************************************************/
 /* This module supplies routines for string handling.		*/
 /* It consists of the following functions:			*/
 /* - to_lower_s(): it turns a given string into a lower case	*/

@@ -1,6 +1,4 @@
 /***************************************************************************/
-/*                             MENU.C                                      */
-/***************************************************************************/
 /* This module implements the menus to select the desired garbage strategy.*/
 /* It may be:                                                              */
 /* - garbage collection performed whenever possible.                       */
