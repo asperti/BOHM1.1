@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include "h/const.h"
 #include "h/types.h"
-#include "h/y.tab.h"
+#include "y.tab.h"
 #include "e/lambda_lexan.e"
 #include "e/lambda_parser.e"
 

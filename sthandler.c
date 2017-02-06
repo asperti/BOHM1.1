@@ -97,7 +97,7 @@
 
 #include		"h/const.h"
 #include		"h/types.h"
-#include		"h/y.tab.h"
+#include		"y.tab.h"
 #include		<stdio.h>
 #include		<malloc.h>
 

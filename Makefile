@@ -14,7 +14,7 @@ e/inspect.e e/lambda_lexan.e e/lambda_parser.e e/listinghandler.e \
 e/loader.e e/m_stack.e e/menu.e e/numberhandler.e destroyer.c\
 e/readback.e e/reducer.e e/scope_analysis.e e/sthandler.e \
 e/stringhandler.e h/const.h h/crashmsgs.h h/errormsgs.h \
-h/iolibrary.h h/keywords.h h/types.h Makefile
+h/iolibrary.h h/keywords.h h/types.h Makefile y.tab.h
 
 # the C files -- not the sources (lex and yacc object too)
 
@@ -33,9 +33,6 @@ utility/crashhandler.o utility/errorhandler.o \
 utility/numberhandler.o utility/dynallhandler.o \
 utility/filehandler.o utility/stringhandler.o
 
-YACC = bison -y
-LEX = flex
-
 opt: $(OBJS) $(SUPPORT)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) \
 	-o opt $(LDLIBS)
@@ -43,13 +40,11 @@ opt: $(OBJS) $(SUPPORT)
 # The two following productions are identical
 y.tab.c: lambda_parser.y
 	$(YACC) $(YFLAGS) lambda_parser.y
-	mv y.tab.h h/y.tab.h
 
-h/y.tab.h: lambda_parser.y
+y.tab.h: lambda_parser.y
 	$(YACC) $(YFLAGS) lambda_parser.y
-	mv y.tab.h h/y.tab.h
 
-lex.yy.c: lambda_lexan.l h/y.tab.h
+lex.yy.c: lambda_lexan.l y.tab.h
 	$(LEX) $(LFLAGS) lambda_lexan.l
 
 # the default .c.o rule puts its object in the wrong directory
@@ -66,7 +61,7 @@ graphgenerator.o: graphgenerator.c $(SUPPORT)
 
 inspect.o: inspect.c $(SUPPORT)
 
-lex.yy.o: lex.yy.c $(SUPPORT) h/y.tab.h
+lex.yy.o: lex.yy.c $(SUPPORT) y.tab.h
 
 loader.o: loader.c $(SUPPORT)
 
@@ -86,7 +81,7 @@ save.o: save.c $(SUPPORT)
 
 scope_analysis.o: scope_analysis.c $(SUPPORT)
 
-sthandler.o: sthandler.c $(SUPPORT) h/y.tab.h
+sthandler.o: sthandler.c $(SUPPORT) y.tab.h
 
 y.tab.o: y.tab.c $(SUPPORT)
 
@@ -123,12 +118,8 @@ ctags:
 	utility/stringhandler.c lambda_parser.y lambda_lexan.l
 
 clean:
-	-cd utility ; rm *.o
-	-rm *.o 
-	-rm y.tab.c lex.yy.c
+	-rm -f y.tab.h y.tab.c lex.yy.c
+	-rm -f opt *.o utility/*.o
 
 distclean: clean
-	-rm TAGS tags
-
-
-
+	-rm -f TAGS tags
