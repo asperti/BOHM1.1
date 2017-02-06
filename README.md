@@ -67,14 +67,14 @@ or
   make CC=gcc CFLAGS=-O2
 
 if you want to use the GNU C compiler.  This step will create an
-executable called `opt'.  You may always return to the original state
+executable called `bohm`.  You may always return to the original state
 of the distribution by typing
 
   make clean
 
 USAGE
 
-Calling opt will open an interactive environment. You may now
+Calling `bohm` will open an interactive environment. You may now
 introduce a term ended by a double semicolon, that will be immediately
 reduced by the interpreter.
 
@@ -189,7 +189,7 @@ The directive
 allows you to choose a garbage strategie during execution, by
 presenting a series of menus containing the possible modalities.  Such
 menus can also be obtained at the beginning of execution by calling
-opt with option "-s".
+`bohm` with option `-s`.
 
 Garbage collection can also be explicitly invoked by the user by
 calling the directive

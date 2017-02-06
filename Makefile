@@ -63,38 +63,38 @@ GENSRC = $(SRC) \
 	lambda_lexan.c
 
 OBJS = \
-	lib.a(lambda_parser.o) \
-	lib.a(lambda_lexan.o) \
-	lib.a(main.o) \
-	lib.a(copy.o) \
-	lib.a(sthandler.o) \
-	lib.a(scope_analysis.o) \
-	lib.a(inspect.o) \
-	lib.a(graphgenerator.o) \
-	lib.a(destroyer.o) \
-	lib.a(loader.o) \
-	lib.a(reducer.o) \
-	lib.a(m_stack.o) \
-	lib.a(readback.o) \
-	lib.a(garbage.o) \
-	lib.a(menu.o) \
-	lib.a(save.o) \
-	lib.a(crashhandler.o) \
-	lib.a(errorhandler.o) \
-	lib.a(numberhandler.o) \
-	lib.a(dynallhandler.o) \
-	lib.a(filehandler.o) \
-	lib.a(stringhandler.o)
+	bohm.a(lambda_parser.o) \
+	bohm.a(lambda_lexan.o) \
+	bohm.a(main.o) \
+	bohm.a(copy.o) \
+	bohm.a(sthandler.o) \
+	bohm.a(scope_analysis.o) \
+	bohm.a(inspect.o) \
+	bohm.a(graphgenerator.o) \
+	bohm.a(destroyer.o) \
+	bohm.a(loader.o) \
+	bohm.a(reducer.o) \
+	bohm.a(m_stack.o) \
+	bohm.a(readback.o) \
+	bohm.a(garbage.o) \
+	bohm.a(menu.o) \
+	bohm.a(save.o) \
+	bohm.a(crashhandler.o) \
+	bohm.a(errorhandler.o) \
+	bohm.a(numberhandler.o) \
+	bohm.a(dynallhandler.o) \
+	bohm.a(filehandler.o) \
+	bohm.a(stringhandler.o)
 
-all: opt
+all: bohm
 
 debug:
 	$(MAKE) CFLAGS="-g -Wall -Werror"
 
-opt: lib.a
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ lib.a -ll -ly
+bohm: bohm.a
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ bohm.a -ll -ly
 
-lib.a: $(OBJS)
+bohm.a: $(OBJS)
 
 $(OBJS): $(SUPPORT)
 
@@ -113,6 +113,6 @@ ctags:
 	ctags $(YLSRC)
 
 clean:
-	-rm -f opt lib.a *.o
+	-rm -f bohm bohm.a *.o
 	-rm -f lambda_parser.c lambda_lexan.c y.*
 	-rm -f TAGS tags

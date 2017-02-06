@@ -86,7 +86,7 @@ char *argv[];
 
   while (quit == 0)
      {
-       printf("opt>");
+       printf("bohm>");
 	yyparse();
 	if (loading_mode==TRUE)
 	  {
