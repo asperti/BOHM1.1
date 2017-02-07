@@ -32,7 +32,7 @@
 #include "bohm.h"
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/

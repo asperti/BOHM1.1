@@ -37,7 +37,7 @@
 #include "bohm.h"
 #include "y.tab.h"
 
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 %}
 

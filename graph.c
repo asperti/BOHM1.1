@@ -80,7 +80,6 @@
 #include "bohm.h"
 
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
 
 /****************************************************************/

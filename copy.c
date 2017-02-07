@@ -36,7 +36,7 @@
 #include "bohm.h"
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

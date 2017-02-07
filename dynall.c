@@ -15,8 +15,8 @@
 #include "bohm.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
