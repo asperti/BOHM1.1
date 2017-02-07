@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		            REDUCER.C    			*/
-/****************************************************************/
 /* This module implements the interaction-net rewriting rules   */
 /* for reducing the graph representing a lambda term.           */
 /* Reduction is "weak". It looks for the leftmost outermost     */
@@ -34,28 +32,20 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/times.h>
 #include <time.h>
-#include "h/types.h"
-#include "h/const.h"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
 
-#include "e/graphgenerator.e"
-#include "e/m_stack.e"
-#include "e/readback.e"
-#include "e/menu.e"
-#include "e/garbage.e"
-#include "e/destroyer.e"
-#include "e/inspect.e"
 extern clock_t usr_garb_time;
 extern clock_t sys_garb_time;
-
 
 /****************************************************************/
 /* 3. Declaration of names strictly local to the module.	*/

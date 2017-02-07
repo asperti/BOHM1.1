@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		          LOADER.C          			*/
-/****************************************************************/
 /* This module implements the "load" directive, that is used 	*/
 /* to load a source file.		                        */
 /* There is only one external function:                         */
@@ -12,14 +10,11 @@
 /* Inclusion of header files.       				*/
 /****************************************************************/
 
+#include "bohm.h"
+#include "y.tab.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "h/y.tab.h"
-#include "e/lambda_lexan.e"
-#include "e/lambda_parser.e"
-
 
 /****************************************************************/
 /* Definitions of functions to be exported.			*/

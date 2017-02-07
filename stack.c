@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		              M_STACK.C                         */
-/****************************************************************/
 /* This module implements the auxiliary stack used during       */
 /* the reduction of a term.                                     */
 /****************************************************************/
@@ -9,11 +7,10 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		<stdio.h>
-#include                <assert.h>
-#include		"h/const.h"
-#include		"h/types.h"
-#include                "e/inspect.e"
+#include "bohm.h"
+
+#include <stdio.h>
+#include <assert.h>
 
 /****************************************************************/
 /* 2. Definitions of local variables     			*/

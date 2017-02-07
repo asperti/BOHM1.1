@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		            	SAVE.C    			*/
-/****************************************************************/
 /* This modules carries out the storing of a graph on a textual */
 /* file, to permit consultation.                                */
 /* In particular, a list is stored of all the links existing    */
@@ -27,11 +25,11 @@
 
 #define	ENTRY		17
 #define	NUM		13
+
+#include "bohm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "e/dynallhandler.e"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

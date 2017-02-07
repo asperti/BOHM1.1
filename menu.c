@@ -1,6 +1,4 @@
 /***************************************************************************/
-/*                             MENU.C                                      */
-/***************************************************************************/
 /* This module implements the menus to select the desired garbage strategy.*/
 /* It may be:                                                              */
 /* - garbage collection performed whenever possible.                       */
@@ -25,11 +23,10 @@
 /* 1. Inclusion of header files.                                           */
 /***************************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-
 
 HIDDEN BOOLEAN do_menu1();
 HIDDEN BOOLEAN do_menu2();

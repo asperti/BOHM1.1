@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		             MAIN.C          			*/
-/****************************************************************/
 /* This module implements the main function.			*/
 /* It analizes the input parameters, initializes some variable,	*/
 /* the symbol table, the destroyer, the garbage and call the 	*/
@@ -11,19 +9,12 @@
 /* Inclusion of header files.           			*/
 /****************************************************************/
 
+#include "bohm.h"
+#include "y.tab.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "h/y.tab.h"
-#include "e/sthandler.e"
-#include "e/lambda_lexan.e"
-#include "e/lambda_parser.e"
-#include "e/loader.e"
-#include "e/menu.e"
-#include "e/destroyer.e"
-#include "e/garbage.e"
 
 /****************************************************************/
 /* Main program.               			                */
@@ -86,7 +77,7 @@ char *argv[];
 
   while (quit == 0)
      {
-       printf("opt>");
+       printf("bohm>");
 	yyparse();
 	if (loading_mode==TRUE)
 	  {

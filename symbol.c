@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		          STHANDLER.C			        */
-/****************************************************************/
 /* This module supplies routines for symbol table handling.	*/
 /* The symbol table consists of two parts: a dictionary and a	*/
 /* scope stack.							*/
@@ -95,21 +93,16 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
-#include		"h/const.h"
-#include		"h/types.h"
-#include		"h/y.tab.h"
-#include		<stdio.h>
-#include		<malloc.h>
+#include "bohm.h"
+#include "y.tab.h"
+
+#include <stdio.h>
+#include <malloc.h>
 
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
-
-#include		"e/errorhandler.e"
-#include		"e/dynallhandler.e"
-#include		"e/stringhandler.e"
-#include		"e/sthandler.e"
 
 
 /****************************************************************/
@@ -127,9 +120,6 @@ LOCALENVENTRY		*curr_local_env;
 /****************************************************************/
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
-
-#include		"h/keywords.h"
-#include		"h/iolibrary.h"
 
 HIDDEN LOCALENVENTRY	*external_env;
 			       /* pointer to the entry for the */

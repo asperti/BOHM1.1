@@ -1,6 +1,4 @@
 /******************************************************************/
-/*                        DESTROYER.C                             */
-/******************************************************************/
 /* This module implements the destroyer operator, that is to be	  */
 /* applied  at the end of a term. 				  */	
 /* If the last term is a global defination the graph is stored,   */
@@ -31,13 +29,10 @@
 /* 1. Inclusion of header files                                   */
 /******************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <malloc.h>
-#include "h/const.h"
-#include "h/types.h"
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
-#include "e/garbage.e"
 
 /****************************************************************/
 /* 2. Definitions of variables to be exported.			*/

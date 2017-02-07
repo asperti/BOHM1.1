@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		            	COPY.C    			*/
-/****************************************************************/
 /* This module carries out graph duplication. This is done in   */
 /* a top-down manner, starting off from the root and going      */
 /* downwards. However, when entering a FAN, we have to take     */
@@ -35,12 +33,10 @@
 /* 1. Inclusion of header files.				*/
 /****************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
 #include <malloc.h>
-#include "h/types.h"
-#include "h/const.h"
-#include "e/dynallhandler.e"
-#include "e/graphgenerator.e"
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */

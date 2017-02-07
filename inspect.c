@@ -1,6 +1,4 @@
 /****************************************************************/
-/*		          INSPECT.C          			*/
-/****************************************************************/
 /* This module implements the "inspect" directive, that is used */
 /* to visit the graph representing a term.                      */
 /* We plan to integrate the i/o with the YACC specification.    */
@@ -20,8 +18,8 @@
 /* Inclusion of header files.       				*/
 /****************************************************************/
 
-#include "h/const.h"
-#include "h/types.h"
+#include "bohm.h"
+
 #include <stdio.h>
 
 /****************************************************************/

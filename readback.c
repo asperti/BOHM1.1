@@ -1,6 +1,4 @@
 /****************************************************************/
-/*			     READBACK.C			        */
-/****************************************************************/
 /* This module implements the readback procedure as defined     */
 /* is Asperti Laneve: Interaction Systems II.                   */
 /* The only external function is                                */
@@ -14,9 +12,9 @@
 /* Inclusion of header files.	  			        */
 /****************************************************************/
 
+#include "bohm.h"
+
 #include <stdio.h>
-#include "h/types.h"
-#include "h/const.h"
 
 /****************************************************************/
 /* Declaration of variables strictly local to the module.	*/
