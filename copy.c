@@ -222,6 +222,8 @@ HIDDEN FORM
 		int_connect(newf1,2,temp->nform[2],temp->nport[2]);
 	      return(newf1);
 	      break;
+	  default:
+	      return NULL;
 	  }
 }
 

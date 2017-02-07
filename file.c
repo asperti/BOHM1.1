@@ -46,15 +46,14 @@ fopen_f(file_name, access)
 	FILE		*f;
 
 	f = fopen(file_name, access);
-	if (f != NULL)
-		return(f);
-	else
-	{
+	if (!f) {
 		fprintf(stderr,
 			"%s: ",
 			file_name);
 		signal_crash(UNABLETOOPENFILE);
 	}
+
+	return f;
 }
 
 

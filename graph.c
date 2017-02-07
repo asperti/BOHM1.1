@@ -825,6 +825,8 @@ FORM
 	   closeglobalvars(t->vars);
 	   return newroot;
 	}
+
+       return NULL;
 }
 
  /* the following function allocate a new graphical form */

@@ -48,10 +48,10 @@ malloc_da(size)
 	STRING		p;
 
 	p = (STRING)malloc(size);
-	if (p != NULL)
-		return(p);
-	else
+	if (!p)
 		signal_crash(NOTENOUGHMEMORY);
+
+	return p;
 }
 
  /* The following function implements a control interface for the */
@@ -64,10 +64,10 @@ strdup_da(s)
 	STRING		p;
 
 	p = strdup(s);
-	if (p != NULL)
-		return(p);
-	else
+	if (!p)
 		signal_crash(NOTENOUGHMEMORY);
+
+	return p;
 }
 
 /****************************************************************/
