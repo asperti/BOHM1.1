@@ -75,6 +75,9 @@ string                  [^\"]*\"
  /* 5. Start Conditions.					*/
  /***************************************************************/
 
+%option nounput
+%option noinput
+
 /* %option reentrant bison-bridge */
 
 %start com

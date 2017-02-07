@@ -61,16 +61,6 @@
 /* The following functions are local to the module:             */
 /*  - allocate_var(): it allocates a new entry for a variable.  */
 /*  - allocate_term(): it allocates a new entry for a term.     */
-/*  - buildglobaldefvarterm(): it shares the term corresponding */
-/*                             to the globally defined variable */
-/*                             (by adding a FAN on top of the   */
-/*                             term). One branch of this fan is */
-/*                             returned as result; the other    */
-/*                             branch is the new root of the    */
-/*                             globally declared variable       */
-/*  - buildfreevarterm(): it build the graph representation for */
-/*                        a free variable (this is just a       */
-/*                        CROISSANT of index 1).                */
 /*  - makebox(): it builds a box around a term.                 */
 /*  - addbrackets(): it adds a sequence of brackets of          */
 /*                   specified index along a sequence of        */
@@ -111,9 +101,7 @@ unsigned length_list = 0;
 /* 4. Declaration of functions strictly local to the module.	*/
 /****************************************************************/
 
-HIDDEN TERM             *buildglobaldefvarterm(),
-			*buildfreevarterm(),
-			*makebox();
+HIDDEN TERM             *makebox();
 HIDDEN VARENTRY         *addbrackets(),
 			*share(),
 			*lookfor(),
@@ -121,7 +109,6 @@ HIDDEN VARENTRY         *addbrackets(),
                         *remvp();
 HIDDEN void             allocate_var(),
                         allocate_term(),
-                        allocate_term_special(),
                         closeglobalvars(),
 			intelligent_connect(),
 			inspect_connect();
@@ -998,33 +985,6 @@ void allocate_term(term,rootform,rootport,freevars)
        (*term)->rootp = rootport;
        (*term)->vars = freevars;
 }
-
- /* the following function shares the term corresponding to the	*/
- /* globally defined variable (by adding a FAN on top of the   	*/
- /* term). One branch of this fan is returned as result; the    */
- /* other branch is the new root of the globally declared 	*/
- /* variable       */
-HIDDEN TERM
-*buildglobaldefvarterm(level,id)
-	int             level;
-	STBUCKET	*id;
-{
-	TERM *t;
-		     /* pointer to the term to be created */
-	FORM *newf;
-		     /* pointer to the new form to be created */
-
-	allocate_form(&newf,FAN,1);
-	newf->nlevel[1] = 0;
-	newf->nlevel[2] = 0;
-	connect1(newf, 0,
-		id->curr_binding->root->nform[0],
-		id->curr_binding->root->nport[0]);
-	connect(newf, 2, id->curr_binding->root, 0);
-	allocate_term(&t,newf,1,NULL);
-	return(t);
-}
-
 
  /* the following function build a box around a term  */
 HIDDEN TERM
