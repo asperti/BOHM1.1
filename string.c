@@ -6,8 +6,6 @@
 /* - to_nat_s(): it turns a given string of digits into a	*/
 /*		 natural and checks for presence of overflow;	*/
 /* - length_s(): it computes the length of a given string;	*/
-/* - concat_s(): it computes the concatenation of two given	*/
-/*		 strings;					*/
 /* - equal_s(): it returns the result of the check for equality	*/
 /*		between two given strings.			*/
 /****************************************************************/
@@ -77,23 +75,6 @@ int length_s(s)
 
 	for (i = 1; *s != EOS; s++, i++);
 	return(i);
-}
-
- /* The following function puts the concatenation of two given strings */
- /* into a given string. */
-void concat_s(s1, s2, s3)
-	STRING		s1,
-					/* first string */
-			s2,
-					/* second string */
-			s3;
-					/* resulting string */
-{
-	int		i,
-			j;
-
-	for (i = j = 0; s3[i++] = s1[j++];);
-	for (i--, j = 0; s3[i++] = s2[j++];);
 }
 
  /* The following function returns the result of the check for */

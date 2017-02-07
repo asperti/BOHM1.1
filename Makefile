@@ -1,4 +1,5 @@
 CFLAGS = -g -Wall \
+	-Werror=parentheses \
 	-Werror=unused-function \
 	-Werror=unused-variable \
 	-Werror=comment \

@@ -398,7 +398,8 @@ hash_pjw(id)
 	for (h = 0; *id != EOS; id++)
 	{
 		h = (h << HASH1) + (*id);
-		if (g = h & HASH2)
+		g = h & HASH2;
+		if (g)
 			h = h ^ (g >> HASH3) ^ g;
 	}
 	return(h % DICTSIZE);

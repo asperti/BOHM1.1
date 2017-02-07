@@ -159,7 +159,8 @@ save_aux(root,p)
 {
   int n,p1,card;
 
-  if(card=present(root)) {
+  card = present(root);
+  if(card) {
     n=num_port(root->name);
     for (p1=0;p1<n;p1++)
 	stampa(root,p1,card);
