@@ -97,8 +97,7 @@
 #include "y.tab.h"
 
 #include <stdio.h>
-#include <malloc.h>
-
+#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -135,6 +134,42 @@ HIDDEN void             allocate_local_env_entry();
 HIDDEN void             allocate_binding_entry();
 HIDDEN void             move_bucket();
 HIDDEN void             allocate_bucket();
+
+/* I/O library procedure names */
+HIDDEN STRING		library_proc_names[] = {"empty"
+					       };
+
+/* keywords */
+HIDDEN STRING		keywords[] =
+				{
+					"let",
+					"in",
+                                        "inspect",
+                                        "quit",
+					"load",
+					"rec",
+					"true",
+					"false",
+					"if",
+					"then",
+					"else",
+					"and",
+					"or",
+					"not",
+					"div",
+					"mod",
+					"cons",
+					"head",
+					"tail",
+					"isnil",
+					"def",
+					"share",
+					"nil",
+					"garbage",
+					"option",
+					"info",
+					"save",
+				};
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -362,7 +397,8 @@ hash_pjw(id)
 	for (h = 0; *id != EOS; id++)
 	{
 		h = (h << HASH1) + (*id);
-		if (g = h & HASH2)
+		g = h & HASH2;
+		if (g)
 			h = h ^ (g >> HASH3) ^ g;
 	}
 	return(h % DICTSIZE);

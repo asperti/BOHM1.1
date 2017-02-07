@@ -98,8 +98,8 @@
 %{
 #include "bohm.h"
 
-#include <malloc.h>
 #include <stdio.h>
+#include <stdlib.h>
 %}
 
 
@@ -118,7 +118,7 @@ void yyerror(const char *s);
 
 %{
 BOOLEAN			error_detected,
-			       /* flag indicating whether an *
+			       /* flag indicating whether an */
 			       /* error has been detected */
 			       /* during the analysis of the */
 			       /* P source file */

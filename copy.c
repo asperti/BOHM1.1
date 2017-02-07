@@ -36,7 +36,7 @@
 #include "bohm.h"
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -91,7 +91,7 @@ HIDDEN FORM
 		 *newf1,
 		 *newf2,
 		 *newf3;
-      int        q,r;
+      int        q;
 
       temp = root;
       switch (temp->name)
@@ -222,6 +222,8 @@ HIDDEN FORM
 		int_connect(newf1,2,temp->nform[2],temp->nport[2]);
 	      return(newf1);
 	      break;
+	  default:
+	      return NULL;
 	  }
 }
 

@@ -26,6 +26,8 @@
 void compile(file)
      STRING  file;
 {
+     extern int yyparse();
+
      printf("\n******** loading file %s ********\n",file);
      yypush_buffer_state(yy_create_buffer( yyin, 16384));
      yyin = fopen(file,"r");

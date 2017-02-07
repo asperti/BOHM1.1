@@ -77,8 +77,7 @@ void reduce_term(root)
      FORM      *root;
 {
      FORM      *f1,
-	       *f2,
-	       *erase;
+	       *f2;
      int      ans;
      struct tms  time;
      clock_t      usr_time;
@@ -153,8 +152,8 @@ void reduce_term(root)
 	}
 	if((option!=3)&&(seegarb))
 	  {
-	    printf("Total number of garbage calls      %u\n",cl_count);
-	    printf("Total number of garbage operations %u\n",er_count);
+	    printf("Total number of garbage calls      %lu\n",cl_count);
+	    printf("Total number of garbage operations %lu\n",er_count);
 	    printf("Garbage collection done in %.2f:usr %.2f:sys seconds\n",(double) usr_garb_time/60, (double)sys_garb_time/60);
 	    printf("*****************************************************\n");
 	  }
@@ -186,8 +185,7 @@ reduce_redex(f1,f2)
 	       *f2;
 {
      FORM      *new1,
-	       *new2,
-	       *new3;
+	       *new2;
 
 /*   printf("REDUCE: f1: name:%d, index:%d, f2: name:%d, index:%d\n",f1->name,f1->index,f2->name,f2->index);*/
      if((option==2)&&(del_head!=NULL)&&(num_nodes>limit))

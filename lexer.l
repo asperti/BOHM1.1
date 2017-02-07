@@ -37,7 +37,7 @@
 #include "bohm.h"
 #include "y.tab.h"
 
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 %}
 
@@ -74,6 +74,9 @@ string                  [^\"]*\"
  /***************************************************************/
  /* 5. Start Conditions.					*/
  /***************************************************************/
+
+%option nounput
+%option noinput
 
 /* %option reentrant bison-bridge */
 

@@ -24,11 +24,13 @@ int main(argc,argv)
 int argc;
 char *argv[];
 {
+  extern int yyparse();
+
   option=1;
   seetime=0;
   seenode=0;
   seegarb=0;
-  if(argc>1)
+  if(argc>1) {
       if(argc==2)
 	    if (strcmp(argv[1],"-s")==0){
 		/* do_menu4(); */
@@ -57,6 +59,7 @@ char *argv[];
 	       printf("Execution failed:Too many parameters . . .\n");
 	       exit(1);
 	       }
+  }
   printf("\n");
   printf("***********************************************************\n");
   printf("***                  Welcome to the                     ***\n");

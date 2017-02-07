@@ -28,6 +28,8 @@
 
 #include "bohm.h"
 
+#include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -157,9 +159,10 @@ save_aux(root,p)
       FORM       *root;
       int        p;
 {
-  int n,p1,i,card;
+  int n,p1,card;
 
-  if(card=present(root)) {
+  card = present(root);
+  if(card) {
     n=num_port(root->name);
     for (p1=0;p1<n;p1++)
 	stampa(root,p1,card);
@@ -320,7 +323,7 @@ put_int(f,p)
 	   fprintf(save_file,"False         ");
 	   break;
 	case INT:
-	   fprintf(save_file,"Int: %d ",f);
+	   fprintf(save_file,"Int: %" PRIdPTR " ", (intptr_t)f);
 	   break;
 	case NIL:
 	   fprintf(save_file,"Nil          ");

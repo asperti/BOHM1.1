@@ -158,117 +158,6 @@ typedef char		*STRING;
 
 #define NONAME 0
 
-/* crash messages */
-HIDDEN STRING		crash_msgs[] =
-				{
-					"not enough memory",
-					"unable to open this file"
-				};
-
-/* compile time error messages */
-HIDDEN STRING		error_msgs[] = {
-  "lexical error: illegal character",
-  "lexical error: numerical constant overflow",
-  "syntax error: identifier expected after let",
-  "syntax error: bad expression in declaration",
-  "syntax error: = expected after identifier in declaration",
-  "syntax error",
-  "syntax error: missing closed bracket",
-  "syntax error: identifier expected after lambda",
-  "syntax error: identifier expected after let in expression",
-  "syntax error: bad expression in assignement of let_in expression",
-  "syntax error: bad expression in body of let_in expression",
-  "syntax error: bad expression",
-  "syntax error: = expected after identifier in let_in expression",
-  "syntax error: bad application",
-  "scoping error: undefined variable"
-};
-
-/* warning messages */
-HIDDEN STRING		warning_msgs[] = {
-  "warning: variable already declared"
-};
-
-/* I/O library procedure names */
-HIDDEN STRING		library_proc_names[] = {"empty"
-					       };
-
-/* I/O library procedure parameter type names */
-HIDDEN int		library_proc_par_type_names[] = {0
-							};
-
-/* I/O library procedure parameter passing modes */
-HIDDEN int		library_proc_par_passing_modes[] = {0
-							   };
-
-/* I/O library procedure code */
-HIDDEN STRING		library_proc_code[] = {"empty"
-};
-
-/* keywords */
-HIDDEN STRING		keywords[] =
-				{
-					"let",
-					"in",
-                                        "inspect",
-                                        "quit",
-					"load",
-					"rec",
-					"true",
-					"false",
-					"if",
-					"then",
-					"else",
-					"and",
-					"or",
-					"not",
-					"div",
-					"mod",
-					"cons",
-					"head",
-					"tail",
-					"isnil",
-					"def",
-					"share",
-					"nil",
-					"garbage",
-					"option",
-					"info",
-					"save",
-				};
-
-/* keyword tokens */
-HIDDEN STRING		keyword_tokens[] =
-				{
-					"LETKW",
-					"INKW",
-					"INSPECTKW",
-					"QUITKW",
-					"LOADKW",
-					"LETRECKW",
-					"TRUEKW",
-					"FALSEKW",
-					"IFKW",
-					"THENKW",
-					"ELSEKW",
-					"ANDKW",
-					"ORKW",
-					"NOTKW",
-					"DIVKW",
-					"MODKW",
-					"CONSKW",
-					"HEADKW",
-					"TAILKW",
-					"TESTNILKW",
-					"DEFKW",
-					"SHAREKW",
-					"NILKW",
-					"GARBAGEKW",
-					"OPTIONKW",
-					"INFOKW",
-					"SAVEKW",
-				};
-
 /* symbol table bucket type */
 typedef	struct st_bucket
 	{
@@ -574,7 +463,7 @@ extern int		lines,
 
 extern BOOLEAN		out_listing;
 
-extern			open_listing(),
+extern int		open_listing(),
 			produce_listing(),
 			white_space_listing(),
 			tab_listing(),
@@ -626,10 +515,9 @@ extern	void		init_symbol_table(),
                         create_local_variable_binding(),
 			create_binding_for_undef_id();
 
-extern void		to_lower_s(),
-			concat_s();
+extern void		to_lower_s();
 extern int 		to_nat_s(),
 			length_s();
 extern 	BOOLEAN		equal_s();
 
-#endif _BOHM_H
+#endif
