@@ -1,13 +1,3 @@
-CFLAGS = -g -Wall \
-	-Werror=format \
-	-Werror=return-type \
-	-Werror=implicit-function-declaration \
-	-Werror=parentheses \
-	-Werror=unused-function \
-	-Werror=unused-variable \
-	-Werror=comment \
-	-Werror=implicit-int
-
 YFLAGS = -dv
 
 OBJS = \
@@ -36,6 +26,9 @@ OBJS = \
 
 all: bohm
 	./bohm <examples/tartaglia
+
+debug:
+	$(MAKE) CFLAGS="-g -Wall -Werror"
 
 bohm: bohm.a
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< -ll -ly
