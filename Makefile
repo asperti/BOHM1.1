@@ -1,4 +1,5 @@
 CFLAGS = -g -Wall \
+	-Werror=format \
 	-Werror=return-type \
 	-Werror=implicit-function-declaration \
 	-Werror=parentheses \

@@ -14,6 +14,8 @@
 
 #include "bohm.h"
 
+#include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 
 /****************************************************************/
@@ -52,7 +54,7 @@ HIDDEN void rdbk_1(form,port)
     if(form->nport[port]<0) {
       switch(form->nport[port]){
       case INT:
-	left_to_print-=printf("%d", form->nform[0]);
+	left_to_print-=printf("%" PRIdPTR, (intptr_t)form->nform[0]);
 	break;
       case T:
 	left_to_print-=printf("TRUE");

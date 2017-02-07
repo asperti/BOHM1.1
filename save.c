@@ -28,6 +28,8 @@
 
 #include "bohm.h"
 
+#include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -321,7 +323,7 @@ put_int(f,p)
 	   fprintf(save_file,"False         ");
 	   break;
 	case INT:
-	   fprintf(save_file,"Int: %d ",f);
+	   fprintf(save_file,"Int: %" PRIdPTR " ", (intptr_t)f);
 	   break;
 	case NIL:
 	   fprintf(save_file,"Nil          ");
