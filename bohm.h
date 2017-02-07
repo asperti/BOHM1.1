@@ -574,7 +574,7 @@ extern int		lines,
 
 extern BOOLEAN		out_listing;
 
-extern			open_listing(),
+extern int		open_listing(),
 			produce_listing(),
 			white_space_listing(),
 			tab_listing(),
@@ -632,4 +632,4 @@ extern int 		to_nat_s(),
 			length_s();
 extern 	BOOLEAN		equal_s();
 
-#endif _BOHM_H
+#endif

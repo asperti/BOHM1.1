@@ -1,3 +1,6 @@
+CFLAGS = -g -Wall \
+	-Werror=implicit-int
+
 YFLAGS = -dv
 
 OBJS = \
@@ -27,11 +30,8 @@ OBJS = \
 all: bohm
 	./bohm <examples/tartaglia
 
-debug:
-	$(MAKE) CFLAGS="-g -Wall -Werror"
-
 bohm: bohm.a
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ bohm.a -ll -ly
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< -ll -ly
 
 bohm.a: $(OBJS)
 
