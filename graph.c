@@ -196,8 +196,7 @@ TERM
 	TERM            *body;
 {
 	TERM 	*t;         /* pointer to the new term to be created */
-	FORM    *newf1,     /* pointers to the new forms to be created */
-		*newf2;
+	FORM    *newf1;     /* pointer to the new form to be created */
 	VARENTRY *boundvar; /* pointer to the entry for the bound variable */
 	FORM    *varform;   /* pointer to the bound variable form */
 
@@ -294,9 +293,7 @@ TERM
 	TERM            *t,
 		   /* pointer to the new term to be created */
 			*temp;
-	FORM            *newf1,
-			*newf2;
-		   /* pointers to the new forms to be created */
+	FORM            *newf1; /* pointer to the new form to be created */
 	VARENTRY        *boundvar;
 		   /* pointer to the entry for the bound variable */
 	FORM            *varform;
@@ -383,11 +380,7 @@ TERM
 			*arg2,
 			*arg3;
 {
-	TERM            *t,
-		    /* pointer to the term to be created */
-			*temp;
-		    /* pointer to the temporary term obtained by */
-		    /* building a box around the argument */
+	TERM            *t; /* pointer to the term to be created */
 	VARENTRY        *newvars,*tempvars;
 		    /* free variables of the application */
 	FORM            *newf,
@@ -701,10 +694,8 @@ TERM
 	TERM            *arg1,
 			*arg2;
 {
-	TERM            *t;
-		    /* pointer to the term to be created */
-	FORM            *newf1, *newf2;
-		    /* pointer to the new form to be created */
+	TERM            *t; /* pointer to the term to be created */
+	FORM            *newf1; /* pointer to the new form to be created */
 	VARENTRY	*newvars;
 
 	if(arg2 != NULL){
@@ -737,10 +728,8 @@ TERM
 	TERM            *arg1,
 			*arg2;
 {
-	TERM            *t;
-		    /* pointer to the term to be created */
-	FORM            *newf1, *newf2;
-		    /* pointer to the new form to be created */
+	TERM            *t; /* pointer to the term to be created */
+	FORM            *newf1; /* pointer to the new form to be created */
 	VARENTRY	*newvars;
 
 	if(arg2 != NULL){
@@ -833,7 +822,6 @@ FORM
        int        level;
        TERM       *t;
 {
-       VARENTRY   *newvars;
        FORM       *newroot;
        if(t!=NULL){
 	   if(level==1)
@@ -1122,9 +1110,6 @@ HIDDEN VARENTRY
 		 }
 	      else
 		 {
-		     FORM      *varform1,
-			       *varform2;
-
 		     allocate_form(&fan,FAN,index);
 		     fan->nlevel[1] = 0;
 		     fan->nlevel[2] = 0;

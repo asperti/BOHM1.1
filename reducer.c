@@ -77,8 +77,7 @@ void reduce_term(root)
      FORM      *root;
 {
      FORM      *f1,
-	       *f2,
-	       *erase;
+	       *f2;
      int      ans;
      struct tms  time;
      clock_t      usr_time;
@@ -186,8 +185,7 @@ reduce_redex(f1,f2)
 	       *f2;
 {
      FORM      *new1,
-	       *new2,
-	       *new3;
+	       *new2;
 
 /*   printf("REDUCE: f1: name:%d, index:%d, f2: name:%d, index:%d\n",f1->name,f1->index,f2->name,f2->index);*/
      if((option==2)&&(del_head!=NULL)&&(num_nodes>limit))

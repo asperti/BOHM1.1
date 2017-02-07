@@ -136,6 +136,42 @@ HIDDEN void             allocate_binding_entry();
 HIDDEN void             move_bucket();
 HIDDEN void             allocate_bucket();
 
+/* I/O library procedure names */
+HIDDEN STRING		library_proc_names[] = {"empty"
+					       };
+
+/* keywords */
+HIDDEN STRING		keywords[] =
+				{
+					"let",
+					"in",
+                                        "inspect",
+                                        "quit",
+					"load",
+					"rec",
+					"true",
+					"false",
+					"if",
+					"then",
+					"else",
+					"and",
+					"or",
+					"not",
+					"div",
+					"mod",
+					"cons",
+					"head",
+					"tail",
+					"isnil",
+					"def",
+					"share",
+					"nil",
+					"garbage",
+					"option",
+					"info",
+					"save",
+				};
+
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/

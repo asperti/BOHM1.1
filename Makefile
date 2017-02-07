@@ -1,4 +1,5 @@
 CFLAGS = -g -Wall \
+	-Werror=unused-variable \
 	-Werror=comment \
 	-Werror=implicit-int
 

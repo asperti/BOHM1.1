@@ -31,6 +31,12 @@
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
+/* crash messages */
+HIDDEN STRING		crash_msgs[] =
+				{
+					"not enough memory",
+					"unable to open this file"
+				};
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/

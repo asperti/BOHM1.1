@@ -91,7 +91,7 @@ HIDDEN FORM
 		 *newf1,
 		 *newf2,
 		 *newf3;
-      int        q,r;
+      int        q;
 
       temp = root;
       switch (temp->name)

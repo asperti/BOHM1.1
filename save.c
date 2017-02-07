@@ -157,7 +157,7 @@ save_aux(root,p)
       FORM       *root;
       int        p;
 {
-  int n,p1,i,card;
+  int n,p1,card;
 
   if(card=present(root)) {
     n=num_port(root->name);
