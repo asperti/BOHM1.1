@@ -1,4 +1,5 @@
 CFLAGS = -g -Wall \
+	-Werror=comment \
 	-Werror=implicit-int
 
 YFLAGS = -dv
