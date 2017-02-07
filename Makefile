@@ -1,4 +1,5 @@
 CFLAGS = -g -Wall \
+	-Werror=implicit-function-declaration \
 	-Werror=parentheses \
 	-Werror=unused-function \
 	-Werror=unused-variable \

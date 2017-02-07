@@ -24,6 +24,8 @@ int main(argc,argv)
 int argc;
 char *argv[];
 {
+  extern int yyparse();
+
   option=1;
   seetime=0;
   seenode=0;
