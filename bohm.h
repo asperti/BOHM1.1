@@ -474,10 +474,6 @@ extern 	BOOLEAN  	seegarb;
 extern 	void	menu();
 extern 	void	info();
 
-extern 		FORM	*pop();
-extern          void    push();
-extern          void    init_stack();
-
 extern void  	                rdbk();
 
 extern void		reduce_term();

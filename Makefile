@@ -10,7 +10,6 @@ OBJS = \
 	bohm.a(graph.o) \
 	bohm.a(destroy.o) \
 	bohm.a(reducer.o) \
-	bohm.a(stack.o) \
 	bohm.a(readback.o) \
 	bohm.a(garbage.o) \
 	bohm.a(menu.o) \

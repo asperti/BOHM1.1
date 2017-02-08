@@ -34,11 +34,12 @@
 
 #include "bohm.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <sys/times.h>
 #include <time.h>
+#include <sys/times.h>
+#include <sys/types.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -48,9 +49,8 @@ extern clock_t usr_garb_time;
 extern clock_t sys_garb_time;
 
 /****************************************************************/
-/* 3. Declaration of names strictly local to the module.	*/
+/* 3. Definitions strictly local to the module.                 */
 /****************************************************************/
-
 
 static int     unsafe;
 static int     optim;
@@ -62,7 +62,36 @@ static int     type_error;
 static void    reduce_redex();
 static void    reduce_form();
 static FORM    *lo_redex();
+static int     auxnext;
+static FORM    *auxstack[STACK_SIZE];
 
+static FORM *pop()
+{
+	FORM *res;
+
+	assert(auxnext > 0);
+	--auxnext;
+	res = auxstack[auxnext];
+	auxstack[auxnext] = NULL;
+	return res;
+}
+
+static void push(FORM *f)
+{
+	auxstack[auxnext] = f;
+
+	++auxnext;
+	if(auxnext >= STACK_SIZE) {
+		printf("Stack Overflow . . .\n");
+		getchar();
+		getchar();
+	}
+}
+
+static void init_stack()
+{
+	auxnext = 0;
+}
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
