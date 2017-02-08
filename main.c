@@ -5,6 +5,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+extern FILE *yyin;
+
+extern struct yy_buffer_state *yy_create_buffer(FILE *file, int size);
+extern void yypush_buffer_state(struct yy_buffer_state *new_buffer);
+extern void yypop_buffer_state(void);
 extern int yyparse();
 
 /* The following function changes the parser standard 	*/

@@ -1,8 +1,6 @@
 #ifndef _BOHM_H
 #define _BOHM_H
 
-#include <stdio.h>
-
 /* utility types */
 typedef int		BOOLEAN;
 typedef char		*STRING;
@@ -429,23 +427,12 @@ TERM                    *maketerm();
 extern void		inspect_driver();
 extern FORM             *inspect();
 
-extern FILE		*yyin;
-
-extern int		yyleng,
-			lines;
-
-extern int		yylex();
-
-typedef struct yy_buffer_state *YY_BUFFER_STATE;
-extern YY_BUFFER_STATE yy_create_buffer (FILE *file,int size);
-extern void yypush_buffer_state (YY_BUFFER_STATE new_buffer);
-extern void yypop_buffer_state (void);
+extern int		lines;
 
 extern BOOLEAN          quit,
                         loading_mode;
 extern char             *include_file;
 extern FORM 		*lastinputterm;
-extern FILE             *yyin;
 
 extern int		lines,
 			lexemes_in_curr_line;
