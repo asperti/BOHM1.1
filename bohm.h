@@ -492,7 +492,6 @@ extern	void		init_symbol_table(),
 			create_binding_for_undef_id();
 
 extern void		to_lower_s();
-extern int 		to_nat_s(),
-			length_s();
+extern int 		to_nat_s();
 
 #endif

@@ -4,8 +4,7 @@
 /* - to_lower_s(): it turns a given string into a lower case	*/
 /*		   one;						*/
 /* - to_nat_s(): it turns a given string of digits into a	*/
-/*		 natural and checks for presence of overflow;	*/
-/* - length_s(): it computes the length of a given string.	*/
+/*		 natural and checks for presence of overflow.	*/
 /****************************************************************/
 
 
@@ -60,17 +59,4 @@ int to_nat_s(s)
 		return(NUMOUTOFRANGE);
 	else
 		return((int)n);
-}
-
- /* The following function computes the length of a given string, */
- /* including the null character terminating the string itself. */
-int length_s(s)
-	STRING		s;
-					/* string whose length is to */
-					/* be computed */
-{
-	int 		i;
-
-	for (i = 1; *s != EOS; s++, i++);
-	return(i);
 }
