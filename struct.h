@@ -146,53 +146,6 @@ typedef struct pattern{
   struct term *term;
 } PATTERN;
 
-typedef struct new{
-		struct form *node;
-		struct new *prox;
-}NEW;
-typedef struct new1{
-		struct form *rt;
-		struct new1 *px;
-}NEW1;
-
-/* top level * o branching commands type */
-typedef struct top_level_branching_info
-	{
-	  int top;             /* it can be STAR or CIRCLE */
-	  struct top_level_branching_info *next ;
-	}               TOPLEVEL_BRANCHING_INFO;
-
-/* context type */
-/* every context c has a shape of the kind  *o*oo..*o<c1,c2> */
-/* where the initial sequence may be empty and the pair <c1,c2> */
-/* may be absent */
-
-typedef struct context
-	{
-	  TOPLEVEL_BRANCHING_INFO   *branching_info;
-	  struct context            *fst;
-	  struct context            *snd;
-	}               CONTEXT;
-
-/* stack of contexts entry type */
-typedef struct context_stack
-	{
-	  FORM                 *argform;
-				/* first form of the argument */
-				/* of an application  */
-	  int                  dbnm,
-				/* de brujin number */
-			       accessport;
-				/* port of the first form of the */
-				/* argument connected to the */
-				/* application */
-	  CONTEXT              *backup;
-				/* application context. Used to resume */
-				/* readback for the argument */
-	  struct context_stack *tail;
-				/* previous element in the stack */
-	}              CONTEXT_STACK;
-
 typedef	struct 	copy_form	{
 	FORM			*src;
 	FORM			*dest;
