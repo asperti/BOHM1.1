@@ -226,16 +226,12 @@ typedef struct form
 					/* name of the form */
 					/* (FAN, ROOT, CROISSANT */
 					/* BRACKET)  */
-				/*dbr,*/
-					/* for LAMBDA forms; only */
-					/* used during readback */
 	  int		        num_safe;
 					/* Integer value for numeric */
 					/* forms or indicator of safeness */
 					/* for other forms  */
 	  short int             index;
 					/* index of the form */
-/*	  struct form           *copy;*/
 	  char                  nport[3];
 					/* numbers of the ports */
 					/* where the three ports */
@@ -254,7 +250,6 @@ typedef struct form
 		                        /* ROOT only the first one is) */
 	  short int             nlevel[3];
 
-/*          BOOLEAN               connected; */
 	  struct form           *next;
 	  struct form           *prev;
 

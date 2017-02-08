@@ -32,10 +32,8 @@ char *argv[];
   seegarb=0;
   if(argc>1) {
       if(argc==2)
-	    if (strcmp(argv[1],"-s")==0){
-		/* do_menu4(); */
+	    if (strcmp(argv[1],"-s")==0)
 		menu();
-	    }
 	    else if (strcmp(argv[1],"-i")==0)
 			info();
 		 else{
@@ -48,7 +46,6 @@ char *argv[];
 		     ( (strcmp(argv[2],"-s")==0)&&
 		       (strcmp(argv[1],"-i")==0) ) ){
 			info();
-			/* do_menu4(); */
 			menu();
 		}else{
 			printf("Execution failed:Illegal option \n");
@@ -74,9 +71,7 @@ char *argv[];
   init_garbage();
   lines = 0;
   setbuf(stdout, NULL);
-  /* error_detected = 0; */
   lastinputterm = NULL;
-  /* int error_detected = FALSE; */
 
   while (quit == 0)
      {

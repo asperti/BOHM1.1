@@ -50,13 +50,7 @@ FORM *pop()
 void push(f)
      FORM    *f;
 {
-  /* assert(not_in_stack(f)); */
      stack[next++] = f;
-     /*
-     if (next>max_ptr){
-        printf("next = %i, max_ptr = %i\n", next, max_ptr);
-        max_ptr = next; 
-	} */
      if(next>=STACK_SIZE){
 	printf("Stack Overflow . . .\n");
 	getchar();getchar();

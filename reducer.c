@@ -103,8 +103,6 @@ void reduce_term(root)
      sys_time = time.tms_stime;
      init_stack();
      f1 = lo_redex(root);
-     /* getchar();
-	print_stack(); */
      usr_garb_time = 0;
      sys_garb_time = 0;
      while ((f1 != root) && (!type_error))
@@ -124,13 +122,6 @@ void reduce_term(root)
 	     reduce_form(f1);
 	   counter = counter + 1;
 	   f1 = lo_redex(pop());
-	   /* print_stack();
-	   ans = getchar(); 
-	   if (ans == 'i') inspect_driver(root); */
-	   /* init_stack();
-	      f1 = lo_redex(root);
-	   if (get_next() == 65554)
-	   {printf("%i\n", get_max_ptr());} */
 	}
      if(!type_error){
 	times(&time);
@@ -187,7 +178,6 @@ reduce_redex(f1,f2)
      FORM      *new1,
 	       *new2;
 
-/*   printf("REDUCE: f1: name:%d, index:%d, f2: name:%d, index:%d\n",f1->name,f1->index,f2->name,f2->index);*/
      if((option==2)&&(del_head!=NULL)&&(num_nodes>limit))
 	clean();
 
@@ -577,7 +567,7 @@ reduce_redex(f1,f2)
 	{
 	   case FAN:
 	      if (f2->name != TRIANGLE) fan_int++;
-	      if ((f2->name==LAMBDA)/*||(f2->name==MU)*/)
+	      if (f2->name == LAMBDA)
 			f1->num_safe=FALSE;
 	      switch (f2->name)
 	      {
@@ -688,7 +678,7 @@ reduce_redex(f1,f2)
 	      if (f2->name != TRIANGLE) fan_int++;
 	      unsafe++;
 	   case TRIANGLE:
-	      if ((f2->name==LAMBDA)/*||(f2->name==MU)*/)
+	      if (f2->name == LAMBDA)
 		 f1->num_safe = FALSE;
 	      switch (f2->name)
 		 {
@@ -754,13 +744,7 @@ reduce_redex(f1,f2)
 		       break;
 
 		 }
-	      /* 
-	   default:
-	     printf("--->   type error: unexpected constant\n");
-	     type_error = TRUE;
-	     break; */
 	   break;
-
 	}
      }
 }
@@ -774,7 +758,6 @@ reduce_form(f1)
 FORM	*f1;
 {
   FORM    *tmp;
-/*   printf("FORM: f1: name:%d, index:%d, f2: name:%d\n",f1->name,f1->index,f1->nport[0]);*/
 	switch (f1->name) {
 		case IFELSE:
 		  switch(f1->nport[0])
@@ -1423,13 +1406,9 @@ static FORM
 				   temp->nport[1],
 				   next->nform[0],
 				   next->nport[0]);
-			   /* printf("current level %i\n", temp->index);
-			      printf("next level %i\n", next->index); */
 			   myfree(temp);
 			   myfree(next);
 			   temp = pop();
-			   /* printf("previous is %i\n", temp->name);
-			      printf("at level %i\n", temp->index); */
 			  }
 		       else
 			  {
@@ -1473,25 +1452,6 @@ static FORM
 		       push(temp);
 		       temp = next;
 		       break;
-/*
-			 if ((next->nlevel[p] != 0) ||
-			   (temp->num_safe == FALSE))
-			 {
-			    temp->num_safe = TRUE;
-			    temp->index = next->index;
-			    temp->nlevel[1] = temp->nlevel[1]+next->nlevel[p];
-			    temp->nlevel[2] = temp->nlevel[2]+next->nlevel[p];
-			    next->nlevel[p] = 0;
-			    next->nlevel[p] = 0;
-			    temp = pop();
-			  }
-		       else
-			 {
-			   push(temp);
-			   temp = next;
-			 }
-		       break;
-*/
 		     }
 		   break;
 		 }

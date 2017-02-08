@@ -74,10 +74,6 @@ FORM *inspect(p,f)
 		switch(f->name){
 		    case ERASE:
 		    case ROOT:
-/*		    case INT:
-		    case T:
-		    case F:
-		    case NIL:*/
 			ok=FALSE;
 			break;
 		    default:
@@ -94,7 +90,6 @@ FORM *inspect(p,f)
 		    case NIL:
 		    case TRIANGLE:
 		    case LAMBDAUNB:
-/*		    case MU_UNB:*/
 		    case TESTNIL:
 		    case CAR:
 		    case CDR:
@@ -179,9 +174,6 @@ FORM *inspect(p,f)
 		case LAMBDA:
 		   printf("form = LAMBDA\n");
 		   break;
-/*		case MU:
-		   printf("form = MU\n");
-		   break;*/
 		case IFELSE:
 		   printf("form = IFELSE\n");
 		   break;

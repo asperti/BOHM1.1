@@ -338,12 +338,6 @@ TERM
 		    /* pointer to the new form to be created */
 
 	temp = makebox(level,arg);
-	/* 
-	if (fun->rootp < 0)
-	  {
-	    printf("constant in functional position\n");
-	    return(NULL);
-	    } */
 
 	allocate_form(&newf,APP,level);
 
@@ -926,9 +920,7 @@ void int_connect(form1,portf1,form2,portf2)
 {
        form1->nport[portf1] = portf2;
        form1->nform[portf1] = form2; 
-       /* form1->num_safe = value; */
 }
-
 
  /* the following function connects only the port portf1 of 	*/
  /* form1 to the port portf2 of form2, because form2 is a INT,	*/

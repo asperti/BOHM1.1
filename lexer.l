@@ -78,8 +78,6 @@ string                  [^\"]*\"
 %option nounput
 %option noinput
 
-/* %option reentrant bison-bridge */
-
 %start com
 %start str              
 
@@ -162,24 +160,20 @@ string                  [^\"]*\"
 		}
 
 "=="		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(EQUAL);
 		}
 
 "<="		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(LEQUAL);
 		}
 
 ">="		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(MEQUAL);
 		}
 "<>"		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(NOTEQUAL);
 		}
@@ -190,28 +184,3 @@ string                  [^\"]*\"
                         if (loading_mode == 1) ECHO; 
 			signal_error(ILLEGALCHAR);
                 }
-
-%%
-
- /***************************************************************/
- /* 6. Auxiliary functions.					*/
- /***************************************************************/
-
-/*
-int yywrap()
-{
-   quit = 1; 
-   return(NOMOREINPUT); 
-} */
-
-
-
-
-
-
-
-
-
-
-
-

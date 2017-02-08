@@ -27,7 +27,7 @@ OBJS = \
 all: bohm
 	./bohm <examples/tartaglia
 
-debug:
+debug: clean
 	$(MAKE) CFLAGS="-g -Wall -Werror"
 
 bohm: bohm.a
