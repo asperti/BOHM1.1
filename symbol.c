@@ -118,7 +118,7 @@ LOCALENVENTRY		*curr_local_env;
 
 
 /****************************************************************/
-/* 4. Definitions of variables strictly local to the module.	*/
+/* 4. Definitions strictly local to the module.                 */
 /****************************************************************/
 
 static LOCALENVENTRY	*external_env;
@@ -171,6 +171,14 @@ static STRING		keywords[] =
 					"info",
 					"save",
 				};
+
+/* The following function turns a given string into a lower case one. */
+static void to_lower_s(STRING s)
+{
+	for (; *s != EOS; s++)
+		if (('A' <= *s) && (*s <= 'Z'))
+			*s += 'a' - 'A';
+}
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
