@@ -373,8 +373,7 @@ extern STRING		malloc_da(),
 
 extern BOOLEAN		error_detected;
 
-extern void		signal_error(),
-			signal_warning();
+extern void		signal_error();
 
 extern long unsigned 	er_count;
 extern long unsigned 	cl_count;

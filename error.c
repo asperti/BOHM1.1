@@ -3,8 +3,7 @@
 /* Upon error detection, the corresponding error message is	*/
 /* printed on the screen.                                	*/
 /* - signal_error(): it signals lexical, syntax and semantic	*/
-/*		     errors;					*/
-/* - signal_warning(): it signals warnings.			*/
+/*		     errors.					*/
 /****************************************************************/
 
 
@@ -52,11 +51,6 @@ static STRING		error_msgs[] = {
   "scoping error: undefined variable"
 };
 
-/* warning messages */
-static STRING		warning_msgs[] = {
-  "warning: variable already declared"
-};
-
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
@@ -73,21 +67,3 @@ void signal_error(error_msg_num)
 		lines,
 		error_msgs[error_msg_num]);
 }
-
- /* The following function signals warnings. */
-void signal_warning(warning_msg_num)
-	int		warning_msg_num;
-					/* warning message number */
-{
-	fprintf(stderr,
-		"line %-5d\t--->\t%s\n",
-		lines,
-		warning_msgs[warning_msg_num]);
-}
-
-
-/****************************************************************/
-/* 6. Definitions of functions strictly local to the module.	*/
-/****************************************************************/
-
-
