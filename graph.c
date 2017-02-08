@@ -93,7 +93,6 @@
 int rec_er=false;
 unsigned num_nodes,max_nodes;
 bool is_global_var;
-FORM *headfree=NULL; /* pointer to the head of the free-form list */
 
 unsigned length_list = 0;
 /****************************************************************/

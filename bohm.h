@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 extern 		FORM	*copy();
-//FORM *headfree;
+extern FORM *headfree;
 
 extern 	void destroy();
 extern 	void init_destroy();
