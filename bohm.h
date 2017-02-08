@@ -13,8 +13,8 @@ extern 	void destroy();
 extern 	void init_destroy();
 extern 	void no_destroy();
 
-extern STRING		malloc_da(),
-			strdup_da();
+extern STRING		malloc_da();
+extern STRING		strdup_da();
 
 extern bool		error_detected;
 
@@ -30,45 +30,50 @@ extern 	void		user();
 extern 	void		init_garbage();
 extern 	void		ins_del();
 
-extern unsigned		max_nodes,num_nodes;
+extern unsigned		max_nodes;
+extern unsigned		num_nodes;
 extern bool		is_global_var;
 extern int		rec_er;
 
 extern 		FORM	*closeterm();
-extern 		TERM    *buildvarterm(),
-        		*buildlambdaterm(),
-        		*buildplambdaterm(),
-        		*buildappterm(),
-        		*buildletinterm(),
-                        *build_mu_term(),
-                        *buildtrueterm(),
-                        *buildfalseterm(),
-                        *buildifelseterm(),
-			*buildandterm(),
-			*buildorterm(),
-			*buildnotterm(),
-			*buildrelopterm(),
-			*buildmatterm(),
-			*buildminusterm(),
-			*buildintterm(),
-			*buildlist(),
-			*buildlist1(),
-			*buildcarterm(),
-			*buildcdrterm(),
-			*buildtestnil(),
-			*buildnillist(),
-                        *buildvoidterm();
-extern void             connect(),
-			int_connect(),
-			bool_connect(),
-			connect1();
+
+extern TERM *buildvarterm();
+extern TERM *buildlambdaterm();
+extern TERM *buildplambdaterm();
+extern TERM *buildappterm();
+extern TERM *buildletinterm();
+extern TERM *build_mu_term();
+extern TERM *buildtrueterm();
+extern TERM *buildfalseterm();
+extern TERM *buildifelseterm();
+extern TERM *buildandterm();
+extern TERM *buildorterm();
+extern TERM *buildnotterm();
+extern TERM *buildrelopterm();
+extern TERM *buildmatterm();
+extern TERM *buildminusterm();
+extern TERM *buildintterm();
+extern TERM *buildlist();
+extern TERM *buildlist1();
+extern TERM *buildcarterm();
+extern TERM *buildcdrterm();
+extern TERM *buildtestnil();
+extern TERM *buildnillist();
+extern TERM *buildvoidterm();
+
+extern void connect();
+extern void int_connect();
+extern void bool_connect();
+extern void connect1();
+
 extern void             allocate_form();
 extern void             myfree();
 extern void             free_varlist();
 extern void             free_pattern();
 
-VARLIST                 *mergevarlist(),
-                        *makevarlist();
+VARLIST *mergevarlist();
+VARLIST *makevarlist();
+
 TERM                    *maketerm();
 
 extern void		inspect_driver();
@@ -76,26 +81,27 @@ extern FORM             *inspect();
 
 extern int		lines;
 
-extern bool          quit,
-                        loading_mode;
+extern bool quit;
+extern bool loading_mode;
+
 extern char             *include_file;
 extern FORM 		*lastinputterm;
 
-extern int		lines,
-			lexemes_in_curr_line;
+extern int lines;
+extern int lexemes_in_curr_line;
 
 extern bool		out_listing;
 
-extern int		open_listing(),
-			produce_listing(),
-			white_space_listing(),
-			tab_listing(),
-			newline_listing(),
-			last_newline_listing(),
-			print_error_listing(),
-			print_warning_listing(),
-			clear_listing(),
-			close_listing();
+extern int open_listing();
+extern int produce_listing();
+extern int white_space_listing();
+extern int tab_listing();
+extern int newline_listing();
+extern int last_newline_listing();
+extern int print_error_listing();
+extern int print_warning_listing();
+extern int clear_listing();
+extern int close_listing();
 
 extern 	int 		option;
 extern 	unsigned 	limit;
@@ -116,13 +122,13 @@ extern	STBUCKET		*dictionary[];
 
 extern	LOCALENVENTRY		*curr_local_env;
 
-extern	void		init_symbol_table(),
-			search_bucket(),
-			push_local_env(),
-			pop_local_env(),
-			pop_all_local_env(),
-			create_variable_binding(),
-                        create_local_variable_binding(),
-			create_binding_for_undef_id();
+extern void init_symbol_table();
+extern void search_bucket();
+extern void push_local_env();
+extern void pop_local_env();
+extern void pop_all_local_env();
+extern void create_variable_binding();
+extern void create_local_variable_binding();
+extern void create_binding_for_undef_id();
 
 #endif
