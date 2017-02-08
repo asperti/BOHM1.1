@@ -316,20 +316,6 @@ void create_variable_binding(st,rootform,type)
 {
 	allocate_binding_entry(st,curr_local_env,rootform,type);
 }
-#if 0
-void create_local_variable_binding(st,term)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier which is to be bound */
-				/* to a procedure */
-	TERM            *term;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-{
-	allocate_local_binding_entry(st,curr_local_env,term->rootf,term->rootp);
-}
-#endif
 
  /* The following function creates an entry for a binding concerning */
  /* an identifier used but not defined. The entry for the binding is */
@@ -473,34 +459,3 @@ void allocate_binding_entry(st,le,rootform,type)
 	le->last_local_binding = b;
 	b->entry_type = type;
 }
-
-#if 0
-static
-void allocate_local_binding_entry(st,le,rootform,port)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier involved in the binding */
-	LOCALENVENTRY	*le;
-				/* pointer to the entry for the */
-				/* environment in which the binding */
-				/* is to be created */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-	int		port;
-{
-	BINDINGENTRY	*b;
-
-	b = (BINDINGENTRY *)malloc_da(sizeof(BINDINGENTRY));
-	b->st_bucket = st;
-	b->root = rootform;
-        b->port = port;
-	b->prev_id_binding = st->curr_binding;
-	st->curr_binding = b;
-	b->prev_local_binding = le->last_local_binding;
-	le->last_local_binding = b;
-	b->entry_type = type;
-}
-
-#endif
