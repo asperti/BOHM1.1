@@ -468,8 +468,6 @@ extern int		open_listing(),
 			clear_listing(),
 			close_listing();
 
-extern void			compile();
-
 extern 	int 		option;
 extern 	unsigned 	limit;
 extern 	BOOLEAN  	seetime;

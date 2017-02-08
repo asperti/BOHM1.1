@@ -9,7 +9,6 @@ OBJS = \
 	bohm.a(inspect.o) \
 	bohm.a(graph.o) \
 	bohm.a(destroy.o) \
-	bohm.a(loader.o) \
 	bohm.a(reducer.o) \
 	bohm.a(stack.o) \
 	bohm.a(readback.o) \

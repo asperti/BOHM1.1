@@ -1,14 +1,3 @@
-/****************************************************************/
-/* This module implements the main function.			*/
-/* It analizes the input parameters, initializes some variable,	*/
-/* the symbol table, the destroyer, the garbage and call the 	*/
-/* parser.							*/
-/****************************************************************/
-
-/****************************************************************/
-/* Inclusion of header files.           			*/
-/****************************************************************/
-
 #include "bohm.h"
 #include "y.tab.h"
 
@@ -16,16 +5,42 @@
 #include <string.h>
 #include <stdlib.h>
 
-/****************************************************************/
-/* Main program.               			                */
-/****************************************************************/
+extern int yyparse();
+
+/* The following function changes the parser standard 	*/
+/* input and call the parser function.			*/
+static void compile(file)
+     STRING  file;
+{
+     printf("\n******** loading file %s ********\n",file);
+     yypush_buffer_state(yy_create_buffer( yyin, 16384));
+     yyin = fopen(file,"r");
+     if (yyin==NULL)
+	   printf("Fatal Error: cannot open file %s.\n",file);
+     else
+	{
+	   loading_mode = 1;
+	   while ((quit == 0) && (error_detected == FALSE))
+	     {
+		yyparse();
+	     }
+	   if (error_detected == FALSE)
+	      printf("\n******** %s loaded ********\n",file);
+	   else
+	      {
+		 printf("\n***** loading file %s aborted *****\n",file);
+		 error_detected = FALSE;
+	      }
+	   quit = 0;
+	   loading_mode = 0;
+	 }
+     yypop_buffer_state();
+}
 
 int main(argc,argv)
 int argc;
 char *argv[];
 {
-  extern int yyparse();
-
   option=1;
   seetime=0;
   seenode=0;
@@ -89,5 +104,3 @@ char *argv[];
   printf("good bye\n");
   return 0;
 }
-
-
