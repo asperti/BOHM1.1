@@ -28,7 +28,7 @@ bohm: bohm.a
 
 bohm.a: $(OBJS)
 
-$(OBJS): y.tab.h bohm.h define.h typedef.h
+$(OBJS): y.tab.h bohm.h define.h struct.h
 
 lexer.c: y.tab.h
 

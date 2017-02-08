@@ -2,7 +2,7 @@
 #define _BOHM_H
 
 #include "define.h"
-#include "typedef.h"
+#include "struct.h"
 
 #include <stdbool.h>
 

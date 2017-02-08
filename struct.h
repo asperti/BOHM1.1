@@ -1,5 +1,5 @@
-#ifndef _TYPEDEF_H
-#define _TYPEDEF_H
+#ifndef _STRUCT_H
+#define _STRUCT_H
 
 /* symbol table bucket type */
 typedef	struct st_bucket
