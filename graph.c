@@ -90,9 +90,9 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-int rec_er=FALSE;
+int rec_er=false;
 unsigned num_nodes,max_nodes;
-BOOLEAN is_global_var;
+bool is_global_var;
 FORM *headfree=NULL; /* pointer to the head of the free-form list */
 
 unsigned length_list = 0;
@@ -222,11 +222,11 @@ TERM
 	FORM    *newf1,newf2;     /* pointers to the new forms to be created */
 	VARENTRY *boundvar; /* pointer to the entry for the bound variable */
 	FORM    *varform;   /* pointer to the bound variable form */
-        BOOLEAN boundp;
+        bool boundp;
 
-        for(vp=pattern->var_list,boundp=FALSE;vp;vp=vp->next)
+        for(vp=pattern->var_list,boundp=false;vp;vp=vp->next)
           if(lookfor(vp->id->id,body->vars)) {
-            boundp=TRUE;
+            boundp=true;
             break;
           }
 
@@ -805,9 +805,9 @@ FORM
        FORM       *newroot;
        if(t!=NULL){
 	   if(level==1)
-		is_global_var=TRUE;
+		is_global_var=true;
 	   else
-		is_global_var=FALSE;
+		is_global_var=false;
 
 	   allocate_form(&newroot,ROOT,0);
 
@@ -859,7 +859,7 @@ void allocate_form(form, name, index)
 	(*form)->nform[0]=NULL;
 	(*form)->nform[1]=NULL;
 	(*form)->nform[2]=NULL;
-	(*form)->num_safe=TRUE;   /* initially, all operators are safe */
+	(*form)->num_safe=true;   /* initially, all operators are safe */
 }
 
 /* the following function adds a graphical form to deallocate */
@@ -1370,16 +1370,16 @@ void inspect_connect(f1,p1,f2,p2)
     connect1(f1,p1,f2,p2);
 }
 
-static BOOLEAN membervarlist(e,l)
+static bool membervarlist(e,l)
 BINDINGID *e;
 VARLIST *l;
 {
   while(l)
     if (e->id==l->id->id)
-      return TRUE;
+      return true;
     else
       l=l->next;
-  return FALSE;
+  return false;
 }
   
 

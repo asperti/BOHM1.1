@@ -127,7 +127,7 @@ void user()
 static void garbage(erase)
 FORM *erase;
 {
-	BOOLEAN end=FALSE;
+	bool end=false;
 	FORM *form,*nextform,*newform;
 	int port,nextport;
 	int p1,p2;
@@ -140,7 +140,7 @@ FORM *erase;
 	  port=nextport;
 	  if(port<0) {
 	    er_count++;
-	    end=TRUE;
+	    end=true;
 	  }
 	  else {
 	    switch(form->name){
@@ -182,7 +182,7 @@ FORM *erase;
 		      form->index-=1;
 		    }
 		  }
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -223,7 +223,7 @@ FORM *erase;
 		      form->index-=1;
 		    }
 		  }
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -264,7 +264,7 @@ FORM *erase;
 		      form->index-=1;
 		    }
 		  }
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -284,7 +284,7 @@ FORM *erase;
 		  }
 		  else
 		    form->name=CAR;
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -314,7 +314,7 @@ FORM *erase;
 		    }
 		    else
 		      form->name=UNS_FAN2;
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
@@ -395,14 +395,14 @@ FORM *erase;
 		}
 		else{
 		  form->name=LAMBDAUNB;
-		  end=TRUE;
+		  end=true;
 		}
 		break;
 
 	      case ERASE:
 		er_count++;
 		form->index=NOTEXISTENT;
-		end=TRUE;
+		end=true;
 		break;
 
 	      default:

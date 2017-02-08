@@ -65,7 +65,7 @@ FORM *inspect(p,f)
      int     p;
      FORM    *f;
 {
-	BOOLEAN ok=TRUE;
+	bool ok=true;
 	switch(p)
 	    {
 	    case 0:
@@ -74,7 +74,7 @@ FORM *inspect(p,f)
 		switch(f->name){
 		    case ERASE:
 		    case ROOT:
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -107,7 +107,7 @@ FORM *inspect(p,f)
 		    case MOD1:
 		    case UNS_FAN1:
 		    case UNS_FAN2:
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -118,12 +118,12 @@ FORM *inspect(p,f)
 		    case IFELSE:
 			break;
 		    default:
-			ok=FALSE;
+			ok=false;
 			break;
 		    }
 		break;
 	    default:
-		ok=FALSE;
+		ok=false;
 		break;
 	    }
 

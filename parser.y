@@ -116,7 +116,7 @@ int yyerror(const char *msg);
  /***************************************************************/
 
 %{
-BOOLEAN			quit,
+bool			quit,
 			       /* flag indicating quit request */
 			loading_mode;
 			       /* flag indicating if parsing is */
@@ -135,7 +135,7 @@ FORM                    *lastinputterm;
 int                    app_nesting_depth;
 PATTERN                *pattmp;
 
-static BOOLEAN defined();
+static bool defined();
 %}
 
  /***************************************************************/
@@ -259,7 +259,7 @@ input           :      directive
 		|        
 				{
 				   printf("no more input");
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 				; 
@@ -272,13 +272,13 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 				}
 		|      '#' QUITKW EXPRDELIM
 				{
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 		|      '#' LOADKW ASTRING EXPRDELIM
 				{
 				  include_file = $3;
-				  loading_mode = TRUE;
+				  loading_mode = true;
 				  printf("%s", include_file);
 				  YYACCEPT;
 				}
@@ -658,7 +658,7 @@ pattern         :       CONSKW '(' pattern ',' pattern ')'
 
 term    	:	error  EXPRDELIM
                                 {
-                                  error_detected = TRUE;
+                                  error_detected = true;
                                   yyerrok;
                                   YYACCEPT;
 				}
@@ -668,7 +668,7 @@ term    	:	error  EXPRDELIM
 
 /* The following function checks if an identifier has been */
 /* previously declared */
-static BOOLEAN defined(st)
+static bool defined(st)
 	STBUCKET	*st;
 			      /* pointer to the bucket for the */
 			      /* identifier */

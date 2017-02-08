@@ -25,16 +25,16 @@ static void compile(file)
      else
 	{
 	   loading_mode = 1;
-	   while ((quit == 0) && (error_detected == FALSE))
+	   while ((quit == 0) && (error_detected == false))
 	     {
 		yyparse();
 	     }
-	   if (error_detected == FALSE)
+	   if (error_detected == false)
 	      printf("\n******** %s loaded ********\n",file);
 	   else
 	      {
 		 printf("\n***** loading file %s aborted *****\n",file);
-		 error_detected = FALSE;
+		 error_detected = false;
 	      }
 	   quit = 0;
 	   loading_mode = 0;
@@ -97,13 +97,13 @@ char *argv[];
      {
        printf("bohm>");
 	yyparse();
-	if (loading_mode==TRUE)
+	if (loading_mode==true)
 	  {
 	   printf("including %s",include_file);
 	   compile(include_file);
-	   loading_mode = FALSE;
+	   loading_mode = false;
 	  }
-	error_detected = FALSE;
+	error_detected = false;
 	lines = 0;
      }
   printf("good bye\n");

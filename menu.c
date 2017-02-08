@@ -28,8 +28,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static BOOLEAN do_menu1();
-static BOOLEAN do_menu2();
+static bool do_menu1();
+static bool do_menu2();
 static void    do_menu3();
 static int     take_char();
   
@@ -39,9 +39,9 @@ static int     take_char();
 
 int	 option;  /* Initial option selected */
 unsigned limit;   /* Limit for allocable operators (only for option 2) */
-BOOLEAN  seetime;
-BOOLEAN  seenode;
-BOOLEAN  seegarb;
+bool  seetime;
+bool  seenode;
+bool  seegarb;
 
 
 
@@ -71,10 +71,10 @@ void info()
 	printf("\n");
 	switch(select){
 	    case 'y':
-		seetime=TRUE;
+		seetime=true;
 		break;
 	    case 'n':
-		seetime=FALSE;
+		seetime=false;
 		break;
 	    case 'h':
 		printf("HELP . . .\n\n");
@@ -103,10 +103,10 @@ void info()
 	printf("\n");
 	switch(select){
 	    case 'y':
-		seenode=TRUE;
+		seenode=true;
 		break;
 	    case 'n':
-		seenode=FALSE;
+		seenode=false;
 		break;
 	    case 'h':
 		printf("HELP . . .\n\n");
@@ -133,10 +133,10 @@ void info()
 	printf("\n");
 	switch(select){
 	    case 'y':
-		seegarb=TRUE;
+		seegarb=true;
 		break;
 	    case 'n':
-		seegarb=FALSE;
+		seegarb=false;
 		break;
 	    case 'h':
 		printf("HELP . . .\n\n");
@@ -174,14 +174,14 @@ static
 int take_char()
 {
     int taken;
-    BOOLEAN warning;
+    bool warning;
     do{
-	warning=FALSE;
+	warning=false;
 	do
 	    taken = getchar();
 	while (taken == ENTER);
 	while(getchar()!=ENTER)
-	    warning=TRUE;
+	    warning=true;
 	if(warning){
 	    printf("\nOne-character answer is required.\n");
 	    printf("Answer again please . . .\n\n>");
@@ -191,9 +191,9 @@ int take_char()
 }
 
 static
-BOOLEAN do_menu1()
+bool do_menu1()
 {
-    BOOLEAN cont = FALSE;
+    bool cont = false;
     option=0;
     while((option!=1)&&(option!=2)&&(option!=3)){
 	printf("Please choose one of the following strategies:\n");
@@ -221,14 +221,14 @@ BOOLEAN do_menu1()
 		printf("Illegal option . . .\n\n");
     }
     if(option==2)
-	cont=TRUE;
+	cont=true;
     return(cont);
 }
 
 static
-BOOLEAN do_menu2()
+bool do_menu2()
 {
-    BOOLEAN cont=FALSE;
+    bool cont=false;
     int select=0;
     while((select!=1)&&(select!=2)&&(select!=3)&&(select!=4)){
 	printf("Please choose a limit for memory occupation:\n");
@@ -259,7 +259,7 @@ BOOLEAN do_menu2()
 	    limit=20000;
 	    break;
 	case 4:
-	    cont=TRUE;
+	    cont=true;
 	    break;
     }
     return(cont);

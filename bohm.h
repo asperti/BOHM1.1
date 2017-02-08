@@ -1,14 +1,13 @@
 #ifndef _BOHM_H
 #define _BOHM_H
 
+#include <stdbool.h>
+
 /* utility types */
-typedef int		BOOLEAN;
 typedef char		*STRING;
 
 /* utility constants */
 #define         ENTER                           10
-#define		FALSE				0
-#define		TRUE				1
 #define		EOS				'\0'
 
 /* constants concerning files */
@@ -369,7 +368,7 @@ extern 	void no_destroy();
 extern STRING		malloc_da(),
 			strdup_da();
 
-extern BOOLEAN		error_detected;
+extern bool		error_detected;
 
 extern void		signal_error();
 
@@ -384,7 +383,7 @@ extern 	void		init_garbage();
 extern 	void		ins_del();
 
 extern unsigned		max_nodes,num_nodes;
-extern BOOLEAN		is_global_var;
+extern bool		is_global_var;
 extern int		rec_er;
 
 extern 		FORM	*closeterm();
@@ -429,7 +428,7 @@ extern FORM             *inspect();
 
 extern int		lines;
 
-extern BOOLEAN          quit,
+extern bool          quit,
                         loading_mode;
 extern char             *include_file;
 extern FORM 		*lastinputterm;
@@ -437,7 +436,7 @@ extern FORM 		*lastinputterm;
 extern int		lines,
 			lexemes_in_curr_line;
 
-extern BOOLEAN		out_listing;
+extern bool		out_listing;
 
 extern int		open_listing(),
 			produce_listing(),
@@ -452,9 +451,9 @@ extern int		open_listing(),
 
 extern 	int 		option;
 extern 	unsigned 	limit;
-extern 	BOOLEAN  	seetime;
-extern 	BOOLEAN  	seenode;
-extern 	BOOLEAN  	seegarb;
+extern 	bool  	seetime;
+extern 	bool  	seenode;
+extern 	bool  	seegarb;
 
 extern 	void	menu();
 extern 	void	info();

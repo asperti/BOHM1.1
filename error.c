@@ -24,7 +24,7 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN			error_detected;
+bool			error_detected;
 			      /* flag indicating whether an */
 			      /* error has been detected */
 
@@ -61,7 +61,7 @@ void signal_error(error_msg_num)
 	int		error_msg_num;
 					/* error message number */
 {
-	error_detected = TRUE;
+	error_detected = true;
 	fprintf(stderr,
 		"line %-5d\t--->\t%s\n",
 		lines,

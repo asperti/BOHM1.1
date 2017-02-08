@@ -118,7 +118,7 @@ void reduce_term(root)
      counter = 0;
      eq=0;
      redexes = 0;
-     type_error = FALSE;
+     type_error = false;
      er_count=0;
      cl_count=0;
      max_index=0;
@@ -288,7 +288,7 @@ reduce_redex(f1,f2)
 			break;
 		    default:
 			printf("--->   type error1\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -312,7 +312,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error28 %d\n",f2->name);
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -339,7 +339,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error28 bis %d\n",f2->name);
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -364,7 +364,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -390,7 +390,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -410,7 +410,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -440,7 +440,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -478,7 +478,7 @@ reduce_redex(f1,f2)
 		    break;
 		  default:
 		    printf("--->   type error\n");
-		    type_error = TRUE;
+		    type_error = true;
 		    break;
 
 		}
@@ -596,7 +596,7 @@ reduce_redex(f1,f2)
 	   case FAN:
 	      if (f2->name != TRIANGLE) fan_int++;
 	      if (f2->name == LAMBDA)
-			f1->num_safe=FALSE;
+			f1->num_safe=false;
 	      switch (f2->name)
 	      {
 		 case CONS:
@@ -707,7 +707,7 @@ reduce_redex(f1,f2)
 	      unsafe++;
 	   case TRIANGLE:
 	      if (f2->name == LAMBDA)
-		 f1->num_safe = FALSE;
+		 f1->num_safe = false;
 	      switch (f2->name)
 		 {
 		    case CONS:
@@ -804,7 +804,7 @@ FORM	*f1;
 
 		     default:
 			printf("--->   type error2\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -832,7 +832,7 @@ FORM	*f1;
 			break;
 		     default:
 			printf("--->   type error3\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -860,7 +860,7 @@ FORM	*f1;
 			break;
 		     default:
 			printf("--->   type error4\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -880,7 +880,7 @@ FORM	*f1;
 			break;
 		     default:
 			printf("--->   type error5\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -897,7 +897,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error6\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -914,7 +914,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error7\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -931,7 +931,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error8\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -948,7 +948,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error9\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -965,7 +965,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error10\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -982,7 +982,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error11\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1000,7 +1000,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error12\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1017,7 +1017,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error13\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1034,7 +1034,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error14\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1051,7 +1051,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error15\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1068,7 +1068,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error16\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1085,7 +1085,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error17\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1102,7 +1102,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error18\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1119,7 +1119,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error19\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1136,7 +1136,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error20\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1154,7 +1154,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error21\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1171,7 +1171,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error22\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1188,7 +1188,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error23\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1205,7 +1205,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error24\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1222,7 +1222,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error25\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1239,7 +1239,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error26\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1256,7 +1256,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error27\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1271,7 +1271,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1286,7 +1286,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1300,7 +1300,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1316,7 +1316,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1374,7 +1374,7 @@ FORM	*f1;
 	  default:
 	    {
 	      printf("--->   type error: constant in wrong position\n");
-	      type_error = TRUE;
+	      type_error = true;
 	    }
 	} /* end switch */
 }
@@ -1463,7 +1463,7 @@ static FORM
 		    switch(next->name)
 		     {
 		     case TRIANGLE:
-		       temp->num_safe = TRUE;
+		       temp->num_safe = true;
 		       temp->index = next->index;
 		       temp->nlevel[1] = temp->nlevel[1]+next->nlevel[1];
 		       temp->nlevel[2] = temp->nlevel[2]+next->nlevel[1];

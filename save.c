@@ -106,12 +106,12 @@ present(form)
 	FORM	*form;
 {
   ELEM  *p;
-  int risp=TRUE;
+  int risp=true;
 
   p=head;
   while(p!=NULL && risp)
     if (p->node==form)
-      risp=FALSE;
+      risp=false;
     else
       p=p->next;
   if (risp) {
