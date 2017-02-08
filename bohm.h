@@ -486,8 +486,6 @@ extern          void    print_stack();
 extern          int     get_next(),
                         get_max_ptr();
 
-extern int			digits_n();
-
 extern void  	                rdbk();
 
 extern void		reduce_term();
