@@ -494,6 +494,5 @@ extern	void		init_symbol_table(),
 extern void		to_lower_s();
 extern int 		to_nat_s(),
 			length_s();
-extern 	BOOLEAN		equal_s();
 
 #endif

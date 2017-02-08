@@ -5,9 +5,7 @@
 /*		   one;						*/
 /* - to_nat_s(): it turns a given string of digits into a	*/
 /*		 natural and checks for presence of overflow;	*/
-/* - length_s(): it computes the length of a given string;	*/
-/* - equal_s(): it returns the result of the check for equality	*/
-/*		between two given strings.			*/
+/* - length_s(): it computes the length of a given string.	*/
 /****************************************************************/
 
 
@@ -76,23 +74,3 @@ int length_s(s)
 	for (i = 1; *s != EOS; s++, i++);
 	return(i);
 }
-
- /* The following function returns the result of the check for */
- /* equality between two given strings. */
-BOOLEAN
-equal_s(s, t)
-	STRING		s,
-					/* first string */
-			t;
-					/* second string */
-{
-	BOOLEAN		equal;
-
-	for (; (equal = (*s == *t)) && (*s != EOS); s++, t++);
-	return(equal);
-} 
- 
-
-/****************************************************************/
-/* 6. Definitions of functions strictly local to the module.	*/
-/****************************************************************/

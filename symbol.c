@@ -98,6 +98,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -231,7 +232,7 @@ void search_bucket(st, id)
         
         /* scan the bucket list indicated by the hash function */
         prev = curr = dictionary[dict_index];
-        while ((curr != NULL) && (!equal_s(id, curr->id)))
+        while ((curr != NULL) && (strcmp(id, curr->id) != 0))
           {
             prev = curr;
             curr = curr->next_st_bucket;
