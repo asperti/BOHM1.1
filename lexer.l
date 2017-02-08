@@ -193,7 +193,7 @@ static int to_nat_s(STRING s)
 {
 	long n;
 
-	for (n = 0; (n <= MAXINT) && (*s != EOS); s++)
+	for (n = 0; (n <= MAXINT) && (*s != '\0'); s++)
 		n = n * NUMBASE + (*s - '0');
 
 	if (n > MAXINT)

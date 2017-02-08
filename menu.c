@@ -179,8 +179,8 @@ int take_char()
 	warning=false;
 	do
 	    taken = getchar();
-	while (taken == ENTER);
-	while(getchar()!=ENTER)
+	while (taken == '\n');
+	while(getchar()!='\n')
 	    warning=true;
 	if(warning){
 	    printf("\nOne-character answer is required.\n");
@@ -202,7 +202,7 @@ bool do_menu1()
 	printf("3. No garbage collection.\n");
 	printf("4. Help . . .\n\n>");
 	scanf("%d",&option);
-	while(getchar()!=ENTER);
+	while(getchar()!='\n');
 	system("clear");
 	if(option==4){
 	    printf("HELP . . .\n\n");
@@ -238,7 +238,7 @@ bool do_menu2()
 	printf("4. others.\n");
 	printf("5. Help . . .\n\n>");
 	scanf("%d",&select);
-	while(getchar()!=ENTER);
+	while(getchar()!='\n');
 	system("clear");
 	if(select==5){
 	    printf("HELP . . .\n\n");
@@ -271,7 +271,7 @@ do_menu3()
     while((limit<1000)||(limit>50000)){
 	printf("Please insert an upper bound for memory utililization:\n>");
 	scanf("%u",&limit);
-	while(getchar()!=ENTER);
+	while(getchar()!='\n');
 	system("clear");
 	if((limit<1000)||(limit>50000)){
 	    limit = 0;

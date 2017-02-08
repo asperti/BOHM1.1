@@ -1,10 +1,6 @@
 #ifndef _DEFINE_H
 #define _DEFINE_H
 
-/* utility constants */
-#define ENTER                           '\n'
-#define EOS				'\0'
-
 /* constants concerning files */
 #define SUFFIXLENGTH			4
 #define NOMOREINPUT			1

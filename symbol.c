@@ -175,7 +175,7 @@ static STRING		keywords[] =
 /* The following function turns a given string into a lower case one. */
 static void to_lower_s(STRING s)
 {
-	for (; *s != EOS; s++)
+	for (; *s != '\0'; s++)
 		if (('A' <= *s) && (*s <= 'Z'))
 			*s += 'a' - 'A';
 }
@@ -389,7 +389,7 @@ hash_pjw(id)
 	unsigned	h,
 			g;
 
-	for (h = 0; *id != EOS; id++)
+	for (h = 0; *id != '\0'; id++)
 	{
 		h = (h << HASH1) + (*id);
 		g = h & HASH2;
