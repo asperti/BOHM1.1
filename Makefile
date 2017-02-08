@@ -18,7 +18,6 @@ OBJS = \
 	bohm.a(crash.o) \
 	bohm.a(error.o) \
 	bohm.a(dynall.o) \
-	bohm.a(file.o) \
 	bohm.a(string.o)
 
 all: bohm

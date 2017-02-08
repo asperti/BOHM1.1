@@ -377,8 +377,6 @@ extern BOOLEAN		error_detected;
 extern void		signal_error(),
 			signal_warning();
 
-extern FILE		*fopen_f();
-
 extern long unsigned 	er_count;
 extern long unsigned 	cl_count;
 extern long 		garb_time;
