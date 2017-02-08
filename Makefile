@@ -15,7 +15,6 @@ OBJS = \
 	bohm.a(garbage.o) \
 	bohm.a(menu.o) \
 	bohm.a(save.o) \
-	bohm.a(crash.o) \
 	bohm.a(error.o) \
 	bohm.a(dynall.o) \
 	bohm.a(string.o)

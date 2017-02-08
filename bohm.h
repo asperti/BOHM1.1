@@ -362,7 +362,6 @@ typedef	struct	elem {
 	} ELEM;
 
 extern 		FORM	*copy();
-extern void			signal_crash();
 FORM *headfree;
 
 extern 	void destroy();
