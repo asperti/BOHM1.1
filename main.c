@@ -14,8 +14,7 @@ extern int yyparse();
 
 /* The following function changes the parser standard 	*/
 /* input and call the parser function.			*/
-static void compile(file)
-     STRING  file;
+static void compile(char *file)
 {
      printf("\n******** loading file %s ********\n",file);
      yypush_buffer_state(yy_create_buffer( yyin, 16384));

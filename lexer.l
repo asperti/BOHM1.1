@@ -54,7 +54,7 @@
 %{
 int lines, astringlen;
 
-static int to_nat_s(STRING s);
+static int to_nat_s(char *s);
 %}
 
  /***************************************************************/
@@ -189,7 +189,7 @@ string                  [^\"]*\"
 
 /* The following function turns a given string of digits into a natural */
 /* and checks for presence of overflow. */
-static int to_nat_s(STRING s)
+static int to_nat_s(char *s)
 {
 	long n;
 

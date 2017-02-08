@@ -137,11 +137,11 @@ static void             move_bucket();
 static void             allocate_bucket();
 
 /* I/O library procedure names */
-static STRING		library_proc_names[] = {"empty"
+static char *		library_proc_names[] = {"empty"
 					       };
 
 /* keywords */
-static STRING		keywords[] =
+static char *		keywords[] =
 				{
 					"let",
 					"in",
@@ -173,7 +173,7 @@ static STRING		keywords[] =
 				};
 
 /* The following function turns a given string into a lower case one. */
-static void to_lower_s(STRING s)
+static void to_lower_s(char *s)
 {
 	for (; *s != '\0'; s++)
 		if (('A' <= *s) && (*s <= 'Z'))
@@ -223,7 +223,7 @@ void search_bucket(st, id)
 	STBUCKET	**st;
 					/* pointer to the bucket containing */
 					/* the identifier */
-	STRING		id;
+	char *		id;
 					/* identifier */
 {
 	int		dict_index;
@@ -354,7 +354,7 @@ void allocate_bucket(st, id)
 	STBUCKET	**st;
 					/* pointer to the bucket to be */
 					/* allocated */
-	STRING		id;
+	char *		id;
 					/* identifier */
 {
 	*st = (STBUCKET *)malloc_da(sizeof(STBUCKET));
@@ -383,7 +383,7 @@ void move_bucket(st, dict_index)
  /* The following function implements Weinberger's hash function. */
 static int
 hash_pjw(id)
-	STRING		id;
+	char *		id;
 					/* identifier to be hashed */
 {
 	unsigned	h,

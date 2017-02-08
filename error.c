@@ -33,7 +33,7 @@ bool			error_detected;
 /****************************************************************/
 
 /* compile time error messages */
-static STRING		error_msgs[] = {
+static char *error_msgs[] = {
   "lexical error: illegal character",
   "lexical error: numerical constant overflow",
   "syntax error: identifier expected after let",

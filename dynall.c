@@ -37,7 +37,7 @@ static void signal_crash(crash_type)
 	int crash_type; /* crash type */
 {
 	/* crash messages */
-	static STRING crash_msgs[] = {
+	static char *crash_msgs[] = {
 		"not enough memory",
 		"unable to open this file"
 	};
@@ -52,15 +52,15 @@ static void signal_crash(crash_type)
 
  /* The following function implements a control interface for the */
  /* library function malloc(). */
-STRING
+char *
 malloc_da(size)
 	unsigned	size;
 					/* size of the object to be */
 					/* allocated */
 {
-	STRING		p;
+	char *		p;
 
-	p = (STRING)malloc(size);
+	p = (char *)malloc(size);
 	if (!p)
 		signal_crash(NOTENOUGHMEMORY);
 
@@ -69,12 +69,12 @@ malloc_da(size)
 
  /* The following function implements a control interface for the */
  /* library function strdup(). */
-STRING
+char *
 strdup_da(s)
-	STRING		s;
+	char *		s;
 					/* string to be allocated */
 {
-	STRING		p;
+	char *		p;
 
 	p = strdup(s);
 	if (!p)

@@ -13,8 +13,8 @@ extern 	void destroy();
 extern 	void init_destroy();
 extern 	void no_destroy();
 
-extern STRING		malloc_da();
-extern STRING		strdup_da();
+extern char *malloc_da();
+extern char *strdup_da();
 
 extern bool		error_detected;
 

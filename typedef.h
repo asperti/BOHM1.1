@@ -1,13 +1,10 @@
 #ifndef _TYPEDEF_H
 #define _TYPEDEF_H
 
-/* utility types */
-typedef char		*STRING;
-
 /* symbol table bucket type */
 typedef	struct st_bucket
 	{
-		STRING			id;
+		char *			id;
 						/* identifier */
 		int			token;
 						/* token associated with */
