@@ -494,8 +494,6 @@ extern void		reduce_term();
 
 extern	void		save();
 
-extern  BOOLEAN     	defined();
-
 extern	STBUCKET		*dictionary[];
 
 extern	LOCALENVENTRY		*curr_local_env;

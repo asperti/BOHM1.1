@@ -6,7 +6,6 @@ OBJS = \
 	bohm.a(main.o) \
 	bohm.a(copy.o) \
 	bohm.a(symbol.o) \
-	bohm.a(scope.o) \
 	bohm.a(inspect.o) \
 	bohm.a(graph.o) \
 	bohm.a(destroy.o) \

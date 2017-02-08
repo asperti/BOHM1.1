@@ -134,12 +134,14 @@ FORM                    *lastinputterm;
 %}
 
  /***************************************************************/
- /* 4. Definitions of variables strictly local to the module.	*/
+ /* 4. Definitions strictly local to the module.                */
  /***************************************************************/
 
 %{
 int                    app_nesting_depth;
 PATTERN                *pattmp;
+
+static BOOLEAN defined();
 %}
 
  /***************************************************************/
@@ -667,3 +669,15 @@ term    	:	error  EXPRDELIM
                                   YYACCEPT;
 				}
 		;
+
+%%
+
+/* The following function checks if an identifier has been */
+/* previously declared */
+static BOOLEAN defined(st)
+	STBUCKET	*st;
+			      /* pointer to the bucket for the */
+			      /* identifier */
+{
+        return((st->curr_binding) != NULL);
+}
