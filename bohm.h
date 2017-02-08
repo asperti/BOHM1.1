@@ -491,6 +491,4 @@ extern	void		init_symbol_table(),
                         create_local_variable_binding(),
 			create_binding_for_undef_id();
 
-extern int 		to_nat_s();
-
 #endif

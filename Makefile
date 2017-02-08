@@ -15,8 +15,7 @@ OBJS = \
 	bohm.a(menu.o) \
 	bohm.a(save.o) \
 	bohm.a(error.o) \
-	bohm.a(dynall.o) \
-	bohm.a(string.o)
+	bohm.a(dynall.o)
 
 all: bohm
 	./bohm <examples/tartaglia

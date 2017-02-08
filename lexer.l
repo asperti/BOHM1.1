@@ -48,14 +48,14 @@
 
 
  /***************************************************************/
- /* 3. Definitions of variables to be exported.			*/
+ /* 3. Definitions of variables and functions.                  */
  /***************************************************************/
 
 %{
-int			lines;
-int                     astringlen;
-%}
+int lines, astringlen;
 
+static int to_nat_s(STRING s);
+%}
 
  /***************************************************************/
  /* 4. Regular definitions.					*/
@@ -184,3 +184,20 @@ string                  [^\"]*\"
                         if (loading_mode == 1) ECHO; 
 			signal_error(ILLEGALCHAR);
                 }
+
+%%
+
+/* The following function turns a given string of digits into a natural */
+/* and checks for presence of overflow. */
+static int to_nat_s(STRING s)
+{
+	long n;
+
+	for (n = 0; (n <= MAXINT) && (*s != EOS); s++)
+		n = n * NUMBASE + (*s - '0');
+
+	if (n > MAXINT)
+		return(NUMOUTOFRANGE);
+	else
+		return((int)n);
+}
