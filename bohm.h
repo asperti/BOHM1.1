@@ -442,7 +442,6 @@ extern void yypush_buffer_state (YY_BUFFER_STATE new_buffer);
 extern void yypop_buffer_state (void);
 
 extern BOOLEAN          quit,
-                        error_detected,
                         loading_mode;
 extern char             *include_file;
 extern FORM 		*lastinputterm;

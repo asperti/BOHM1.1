@@ -117,12 +117,7 @@ void yyerror(const char *s);
  /***************************************************************/
 
 %{
-BOOLEAN			error_detected,
-			       /* flag indicating whether an */
-			       /* error has been detected */
-			       /* during the analysis of the */
-			       /* P source file */
-			quit,
+BOOLEAN			quit,
 			       /* flag indicating quit request */
 			loading_mode;
 			       /* flag indicating if parsing is */
