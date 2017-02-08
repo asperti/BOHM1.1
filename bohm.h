@@ -477,9 +477,6 @@ extern 	void	info();
 extern 		FORM	*pop();
 extern          void    push();
 extern          void    init_stack();
-extern          void    print_stack();
-extern          int     get_next(),
-                        get_max_ptr();
 
 extern void  	                rdbk();
 

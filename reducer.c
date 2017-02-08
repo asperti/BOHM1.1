@@ -152,7 +152,6 @@ void reduce_term(root)
 	  {
 	    printf("Max. number of nodes seen up to this time %u\n",max_nodes);
 	    printf("Final number of nodes %u\n",num_nodes);
-	    printf("Maximum stack depth %i\n",get_max_ptr());
 	    printf("*****************************************************\n");
 	  }
     }else
