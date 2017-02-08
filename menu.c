@@ -28,10 +28,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-HIDDEN BOOLEAN do_menu1();
-HIDDEN BOOLEAN do_menu2();
-HIDDEN void    do_menu3();
-HIDDEN int     take_char();
+static BOOLEAN do_menu1();
+static BOOLEAN do_menu2();
+static void    do_menu3();
+static int     take_char();
   
 /***************************************************************************/
 /* 2. Definitions of variables to be exported.                             */
@@ -170,7 +170,7 @@ void info()
 /* 4. Definitions of functions strictly local to the module.                */
 /****************************************************************************/
 
-HIDDEN
+static
 int take_char()
 {
     int taken;
@@ -190,7 +190,7 @@ int take_char()
     return(taken);
 }
 
-HIDDEN
+static
 BOOLEAN do_menu1()
 {
     BOOLEAN cont = FALSE;
@@ -225,7 +225,7 @@ BOOLEAN do_menu1()
     return(cont);
 }
 
-HIDDEN
+static
 BOOLEAN do_menu2()
 {
     BOOLEAN cont=FALSE;
@@ -265,7 +265,7 @@ BOOLEAN do_menu2()
     return(cont);
 }
 
-HIDDEN void
+static void
 do_menu3()
 {
     while((limit<1000)||(limit>50000)){

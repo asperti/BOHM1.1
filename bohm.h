@@ -9,7 +9,6 @@ typedef char		*STRING;
 
 /* utility constants */
 #define         ENTER                           10
-#define		HIDDEN				static
 #define		FALSE				0
 #define		TRUE				1
 #define		EOS				'\0'

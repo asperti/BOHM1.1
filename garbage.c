@@ -43,7 +43,7 @@
 /* 3. Declaration of names strictly local to the module.                 */
 /*************************************************************************/
 
-HIDDEN void     garbage();
+static void     garbage();
 
 /*************************************************************************/
 /* 4. Definitions of variables to be exported.                           */
@@ -124,7 +124,7 @@ void user()
 
  /* The following function performs the propagation of a single	*/
  /* erase node by applicating garbage rules. 			*/
-HIDDEN void garbage(erase)
+static void garbage(erase)
 FORM *erase;
 {
 	BOOLEAN end=FALSE;

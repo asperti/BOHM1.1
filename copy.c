@@ -46,13 +46,13 @@
 /* 3. Declaration of names strictly local to the module.	*/
 /****************************************************************/
 
-HIDDEN COPY_FORM  *copy_relation[DIM_REL];
-HIDDEN void       put_relation(),
+static COPY_FORM  *copy_relation[DIM_REL];
+static void       put_relation(),
 		  start_copy(),
 		  end_copy();
-HIDDEN FORM	  *is_in_relation(),
+static FORM	  *is_in_relation(),
 		  *copy_aux();
-HIDDEN int	  entry();
+static int	  entry();
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
@@ -82,7 +82,7 @@ FORM
 
 /* The following function duplicates the input graph and 	*/
 /* returns it as output.					*/
-HIDDEN FORM
+static FORM
 *copy_aux(root,p,offset)
       FORM       *root;
       int        p,offset;
@@ -228,7 +228,7 @@ HIDDEN FORM
 }
 
 /* The following function inserts a two-form relation in the table. */
-HIDDEN void
+static void
 put_relation(src,dest)
 FORM	*src,*dest;
 {
@@ -245,7 +245,7 @@ FORM	*src,*dest;
 
 /* The following function checks whether or not a form has 	*/
 /* already been copied.						*/
-HIDDEN FORM
+static FORM
 *is_in_relation(src)
 FORM	*src;
 {
@@ -262,7 +262,7 @@ FORM	*src;
 }
 
 /* The following function implements hash function.		*/
-HIDDEN int
+static int
 entry(src)
 FORM	*src;
 {
@@ -274,7 +274,7 @@ FORM	*src;
 }
 
 /* The following function initialises hash table.	        */
-HIDDEN void
+static void
 start_copy()
 {
   int 	i;
@@ -283,7 +283,7 @@ start_copy()
 }
 
 /* The following function eliminates hash table.		*/
-HIDDEN void
+static void
 end_copy()
 {
   int 	i;

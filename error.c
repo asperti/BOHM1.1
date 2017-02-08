@@ -34,7 +34,7 @@ BOOLEAN			error_detected;
 /****************************************************************/
 
 /* compile time error messages */
-HIDDEN STRING		error_msgs[] = {
+static STRING		error_msgs[] = {
   "lexical error: illegal character",
   "lexical error: numerical constant overflow",
   "syntax error: identifier expected after let",
@@ -53,7 +53,7 @@ HIDDEN STRING		error_msgs[] = {
 };
 
 /* warning messages */
-HIDDEN STRING		warning_msgs[] = {
+static STRING		warning_msgs[] = {
   "warning: variable already declared"
 };
 

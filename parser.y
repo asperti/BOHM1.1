@@ -713,13 +713,13 @@ term    	:	error  EXPRDELIM
 
 /* int yylex(YYSTYPE *yylval, void *scanner); */
 
-/* HIDDEN
+/* static
 retract_token()
 {
 	yyless(0);
 	} 
 
-HIDDEN
+static
 yyerror()
 {
 	signal_error(SINTAXERROR);

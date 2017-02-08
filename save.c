@@ -44,13 +44,13 @@
 FILE	*save_file;
 ELEM	*head,*tail;
 int	max;
-HIDDEN	int		present();
-HIDDEN	void		save_aux();
-HIDDEN	void		stampa();
-HIDDEN	void		put_int();
-HIDDEN	void		put_form();
-HIDDEN	int		num_port();
-HIDDEN	void		eindex();
+static	int		present();
+static	void		save_aux();
+static	void		stampa();
+static	void		put_int();
+static	void		put_form();
+static	int		num_port();
+static	void		eindex();
 
 
 /****************************************************************/
@@ -101,7 +101,7 @@ void save(name,root,id)
 
 /* The following function checks whether a form has already 	*/
 /* been copied once.						*/
-HIDDEN int
+static int
 present(form)
 	FORM	*form;
 {
@@ -130,7 +130,7 @@ present(form)
 }
 
 /* The following function saves on file a link			*/
-HIDDEN void
+static void
 stampa(form,p,card)
       FORM       *form;
       int        p;
@@ -154,7 +154,7 @@ stampa(form,p,card)
 
 
 /* The following function saves any graph part.			*/
-HIDDEN void
+static void
 save_aux(root,p)
       FORM       *root;
       int        p;
@@ -173,7 +173,7 @@ save_aux(root,p)
 }
 
 /* The following function prints form name.			*/
-HIDDEN void
+static void
 put_form(f)
 	FORM    *f;
 {
@@ -310,7 +310,7 @@ put_form(f)
 
 
 /* The following function prints NIL, INT and BOOL forms names.	*/
-HIDDEN void
+static void
 put_int(f,p)
 	FORM    *f;
 	int	p;
@@ -333,7 +333,7 @@ put_int(f,p)
 
 
 /* The following function returns a form's ports number.	*/
-HIDDEN 	int
+static 	int
 num_port(name)
 	int	name;
 {
@@ -393,7 +393,7 @@ num_port(name)
 }
 
 /* The following function saves a file index row		*/
-HIDDEN void
+static void
 eindex(elem)
 	ELEM    *elem;
 {

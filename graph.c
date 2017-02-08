@@ -100,13 +100,13 @@ unsigned length_list = 0;
 /* 4. Declaration of functions strictly local to the module.	*/
 /****************************************************************/
 
-HIDDEN TERM             *makebox();
-HIDDEN VARENTRY         *addbrackets(),
+static TERM             *makebox();
+static VARENTRY         *addbrackets(),
 			*share(),
 			*lookfor(),
 			*remv(),
                         *remvp();
-HIDDEN void             allocate_var(),
+static void             allocate_var(),
                         allocate_term(),
                         closeglobalvars(),
 			intelligent_connect(),
@@ -948,7 +948,7 @@ void bool_connect(form1,portf1,portf2)
 
 
  /* the following function allocate a new variable entry */
-HIDDEN
+static
 void allocate_var(newvar,id,form,nextvar)
 	VARENTRY   **newvar;
 		       /* reference to the pointer of the */
@@ -968,7 +968,7 @@ void allocate_var(newvar,id,form,nextvar)
 
 
  /* the following function allocate a new term entry */
-HIDDEN
+static
 void allocate_term(term,rootform,rootport,freevars)
 	TERM       **term;
 		       /* reference to the pointer of the */
@@ -988,7 +988,7 @@ void allocate_term(term,rootform,rootport,freevars)
 }
 
  /* the following function build a box around a term  */
-HIDDEN TERM
+static TERM
 *makebox(level,arg)
 	int        level;
 	TERM       *arg;
@@ -999,7 +999,7 @@ HIDDEN TERM
 
  /* the following function add a sequence of square brackets of */
  /* given index at the free variables in listvar */
-HIDDEN VARENTRY
+static VARENTRY
 *addbrackets(index, listvar)
        int         index;
        VARENTRY    *listvar;
@@ -1048,7 +1048,7 @@ HIDDEN VARENTRY
 
  /* The following function shares the free variables of	*/
  /* two terms, by adding suitable FANS.  		*/
-HIDDEN VARENTRY
+static VARENTRY
 *share(index,l1,l2)
        int            index;
        VARENTRY       *l1,
@@ -1089,7 +1089,7 @@ HIDDEN VARENTRY
 
 
  /* The following function searches for a variable inside a list. */
-HIDDEN VARENTRY
+static VARENTRY
 *lookfor(id,listvar)
       STBUCKET       *id;
 		/* pointer to the identifier to be found  */
@@ -1106,7 +1106,7 @@ HIDDEN VARENTRY
 
  /* the following function remove an identifier form a list */
  /* of variables */
-HIDDEN  VARENTRY
+static  VARENTRY
 *remv(id,listvar)
       STBUCKET       *id;
 		/* pointer to the identifier to be removed  */
@@ -1130,7 +1130,7 @@ HIDDEN  VARENTRY
 
 /* the following functions does the set substraction of two variable lists */
 /* it runs in quadratic time, but who cares? */
-HIDDEN  VARENTRY
+static  VARENTRY
 *remvp(vl,listvar)
 VARLIST *vl;              
 VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
@@ -1144,7 +1144,7 @@ VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
 
  /* The following function copies all the graph of the global */
  /* definition.	*/
-HIDDEN
+static
 void closeglobalvars(listvar)
       VARENTRY       *listvar;
 		/* pointer to the variable list to be scanned */
@@ -1175,7 +1175,7 @@ void closeglobalvars(listvar)
 }
 
 #if 0
-HIDDEN
+static
 closeglobalvars(listvar)
       VARENTRY       *listvar;
 		/* pointer to the variable list to be scanned */
@@ -1210,7 +1210,7 @@ closeglobalvars(listvar)
 }
 
 
-HIDDEN
+static
 closeglobalvars(listvar)
       VARENTRY       *listvar;
 		/* pointer to the variable list to be scanned */
@@ -1264,7 +1264,7 @@ closeglobalvars(listvar)
 /* The following function tries to merge two forms into a single one. */
 /* If failing doing so, connects them normally        		      */
 
-HIDDEN
+static
 void intelligent_connect(f1,port,f2)
 	FORM	*f1;
 	int	port;
@@ -1452,7 +1452,7 @@ void intelligent_connect(f1,port,f2)
 
 /* The following function checks whether it's possible to apply      */
 /* function intelligent_connect. Otherwise applies a normal connect. */
-HIDDEN
+static
 void inspect_connect(f1,p1,f2,p2)
        FORM       *f1;
        int        p1;
@@ -1465,7 +1465,7 @@ void inspect_connect(f1,p1,f2,p2)
     connect1(f1,p1,f2,p2);
 }
 
-HIDDEN BOOLEAN membervarlist(e,l)
+static BOOLEAN membervarlist(e,l)
 BINDINGID *e;
 VARLIST *l;
 {

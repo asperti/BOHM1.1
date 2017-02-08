@@ -52,16 +52,16 @@ extern clock_t sys_garb_time;
 /****************************************************************/
 
 
-HIDDEN int     unsafe;
-HIDDEN int     optim;
-HIDDEN int     fan_int;
-HIDDEN int     redexes;
-HIDDEN int     max_index;
-HIDDEN int     eq=0;
-HIDDEN int     type_error;
-HIDDEN void    reduce_redex();
-HIDDEN void    reduce_form();
-HIDDEN FORM    *lo_redex();
+static int     unsafe;
+static int     optim;
+static int     fan_int;
+static int     redexes;
+static int     max_index;
+static int     eq=0;
+static int     type_error;
+static void    reduce_redex();
+static void    reduce_form();
+static FORM    *lo_redex();
 
 
 /****************************************************************/
@@ -179,7 +179,7 @@ void reduce_term(root)
 /*  The following function reduces the redex whose 	*/
 /*  interacting forms are passed as a parameter and the */
 /*  second form is not a INT, NIL, True or False;	*/
-HIDDEN void
+static void
 reduce_redex(f1,f2)
      FORM      *f1,
 	       *f2;
@@ -769,7 +769,7 @@ reduce_redex(f1,f2)
 /*  The following function reduces the redex whose 	*/
 /*  interacting forms are passed as a parameter and the */
 /*  second form is a INT, NIL, True or False; */
-HIDDEN void
+static void
 reduce_form(f1)
 FORM	*f1;
 {
@@ -1372,7 +1372,7 @@ FORM	*f1;
 /*  The following function looks for the leftmost outemost  	*/
 /*  redex, saving on the m_stack pointers to the form along	*/
 /*  the main spine of the term.             			*/
-HIDDEN FORM
+static FORM
 *lo_redex(f)
      FORM    *f;
 {

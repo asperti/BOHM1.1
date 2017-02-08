@@ -32,7 +32,7 @@
 /****************************************************************/
 
 /* crash messages */
-HIDDEN STRING		crash_msgs[] =
+static STRING		crash_msgs[] =
 				{
 					"not enough memory",
 					"unable to open this file"

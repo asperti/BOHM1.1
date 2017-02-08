@@ -120,27 +120,27 @@ LOCALENVENTRY		*curr_local_env;
 /* 4. Definitions of variables strictly local to the module.	*/
 /****************************************************************/
 
-HIDDEN LOCALENVENTRY	*external_env;
+static LOCALENVENTRY	*external_env;
 			       /* pointer to the entry for the */
 			       /* external environment */
 
-HIDDEN int		curr_nesting_depth;
+static int		curr_nesting_depth;
 		               /* current nesting depth */
 
-HIDDEN void             push_external_env();
-HIDDEN void             push_global_env();
-HIDDEN int              hash_pjw();
-HIDDEN void             allocate_local_env_entry();
-HIDDEN void             allocate_binding_entry();
-HIDDEN void             move_bucket();
-HIDDEN void             allocate_bucket();
+static void             push_external_env();
+static void             push_global_env();
+static int              hash_pjw();
+static void             allocate_local_env_entry();
+static void             allocate_binding_entry();
+static void             move_bucket();
+static void             allocate_bucket();
 
 /* I/O library procedure names */
-HIDDEN STRING		library_proc_names[] = {"empty"
+static STRING		library_proc_names[] = {"empty"
 					       };
 
 /* keywords */
-HIDDEN STRING		keywords[] =
+static STRING		keywords[] =
 				{
 					"let",
 					"in",
@@ -354,7 +354,7 @@ void create_binding_for_undef_id(st,rootform)
 /****************************************************************/
 
  /* The following function allocates a bucket for an identifier. */
-HIDDEN
+static
 void allocate_bucket(st, id)
 	STBUCKET	**st;
 					/* pointer to the bucket to be */
@@ -371,7 +371,7 @@ void allocate_bucket(st, id)
 
  /* The following function moves a bucket to the head of the */
  /* list in which it lies. */
-HIDDEN
+static
 void move_bucket(st, dict_index)
 	STBUCKET	*st;
 					/* pointer to the bucket to */
@@ -386,7 +386,7 @@ void move_bucket(st, dict_index)
 }
 
  /* The following function implements Weinberger's hash function. */
-HIDDEN int
+static int
 hash_pjw(id)
 	STRING		id;
 					/* identifier to be hashed */
@@ -406,7 +406,7 @@ hash_pjw(id)
 
  /* The following function pushes the entry for the external environment */
  /* onto the scope stack. */
-HIDDEN
+static
 void push_external_env()
 {
 	STBUCKET	*st;
@@ -424,14 +424,14 @@ void push_external_env()
 
  /* The following function pushes the entry for the global environment */
  /* onto the scope stack. */
-HIDDEN
+static
 void push_global_env()
 {
 	push_local_env();
 }
 
  /* The following function allocates a local environment entry. */
-HIDDEN 
+static 
 void allocate_local_env_entry()
 {
 	LOCALENVENTRY	*le;
@@ -445,7 +445,7 @@ void allocate_local_env_entry()
 }
 
  /* The following function allocates a binding entry. */
-HIDDEN 
+static 
 void allocate_binding_entry(st,le,rootform,type)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
@@ -475,7 +475,7 @@ void allocate_binding_entry(st,le,rootform,type)
 }
 
 #if 0
-HIDDEN
+static
 void allocate_local_binding_entry(st,le,rootform,port)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
