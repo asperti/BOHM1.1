@@ -1,14 +1,3 @@
-/****************************************************************/
-/* This module implements the main function.			*/
-/* It analizes the input parameters, initializes some variable,	*/
-/* the symbol table, the destroyer, the garbage and call the 	*/
-/* parser.							*/
-/****************************************************************/
-
-/****************************************************************/
-/* Inclusion of header files.           			*/
-/****************************************************************/
-
 #include "bohm.h"
 #include "y.tab.h"
 
@@ -16,26 +5,54 @@
 #include <string.h>
 #include <stdlib.h>
 
-/****************************************************************/
-/* Main program.               			                */
-/****************************************************************/
+extern FILE *yyin;
+
+extern struct yy_buffer_state *yy_create_buffer(FILE *file, int size);
+extern void yypush_buffer_state(struct yy_buffer_state *new_buffer);
+extern void yypop_buffer_state(void);
+extern int yyparse();
+
+/* The following function changes the parser standard 	*/
+/* input and call the parser function.			*/
+static void compile(char *file)
+{
+     printf("\n******** loading file %s ********\n",file);
+     yypush_buffer_state(yy_create_buffer( yyin, 16384));
+     yyin = fopen(file,"r");
+     if (yyin==NULL)
+	   printf("Fatal Error: cannot open file %s.\n",file);
+     else
+	{
+	   loading_mode = 1;
+	   while ((quit == 0) && (error_detected == false))
+	     {
+		yyparse();
+	     }
+	   if (error_detected == false)
+	      printf("\n******** %s loaded ********\n",file);
+	   else
+	      {
+		 printf("\n***** loading file %s aborted *****\n",file);
+		 error_detected = false;
+	      }
+	   quit = 0;
+	   loading_mode = 0;
+	 }
+     yypop_buffer_state();
+}
 
 int main(argc,argv)
 int argc;
 char *argv[];
 {
-  extern int yyparse();
-
   option=1;
   seetime=0;
   seenode=0;
   seegarb=0;
   if(argc>1) {
       if(argc==2)
-	    if (strcmp(argv[1],"-s")==0){
-		/* do_menu4(); */
+	    if (strcmp(argv[1],"-s")==0)
 		menu();
-	    }
 	    else if (strcmp(argv[1],"-i")==0)
 			info();
 		 else{
@@ -48,7 +65,6 @@ char *argv[];
 		     ( (strcmp(argv[2],"-s")==0)&&
 		       (strcmp(argv[1],"-i")==0) ) ){
 			info();
-			/* do_menu4(); */
 			menu();
 		}else{
 			printf("Execution failed:Illegal option \n");
@@ -74,25 +90,21 @@ char *argv[];
   init_garbage();
   lines = 0;
   setbuf(stdout, NULL);
-  /* error_detected = 0; */
   lastinputterm = NULL;
-  /* int error_detected = FALSE; */
 
   while (quit == 0)
      {
        printf("bohm>");
 	yyparse();
-	if (loading_mode==TRUE)
+	if (loading_mode==true)
 	  {
 	   printf("including %s",include_file);
 	   compile(include_file);
-	   loading_mode = FALSE;
+	   loading_mode = false;
 	  }
-	error_detected = FALSE;
+	error_detected = false;
 	lines = 0;
      }
   printf("good bye\n");
   return 0;
 }
-
-

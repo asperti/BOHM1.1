@@ -28,10 +28,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-HIDDEN BOOLEAN do_menu1();
-HIDDEN BOOLEAN do_menu2();
-HIDDEN void    do_menu3();
-HIDDEN int     take_char();
+static bool do_menu1();
+static bool do_menu2();
+static void    do_menu3();
+static int     take_char();
   
 /***************************************************************************/
 /* 2. Definitions of variables to be exported.                             */
@@ -39,9 +39,9 @@ HIDDEN int     take_char();
 
 int	 option;  /* Initial option selected */
 unsigned limit;   /* Limit for allocable operators (only for option 2) */
-BOOLEAN  seetime;
-BOOLEAN  seenode;
-BOOLEAN  seegarb;
+bool  seetime;
+bool  seenode;
+bool  seegarb;
 
 
 
@@ -71,10 +71,10 @@ void info()
 	printf("\n");
 	switch(select){
 	    case 'y':
-		seetime=TRUE;
+		seetime=true;
 		break;
 	    case 'n':
-		seetime=FALSE;
+		seetime=false;
 		break;
 	    case 'h':
 		printf("HELP . . .\n\n");
@@ -103,10 +103,10 @@ void info()
 	printf("\n");
 	switch(select){
 	    case 'y':
-		seenode=TRUE;
+		seenode=true;
 		break;
 	    case 'n':
-		seenode=FALSE;
+		seenode=false;
 		break;
 	    case 'h':
 		printf("HELP . . .\n\n");
@@ -133,10 +133,10 @@ void info()
 	printf("\n");
 	switch(select){
 	    case 'y':
-		seegarb=TRUE;
+		seegarb=true;
 		break;
 	    case 'n':
-		seegarb=FALSE;
+		seegarb=false;
 		break;
 	    case 'h':
 		printf("HELP . . .\n\n");
@@ -170,18 +170,18 @@ void info()
 /* 4. Definitions of functions strictly local to the module.                */
 /****************************************************************************/
 
-HIDDEN
+static
 int take_char()
 {
     int taken;
-    BOOLEAN warning;
+    bool warning;
     do{
-	warning=FALSE;
+	warning=false;
 	do
 	    taken = getchar();
-	while (taken == ENTER);
-	while(getchar()!=ENTER)
-	    warning=TRUE;
+	while (taken == '\n');
+	while(getchar()!='\n')
+	    warning=true;
 	if(warning){
 	    printf("\nOne-character answer is required.\n");
 	    printf("Answer again please . . .\n\n>");
@@ -190,10 +190,10 @@ int take_char()
     return(taken);
 }
 
-HIDDEN
-BOOLEAN do_menu1()
+static
+bool do_menu1()
 {
-    BOOLEAN cont = FALSE;
+    bool cont = false;
     option=0;
     while((option!=1)&&(option!=2)&&(option!=3)){
 	printf("Please choose one of the following strategies:\n");
@@ -202,7 +202,7 @@ BOOLEAN do_menu1()
 	printf("3. No garbage collection.\n");
 	printf("4. Help . . .\n\n>");
 	scanf("%d",&option);
-	while(getchar()!=ENTER);
+	while(getchar()!='\n');
 	system("clear");
 	if(option==4){
 	    printf("HELP . . .\n\n");
@@ -221,14 +221,14 @@ BOOLEAN do_menu1()
 		printf("Illegal option . . .\n\n");
     }
     if(option==2)
-	cont=TRUE;
+	cont=true;
     return(cont);
 }
 
-HIDDEN
-BOOLEAN do_menu2()
+static
+bool do_menu2()
 {
-    BOOLEAN cont=FALSE;
+    bool cont=false;
     int select=0;
     while((select!=1)&&(select!=2)&&(select!=3)&&(select!=4)){
 	printf("Please choose a limit for memory occupation:\n");
@@ -238,7 +238,7 @@ BOOLEAN do_menu2()
 	printf("4. others.\n");
 	printf("5. Help . . .\n\n>");
 	scanf("%d",&select);
-	while(getchar()!=ENTER);
+	while(getchar()!='\n');
 	system("clear");
 	if(select==5){
 	    printf("HELP . . .\n\n");
@@ -259,19 +259,19 @@ BOOLEAN do_menu2()
 	    limit=20000;
 	    break;
 	case 4:
-	    cont=TRUE;
+	    cont=true;
 	    break;
     }
     return(cont);
 }
 
-HIDDEN void
+static void
 do_menu3()
 {
     while((limit<1000)||(limit>50000)){
 	printf("Please insert an upper bound for memory utililization:\n>");
 	scanf("%u",&limit);
-	while(getchar()!=ENTER);
+	while(getchar()!='\n');
 	system("clear");
 	if((limit<1000)||(limit>50000)){
 	    limit = 0;

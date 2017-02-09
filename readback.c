@@ -21,13 +21,13 @@
 /****************************************************************/
 /* Declaration of variables strictly local to the module.	*/
 /****************************************************************/
-HIDDEN int left_to_print;
+static int left_to_print;
                   /* maximum number of characters yet to print */
 
 /****************************************************************/
 /* Declaration of functions strictly local to the module.	*/
 /****************************************************************/
-HIDDEN void rdbk_1(), rdbk_list();
+static void rdbk_1(), rdbk_list();
 
 
 /****************************************************************/
@@ -46,7 +46,7 @@ void rdbk(form)
   printf("\n");
 }
 
-HIDDEN void rdbk_1(form,port)
+static void rdbk_1(form,port)
      FORM *form;
      int port;
 {
@@ -104,7 +104,7 @@ HIDDEN void rdbk_1(form,port)
     left_to_print-=printf("...");
 }
 
-HIDDEN void rdbk_list(form,port)
+static void rdbk_list(form,port)
 FORM *form;
 int port;
 {

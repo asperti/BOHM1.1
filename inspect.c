@@ -28,10 +28,11 @@
 /* Declarations of functions strictly local to the module    	*/
 /****************************************************************/
 
+static FORM *inspect();
+
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
 /****************************************************************/
-FORM      *inspect();
 
 void inspect_driver(f)
      FORM  *f;
@@ -61,11 +62,9 @@ void inspect_driver(f)
     }
 }      
 
-FORM *inspect(p,f)
-     int     p;
-     FORM    *f;
+static FORM *inspect(int p, FORM *f)
 {
-	BOOLEAN ok=TRUE;
+	bool ok=true;
 	switch(p)
 	    {
 	    case 0:
@@ -74,11 +73,7 @@ FORM *inspect(p,f)
 		switch(f->name){
 		    case ERASE:
 		    case ROOT:
-/*		    case INT:
-		    case T:
-		    case F:
-		    case NIL:*/
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -94,7 +89,6 @@ FORM *inspect(p,f)
 		    case NIL:
 		    case TRIANGLE:
 		    case LAMBDAUNB:
-/*		    case MU_UNB:*/
 		    case TESTNIL:
 		    case CAR:
 		    case CDR:
@@ -112,7 +106,7 @@ FORM *inspect(p,f)
 		    case MOD1:
 		    case UNS_FAN1:
 		    case UNS_FAN2:
-			ok=FALSE;
+			ok=false;
 			break;
 		    default:
 			break;
@@ -123,12 +117,12 @@ FORM *inspect(p,f)
 		    case IFELSE:
 			break;
 		    default:
-			ok=FALSE;
+			ok=false;
 			break;
 		    }
 		break;
 	    default:
-		ok=FALSE;
+		ok=false;
 		break;
 	    }
 
@@ -179,9 +173,6 @@ FORM *inspect(p,f)
 		case LAMBDA:
 		   printf("form = LAMBDA\n");
 		   break;
-/*		case MU:
-		   printf("form = MU\n");
-		   break;*/
 		case IFELSE:
 		   printf("form = IFELSE\n");
 		   break;

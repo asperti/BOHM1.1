@@ -1,6 +1,6 @@
 /****************************************************************/
 /* This module supplies routines for dynamic allocation.	*/
-/* It consists of the following functions:			*/
+/* It exports the following functions:                          */
 /* - malloc_da(): it allocates a given amount of bytes; if it	*/
 /*		  is unable to allocate, it signals this fact;	*/
 /* - strdup_da(): it allocates a given string; if it is unable	*/
@@ -29,9 +29,22 @@
 
 
 /****************************************************************/
-/* 4. Definitions of variables strictly local to the module.	*/
+/* 4. Definitions strictly local to the module.                 */
 /****************************************************************/
 
+/* The following function signals errors causing abort. */
+static void signal_crash(crash_type)
+	int crash_type; /* crash type */
+{
+	/* crash messages */
+	static char *crash_msgs[] = {
+		"not enough memory",
+		"unable to open this file"
+	};
+
+	fprintf(stderr, "%s\n", crash_msgs[crash_type]);
+	exit(COMPILERCRASH);
+}
 
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
@@ -39,15 +52,15 @@
 
  /* The following function implements a control interface for the */
  /* library function malloc(). */
-STRING
+char *
 malloc_da(size)
 	unsigned	size;
 					/* size of the object to be */
 					/* allocated */
 {
-	STRING		p;
+	char *		p;
 
-	p = (STRING)malloc(size);
+	p = (char *)malloc(size);
 	if (!p)
 		signal_crash(NOTENOUGHMEMORY);
 
@@ -56,12 +69,12 @@ malloc_da(size)
 
  /* The following function implements a control interface for the */
  /* library function strdup(). */
-STRING
+char *
 strdup_da(s)
-	STRING		s;
+	char *		s;
 					/* string to be allocated */
 {
-	STRING		p;
+	char *		p;
 
 	p = strdup(s);
 	if (!p)
@@ -69,7 +82,3 @@ strdup_da(s)
 
 	return p;
 }
-
-/****************************************************************/
-/* 6. Definitions of functions strictly local to the module.	*/
-/****************************************************************/

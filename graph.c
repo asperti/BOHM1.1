@@ -29,8 +29,8 @@
 /*                     globally defined by a let instruction,   */
 /*                     the corresponding graph is a (shared)    */
 /*                     instance of the corresponding term.      */
-/*  - buildlambdaterm(): it builds the graph corresponding to a */
-/*                       a lambda abstraction.                  */
+/*  - buildplambdaterm(): it builds the graph corresponding to  */
+/*                        a lambda abstraction.                 */
 /*  - buildappterm(): it builds the graph corresponding to an   */
 /*                    application                               */
 /*  - buildletinterm(): it builds the graph corresponding to a  */
@@ -53,7 +53,7 @@
 /*		 These forms will be used for future            */
 /*		 allocations.                                   */
 /*  - allocate_form(): it allocates a new graphical form.       */
-/* The functions buildvarterm(), buildlambdaterm(),             */
+/* The functions buildvarterm(), buildplambdaterm(),            */
 /* buildappterm() and buildletinterm() etc. are called by the   */
 /* parser.                                                      */
 /* The functions connect() and allocate_form() are also used    */
@@ -90,23 +90,20 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-int rec_er=FALSE;
 unsigned num_nodes,max_nodes;
-BOOLEAN is_global_var;
-FORM *headfree=NULL; /* pointer to the head of the free-form list */
 
 unsigned length_list = 0;
 /****************************************************************/
 /* 4. Declaration of functions strictly local to the module.	*/
 /****************************************************************/
 
-HIDDEN TERM             *makebox();
-HIDDEN VARENTRY         *addbrackets(),
+static TERM             *makebox();
+static VARENTRY         *addbrackets(),
 			*share(),
 			*lookfor(),
 			*remv(),
                         *remvp();
-HIDDEN void             allocate_var(),
+static void             allocate_var(),
                         allocate_term(),
                         closeglobalvars(),
 			intelligent_connect(),
@@ -175,11 +172,7 @@ TERM
 
  /* The following function creates the graph representation of a */
  /* lambda-abstraction */
-TERM
-*buildlambdaterm(level,id,body)
-	int             level;
-	STBUCKET	*id;
-	TERM            *body;
+static TERM *buildlambdaterm(int level, STBUCKET *id, TERM *body)
 {
 	TERM 	*t;         /* pointer to the new term to be created */
 	FORM    *newf1;     /* pointer to the new form to be created */
@@ -222,11 +215,11 @@ TERM
 	FORM    *newf1,newf2;     /* pointers to the new forms to be created */
 	VARENTRY *boundvar; /* pointer to the entry for the bound variable */
 	FORM    *varform;   /* pointer to the bound variable form */
-        BOOLEAN boundp;
+        bool boundp;
 
-        for(vp=pattern->var_list,boundp=FALSE;vp;vp=vp->next)
+        for(vp=pattern->var_list,boundp=false;vp;vp=vp->next)
           if(lookfor(vp->id->id,body->vars)) {
-            boundp=TRUE;
+            boundp=true;
             break;
           }
 
@@ -338,12 +331,6 @@ TERM
 		    /* pointer to the new form to be created */
 
 	temp = makebox(level,arg);
-	/* 
-	if (fun->rootp < 0)
-	  {
-	    printf("constant in functional position\n");
-	    return(NULL);
-	    } */
 
 	allocate_form(&newf,APP,level);
 
@@ -810,11 +797,6 @@ FORM
 {
        FORM       *newroot;
        if(t!=NULL){
-	   if(level==1)
-		is_global_var=TRUE;
-	   else
-		is_global_var=FALSE;
-
 	   allocate_form(&newroot,ROOT,0);
 
 	   connect1(newroot,0,t->rootf,t->rootp);
@@ -865,7 +847,7 @@ void allocate_form(form, name, index)
 	(*form)->nform[0]=NULL;
 	(*form)->nform[1]=NULL;
 	(*form)->nform[2]=NULL;
-	(*form)->num_safe=TRUE;   /* initially, all operators are safe */
+	(*form)->num_safe=true;   /* initially, all operators are safe */
 }
 
 /* the following function adds a graphical form to deallocate */
@@ -926,9 +908,7 @@ void int_connect(form1,portf1,form2,portf2)
 {
        form1->nport[portf1] = portf2;
        form1->nform[portf1] = form2; 
-       /* form1->num_safe = value; */
 }
-
 
  /* the following function connects only the port portf1 of 	*/
  /* form1 to the port portf2 of form2, because form2 is a INT,	*/
@@ -948,7 +928,7 @@ void bool_connect(form1,portf1,portf2)
 
 
  /* the following function allocate a new variable entry */
-HIDDEN
+static
 void allocate_var(newvar,id,form,nextvar)
 	VARENTRY   **newvar;
 		       /* reference to the pointer of the */
@@ -968,7 +948,7 @@ void allocate_var(newvar,id,form,nextvar)
 
 
  /* the following function allocate a new term entry */
-HIDDEN
+static
 void allocate_term(term,rootform,rootport,freevars)
 	TERM       **term;
 		       /* reference to the pointer of the */
@@ -988,7 +968,7 @@ void allocate_term(term,rootform,rootport,freevars)
 }
 
  /* the following function build a box around a term  */
-HIDDEN TERM
+static TERM
 *makebox(level,arg)
 	int        level;
 	TERM       *arg;
@@ -999,7 +979,7 @@ HIDDEN TERM
 
  /* the following function add a sequence of square brackets of */
  /* given index at the free variables in listvar */
-HIDDEN VARENTRY
+static VARENTRY
 *addbrackets(index, listvar)
        int         index;
        VARENTRY    *listvar;
@@ -1048,7 +1028,7 @@ HIDDEN VARENTRY
 
  /* The following function shares the free variables of	*/
  /* two terms, by adding suitable FANS.  		*/
-HIDDEN VARENTRY
+static VARENTRY
 *share(index,l1,l2)
        int            index;
        VARENTRY       *l1,
@@ -1089,7 +1069,7 @@ HIDDEN VARENTRY
 
 
  /* The following function searches for a variable inside a list. */
-HIDDEN VARENTRY
+static VARENTRY
 *lookfor(id,listvar)
       STBUCKET       *id;
 		/* pointer to the identifier to be found  */
@@ -1106,7 +1086,7 @@ HIDDEN VARENTRY
 
  /* the following function remove an identifier form a list */
  /* of variables */
-HIDDEN  VARENTRY
+static  VARENTRY
 *remv(id,listvar)
       STBUCKET       *id;
 		/* pointer to the identifier to be removed  */
@@ -1130,7 +1110,7 @@ HIDDEN  VARENTRY
 
 /* the following functions does the set substraction of two variable lists */
 /* it runs in quadratic time, but who cares? */
-HIDDEN  VARENTRY
+static  VARENTRY
 *remvp(vl,listvar)
 VARLIST *vl;              
 VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
@@ -1144,7 +1124,7 @@ VARENTRY       *listvar;  /* pointer to the variable list to be scanned */
 
  /* The following function copies all the graph of the global */
  /* definition.	*/
-HIDDEN
+static
 void closeglobalvars(listvar)
       VARENTRY       *listvar;
 		/* pointer to the variable list to be scanned */
@@ -1174,97 +1154,10 @@ void closeglobalvars(listvar)
 	  }
 }
 
-#if 0
-HIDDEN
-closeglobalvars(listvar)
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
-{
-      FORM           *formvar,
-		     *formterm,
-		     *newf;
-      if (listvar != NULL)
-	  {
-	     formvar = listvar->var;
-	     formterm = ((listvar->name)->curr_binding)->root;
-	     allocate_form(&newf,FAN,0);
-	     newf->nlevel[1] = 0;
-	     newf->nlevel[2] = 0;
-	     if (formvar->name == TRIANGLE)
-		     {
-		       newf->nlevel[1] = newf->nlevel[1]+formvar->nlevel[1];
-		       connect(newf,1,formvar->nform[1],formvar->nport[1]);
-		       myfree(formvar);
-		     }
-		     else connect(newf,1,formvar,0);
-	     connect(formterm->nform[0],
-		     formterm->nport[0],
-		     newf,
-		     0);
-	     connect(formterm,
-		     0,
-		     newf,
-		     2);
-	     closeglobalvars(listvar->next);
-	  }
-}
-
-
-HIDDEN
-closeglobalvars(listvar)
-      VARENTRY       *listvar;
-		/* pointer to the variable list to be scanned */
-{
-      FORM           *formvar,
-		     *formterm,
-		     *newf;
-      if (listvar != NULL)
-	  {
-	     formvar = listvar->var;
-	     formterm = ((listvar->name)->curr_binding)->root;
-	     switch (listvar->name->curr_binding->entry_type) {
-	       case SHARE:
-		 allocate_form(&newf,FAN,0);
-		 newf->nlevel[1] = 0;
-		 newf->nlevel[2] = 0;
-		 if (formvar->name == TRIANGLE)
-		     {
-		       newf->nlevel[1] = newf->nlevel[1]+formvar->nlevel[1];
-		       connect(newf,1,formvar->nform[1],formvar->nport[1]);
-		       myfree(formvar);
-		     }
-		     else connect(newf,1,formvar,0);
-		 connect1(newf,0,formterm->nform[0],formterm->nport[0]);
-		 connect(formterm,0,newf,2);
-		 break;
-	       case DEF:
-		 if (formvar->name == TRIANGLE) {
-		   newf = copy(formterm->nform[0],
-			       formterm->nport[0],
-			       formvar->nlevel[1]);
-		   connect1(formvar->nform[1], formvar->nport[1],
-			   newf, formterm->nport[0]);
-		 }
-		 else {
-		   newf = copy(formterm->nform[0],formterm->nport[0],0);
-		   connect(formvar, 0, newf, formterm->nport[0]);
-		 }
-		 break;
-	       default:
-		 printf("ERRORE IN CLOSEGLOBALVARS\n");
-		 exit(1);
-		 break;
-	     }
-	     closeglobalvars(listvar->next);
-	  }
-}
-#endif
-
-
 /* The following function tries to merge two forms into a single one. */
 /* If failing doing so, connects them normally        		      */
 
-HIDDEN
+static
 void intelligent_connect(f1,port,f2)
 	FORM	*f1;
 	int	port;
@@ -1452,7 +1345,7 @@ void intelligent_connect(f1,port,f2)
 
 /* The following function checks whether it's possible to apply      */
 /* function intelligent_connect. Otherwise applies a normal connect. */
-HIDDEN
+static
 void inspect_connect(f1,p1,f2,p2)
        FORM       *f1;
        int        p1;
@@ -1465,16 +1358,16 @@ void inspect_connect(f1,p1,f2,p2)
     connect1(f1,p1,f2,p2);
 }
 
-HIDDEN BOOLEAN membervarlist(e,l)
+static bool membervarlist(e,l)
 BINDINGID *e;
 VARLIST *l;
 {
   while(l)
     if (e->id==l->id->id)
-      return TRUE;
+      return true;
     else
       l=l->next;
-  return FALSE;
+  return false;
 }
   
 
@@ -1510,17 +1403,6 @@ TERM     *t;
   vl->next=NULL;
   vl->id=bid;
   return vl;
-}
-
-TERM *maketerm(f)
-FORM *f;
-{
-  TERM *t;
-  t=(TERM*)malloc(sizeof(TERM));
-  t->rootf=f;
-  t->rootp=0;
-  t->vars=NULL;
-  return t;
 }
 
 TERM *buildvoidterm(level)

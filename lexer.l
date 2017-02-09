@@ -48,14 +48,14 @@
 
 
  /***************************************************************/
- /* 3. Definitions of variables to be exported.			*/
+ /* 3. Definitions of variables and functions.                  */
  /***************************************************************/
 
 %{
-int			lines;
-int                     astringlen;
-%}
+int lines, astringlen;
 
+static int to_nat_s(char *s);
+%}
 
  /***************************************************************/
  /* 4. Regular definitions.					*/
@@ -77,8 +77,6 @@ string                  [^\"]*\"
 
 %option nounput
 %option noinput
-
-/* %option reentrant bison-bridge */
 
 %start com
 %start str              
@@ -162,24 +160,20 @@ string                  [^\"]*\"
 		}
 
 "=="		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(EQUAL);
 		}
 
 "<="		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(LEQUAL);
 		}
 
 ">="		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(MEQUAL);
 		}
 "<>"		   {
-			/*  */
                         if (loading_mode == 1) ECHO; 
 			return(NOTEQUAL);
 		}
@@ -193,25 +187,17 @@ string                  [^\"]*\"
 
 %%
 
- /***************************************************************/
- /* 6. Auxiliary functions.					*/
- /***************************************************************/
-
-/*
-int yywrap()
+/* The following function turns a given string of digits into a natural */
+/* and checks for presence of overflow. */
+static int to_nat_s(char *s)
 {
-   quit = 1; 
-   return(NOMOREINPUT); 
-} */
+	long n;
 
+	for (n = 0; (n <= MAXINT) && (*s != '\0'); s++)
+		n = n * NUMBASE + (*s - '0');
 
-
-
-
-
-
-
-
-
-
-
+	if (n > MAXINT)
+		return(NUMOUTOFRANGE);
+	else
+		return((int)n);
+}

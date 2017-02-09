@@ -108,8 +108,7 @@
  /***************************************************************/
 
 %{
-int yylex();
-void yyerror(const char *s);
+int yyerror(const char *msg);
 %}
 
  /***************************************************************/
@@ -117,12 +116,7 @@ void yyerror(const char *s);
  /***************************************************************/
 
 %{
-BOOLEAN			error_detected,
-			       /* flag indicating whether an */
-			       /* error has been detected */
-			       /* during the analysis of the */
-			       /* P source file */
-			quit,
+bool			quit,
 			       /* flag indicating quit request */
 			loading_mode;
 			       /* flag indicating if parsing is */
@@ -134,12 +128,14 @@ FORM                    *lastinputterm;
 %}
 
  /***************************************************************/
- /* 4. Definitions of variables strictly local to the module.	*/
+ /* 4. Definitions strictly local to the module.                */
  /***************************************************************/
 
 %{
 int                    app_nesting_depth;
 PATTERN                *pattmp;
+
+static bool defined();
 %}
 
  /***************************************************************/
@@ -214,7 +210,6 @@ PATTERN                *pattmp;
 %type	<root>		        arg
 %type	<root>		        term
 %type	<root>		        global_decl
-/*%type	<root>		        share_decl*/
 %type	<term>			expr
 %type   <term>                  expr0
 %type	<term>			applist
@@ -264,7 +259,7 @@ input           :      directive
 		|        
 				{
 				   printf("no more input");
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 				; 
@@ -277,21 +272,15 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 				}
 		|      '#' QUITKW EXPRDELIM
 				{
-				   quit = TRUE;
+				   quit = true;
 				   YYACCEPT;
 				}
 		|      '#' LOADKW ASTRING EXPRDELIM
 				{
 				  include_file = $3;
-				  loading_mode = TRUE;
+				  loading_mode = true;
 				  printf("%s", include_file);
-				  /*
-				   compile($3);
-                                   free($3); 
-				   printf("ecco2\n");
-				   if (yyin==stdin) 
-				   printf("ecco3\n"); */
-				   YYACCEPT;
+				  YYACCEPT;
 				}
 		|       '#' GARBAGEKW EXPRDELIM
 				{
@@ -356,11 +345,6 @@ term            :       expr EXPRDELIM
 				  no_destroy();
 				  YYACCEPT;
 				}
-/*		|       share_decl EXPRDELIM
-				{
-				  reduce_term($1);
-				  YYACCEPT;
-				}*/
 		;
 
 
@@ -377,21 +361,6 @@ global_decl	:    DEFKW ID '='
 				  create_variable_binding($2,$$,DEF);
 				}
 		;
-
-/*
-share_decl	:    SHAREKW ID '='
-			{
-				  app_nesting_depth++;
-				}
-		     expr
-				{
-				  app_nesting_depth--;
-				  lastinputterm = closeterm(1,$5);
-				  $$ = lastinputterm;
-				  create_variable_binding($2,$$,SHARE);
-				}
-		;
-*/
 
 expr            :       expr0
                                 {
@@ -494,16 +463,6 @@ expr0           : 	TRUEKW
 				{
 				  $$ = $2;
 				}
-/*		|       '\\' ID '.'
-				{
-				  push_local_env();
-				  create_variable_binding($2,NULL,LOCAL);
-				}
-			expr
-				{
-				  $$ = buildlambdaterm(app_nesting_depth,$2,$5);
-				  pop_local_env();
-				}*/
 		|       '\\' 
 				{
 				  push_local_env();
@@ -699,7 +658,7 @@ pattern         :       CONSKW '(' pattern ',' pattern ')'
 
 term    	:	error  EXPRDELIM
                                 {
-                                  error_detected = TRUE;
+                                  error_detected = true;
                                   yyerrok;
                                   YYACCEPT;
 				}
@@ -707,24 +666,12 @@ term    	:	error  EXPRDELIM
 
 %%
 
- /***************************************************************/
- /* 11. Auxiliary functions.					*/
- /***************************************************************/
-
-/* int yylex(YYSTYPE *yylval, void *scanner); */
-
-/* HIDDEN
-retract_token()
+/* The following function checks if an identifier has been */
+/* previously declared */
+static bool defined(st)
+	STBUCKET	*st;
+			      /* pointer to the bucket for the */
+			      /* identifier */
 {
-	yyless(0);
-	} 
-
-HIDDEN
-yyerror()
-{
-	signal_error(SINTAXERROR);
-	yyerrok;
-	} */
-
-
-
+        return((st->curr_binding) != NULL);
+}

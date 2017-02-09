@@ -3,8 +3,7 @@
 /* Upon error detection, the corresponding error message is	*/
 /* printed on the screen.                                	*/
 /* - signal_error(): it signals lexical, syntax and semantic	*/
-/*		     errors;					*/
-/* - signal_warning(): it signals warnings.			*/
+/*		     errors.					*/
 /****************************************************************/
 
 
@@ -25,7 +24,7 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-BOOLEAN			error_detected;
+bool			error_detected;
 			      /* flag indicating whether an */
 			      /* error has been detected */
 
@@ -34,7 +33,7 @@ BOOLEAN			error_detected;
 /****************************************************************/
 
 /* compile time error messages */
-HIDDEN STRING		error_msgs[] = {
+static char *error_msgs[] = {
   "lexical error: illegal character",
   "lexical error: numerical constant overflow",
   "syntax error: identifier expected after let",
@@ -52,11 +51,6 @@ HIDDEN STRING		error_msgs[] = {
   "scoping error: undefined variable"
 };
 
-/* warning messages */
-HIDDEN STRING		warning_msgs[] = {
-  "warning: variable already declared"
-};
-
 /****************************************************************/
 /* 5. Definitions of functions to be exported.			*/
 /****************************************************************/
@@ -67,27 +61,9 @@ void signal_error(error_msg_num)
 	int		error_msg_num;
 					/* error message number */
 {
-	error_detected = TRUE;
+	error_detected = true;
 	fprintf(stderr,
 		"line %-5d\t--->\t%s\n",
 		lines,
 		error_msgs[error_msg_num]);
 }
-
- /* The following function signals warnings. */
-void signal_warning(warning_msg_num)
-	int		warning_msg_num;
-					/* warning message number */
-{
-	fprintf(stderr,
-		"line %-5d\t--->\t%s\n",
-		lines,
-		warning_msgs[warning_msg_num]);
-}
-
-
-/****************************************************************/
-/* 6. Definitions of functions strictly local to the module.	*/
-/****************************************************************/
-
-

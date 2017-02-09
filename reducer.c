@@ -34,11 +34,12 @@
 
 #include "bohm.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <sys/times.h>
 #include <time.h>
+#include <sys/times.h>
+#include <sys/types.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
@@ -48,21 +49,49 @@ extern clock_t usr_garb_time;
 extern clock_t sys_garb_time;
 
 /****************************************************************/
-/* 3. Declaration of names strictly local to the module.	*/
+/* 3. Definitions strictly local to the module.                 */
 /****************************************************************/
 
+static int     unsafe;
+static int     optim;
+static int     fan_int;
+static int     redexes;
+static int     max_index;
+static int     eq=0;
+static int     type_error;
+static void    reduce_redex();
+static void    reduce_form();
+static FORM    *lo_redex();
+static int     auxnext;
+static FORM    *auxstack[STACK_SIZE];
 
-HIDDEN int     unsafe;
-HIDDEN int     optim;
-HIDDEN int     fan_int;
-HIDDEN int     redexes;
-HIDDEN int     max_index;
-HIDDEN int     eq=0;
-HIDDEN int     type_error;
-HIDDEN void    reduce_redex();
-HIDDEN void    reduce_form();
-HIDDEN FORM    *lo_redex();
+static FORM *pop()
+{
+	FORM *res;
 
+	assert(auxnext > 0);
+	--auxnext;
+	res = auxstack[auxnext];
+	auxstack[auxnext] = NULL;
+	return res;
+}
+
+static void push(FORM *f)
+{
+	auxstack[auxnext] = f;
+
+	++auxnext;
+	if(auxnext >= STACK_SIZE) {
+		printf("Stack Overflow . . .\n");
+		getchar();
+		getchar();
+	}
+}
+
+static void init_stack()
+{
+	auxnext = 0;
+}
 
 /****************************************************************/
 /* 4. Definitions of functions to be exported.			*/
@@ -89,7 +118,7 @@ void reduce_term(root)
      counter = 0;
      eq=0;
      redexes = 0;
-     type_error = FALSE;
+     type_error = false;
      er_count=0;
      cl_count=0;
      max_index=0;
@@ -103,8 +132,6 @@ void reduce_term(root)
      sys_time = time.tms_stime;
      init_stack();
      f1 = lo_redex(root);
-     /* getchar();
-	print_stack(); */
      usr_garb_time = 0;
      sys_garb_time = 0;
      while ((f1 != root) && (!type_error))
@@ -124,13 +151,6 @@ void reduce_term(root)
 	     reduce_form(f1);
 	   counter = counter + 1;
 	   f1 = lo_redex(pop());
-	   /* print_stack();
-	   ans = getchar(); 
-	   if (ans == 'i') inspect_driver(root); */
-	   /* init_stack();
-	      f1 = lo_redex(root);
-	   if (get_next() == 65554)
-	   {printf("%i\n", get_max_ptr());} */
 	}
      if(!type_error){
 	times(&time);
@@ -161,7 +181,6 @@ void reduce_term(root)
 	  {
 	    printf("Max. number of nodes seen up to this time %u\n",max_nodes);
 	    printf("Final number of nodes %u\n",num_nodes);
-	    printf("Maximum stack depth %i\n",get_max_ptr());
 	    printf("*****************************************************\n");
 	  }
     }else
@@ -179,7 +198,7 @@ void reduce_term(root)
 /*  The following function reduces the redex whose 	*/
 /*  interacting forms are passed as a parameter and the */
 /*  second form is not a INT, NIL, True or False;	*/
-HIDDEN void
+static void
 reduce_redex(f1,f2)
      FORM      *f1,
 	       *f2;
@@ -187,7 +206,6 @@ reduce_redex(f1,f2)
      FORM      *new1,
 	       *new2;
 
-/*   printf("REDUCE: f1: name:%d, index:%d, f2: name:%d, index:%d\n",f1->name,f1->index,f2->name,f2->index);*/
      if((option==2)&&(del_head!=NULL)&&(num_nodes>limit))
 	clean();
 
@@ -270,7 +288,7 @@ reduce_redex(f1,f2)
 			break;
 		    default:
 			printf("--->   type error1\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -294,7 +312,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error28 %d\n",f2->name);
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -321,7 +339,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error28 bis %d\n",f2->name);
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -346,7 +364,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -372,7 +390,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -392,7 +410,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -422,7 +440,7 @@ reduce_redex(f1,f2)
 			break;
 		     default:
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -460,7 +478,7 @@ reduce_redex(f1,f2)
 		    break;
 		  default:
 		    printf("--->   type error\n");
-		    type_error = TRUE;
+		    type_error = true;
 		    break;
 
 		}
@@ -577,8 +595,8 @@ reduce_redex(f1,f2)
 	{
 	   case FAN:
 	      if (f2->name != TRIANGLE) fan_int++;
-	      if ((f2->name==LAMBDA)/*||(f2->name==MU)*/)
-			f1->num_safe=FALSE;
+	      if (f2->name == LAMBDA)
+			f1->num_safe=false;
 	      switch (f2->name)
 	      {
 		 case CONS:
@@ -688,8 +706,8 @@ reduce_redex(f1,f2)
 	      if (f2->name != TRIANGLE) fan_int++;
 	      unsafe++;
 	   case TRIANGLE:
-	      if ((f2->name==LAMBDA)/*||(f2->name==MU)*/)
-		 f1->num_safe = FALSE;
+	      if (f2->name == LAMBDA)
+		 f1->num_safe = false;
 	      switch (f2->name)
 		 {
 		    case CONS:
@@ -754,13 +772,7 @@ reduce_redex(f1,f2)
 		       break;
 
 		 }
-	      /* 
-	   default:
-	     printf("--->   type error: unexpected constant\n");
-	     type_error = TRUE;
-	     break; */
 	   break;
-
 	}
      }
 }
@@ -769,12 +781,11 @@ reduce_redex(f1,f2)
 /*  The following function reduces the redex whose 	*/
 /*  interacting forms are passed as a parameter and the */
 /*  second form is a INT, NIL, True or False; */
-HIDDEN void
+static void
 reduce_form(f1)
 FORM	*f1;
 {
   FORM    *tmp;
-/*   printf("FORM: f1: name:%d, index:%d, f2: name:%d\n",f1->name,f1->index,f1->nport[0]);*/
 	switch (f1->name) {
 		case IFELSE:
 		  switch(f1->nport[0])
@@ -793,7 +804,7 @@ FORM	*f1;
 
 		     default:
 			printf("--->   type error2\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -821,7 +832,7 @@ FORM	*f1;
 			break;
 		     default:
 			printf("--->   type error3\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -849,7 +860,7 @@ FORM	*f1;
 			break;
 		     default:
 			printf("--->   type error4\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -869,7 +880,7 @@ FORM	*f1;
 			break;
 		     default:
 			printf("--->   type error5\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -886,7 +897,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error6\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -903,7 +914,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error7\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -920,7 +931,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error8\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -937,7 +948,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error9\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -954,7 +965,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error10\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -971,7 +982,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error11\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -989,7 +1000,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error12\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1006,7 +1017,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error13\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1023,7 +1034,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error14\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1040,7 +1051,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error15\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1057,7 +1068,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error16\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1074,7 +1085,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error17\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1091,7 +1102,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error18\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1108,7 +1119,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error19\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1125,7 +1136,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error20\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1143,7 +1154,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error21\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1160,7 +1171,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error22\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1177,7 +1188,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error23\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1194,7 +1205,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error24\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1211,7 +1222,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error25\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1228,7 +1239,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error26\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1245,7 +1256,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error27\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 
 		 }
@@ -1260,7 +1271,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1275,7 +1286,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1289,7 +1300,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1305,7 +1316,7 @@ FORM	*f1;
 		 }
 		 else {
 			printf("--->   type error\n");
-			type_error = TRUE;
+			type_error = true;
 			break;
 		 }
 		 break;
@@ -1363,7 +1374,7 @@ FORM	*f1;
 	  default:
 	    {
 	      printf("--->   type error: constant in wrong position\n");
-	      type_error = TRUE;
+	      type_error = true;
 	    }
 	} /* end switch */
 }
@@ -1372,7 +1383,7 @@ FORM	*f1;
 /*  The following function looks for the leftmost outemost  	*/
 /*  redex, saving on the m_stack pointers to the form along	*/
 /*  the main spine of the term.             			*/
-HIDDEN FORM
+static FORM
 *lo_redex(f)
      FORM    *f;
 {
@@ -1423,13 +1434,9 @@ HIDDEN FORM
 				   temp->nport[1],
 				   next->nform[0],
 				   next->nport[0]);
-			   /* printf("current level %i\n", temp->index);
-			      printf("next level %i\n", next->index); */
 			   myfree(temp);
 			   myfree(next);
 			   temp = pop();
-			   /* printf("previous is %i\n", temp->name);
-			      printf("at level %i\n", temp->index); */
 			  }
 		       else
 			  {
@@ -1456,7 +1463,7 @@ HIDDEN FORM
 		    switch(next->name)
 		     {
 		     case TRIANGLE:
-		       temp->num_safe = TRUE;
+		       temp->num_safe = true;
 		       temp->index = next->index;
 		       temp->nlevel[1] = temp->nlevel[1]+next->nlevel[1];
 		       temp->nlevel[2] = temp->nlevel[2]+next->nlevel[1];
@@ -1473,25 +1480,6 @@ HIDDEN FORM
 		       push(temp);
 		       temp = next;
 		       break;
-/*
-			 if ((next->nlevel[p] != 0) ||
-			   (temp->num_safe == FALSE))
-			 {
-			    temp->num_safe = TRUE;
-			    temp->index = next->index;
-			    temp->nlevel[1] = temp->nlevel[1]+next->nlevel[p];
-			    temp->nlevel[2] = temp->nlevel[2]+next->nlevel[p];
-			    next->nlevel[p] = 0;
-			    next->nlevel[p] = 0;
-			    temp = pop();
-			  }
-		       else
-			 {
-			   push(temp);
-			   temp = next;
-			 }
-		       break;
-*/
 		     }
 		   break;
 		 }

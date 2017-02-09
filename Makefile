@@ -6,28 +6,21 @@ OBJS = \
 	bohm.a(main.o) \
 	bohm.a(copy.o) \
 	bohm.a(symbol.o) \
-	bohm.a(scope.o) \
 	bohm.a(inspect.o) \
 	bohm.a(graph.o) \
 	bohm.a(destroy.o) \
-	bohm.a(loader.o) \
 	bohm.a(reducer.o) \
-	bohm.a(stack.o) \
 	bohm.a(readback.o) \
 	bohm.a(garbage.o) \
 	bohm.a(menu.o) \
 	bohm.a(save.o) \
-	bohm.a(crash.o) \
 	bohm.a(error.o) \
-	bohm.a(number.o) \
-	bohm.a(dynall.o) \
-	bohm.a(file.o) \
-	bohm.a(string.o)
+	bohm.a(dynall.o)
 
 all: bohm
 	./bohm <examples/tartaglia
 
-debug:
+debug: clean
 	$(MAKE) CFLAGS="-g -Wall -Werror"
 
 bohm: bohm.a
@@ -35,7 +28,7 @@ bohm: bohm.a
 
 bohm.a: $(OBJS)
 
-$(OBJS): bohm.h y.tab.h
+$(OBJS): y.tab.h bohm.h define.h struct.h
 
 lexer.c: y.tab.h
 
