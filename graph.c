@@ -29,8 +29,8 @@
 /*                     globally defined by a let instruction,   */
 /*                     the corresponding graph is a (shared)    */
 /*                     instance of the corresponding term.      */
-/*  - buildlambdaterm(): it builds the graph corresponding to a */
-/*                       a lambda abstraction.                  */
+/*  - buildplambdaterm(): it builds the graph corresponding to  */
+/*                        a lambda abstraction.                 */
 /*  - buildappterm(): it builds the graph corresponding to an   */
 /*                    application                               */
 /*  - buildletinterm(): it builds the graph corresponding to a  */
@@ -53,7 +53,7 @@
 /*		 These forms will be used for future            */
 /*		 allocations.                                   */
 /*  - allocate_form(): it allocates a new graphical form.       */
-/* The functions buildvarterm(), buildlambdaterm(),             */
+/* The functions buildvarterm(), buildplambdaterm(),            */
 /* buildappterm() and buildletinterm() etc. are called by the   */
 /* parser.                                                      */
 /* The functions connect() and allocate_form() are also used    */
@@ -90,9 +90,7 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-int rec_er=false;
 unsigned num_nodes,max_nodes;
-bool is_global_var;
 
 unsigned length_list = 0;
 /****************************************************************/
@@ -174,11 +172,7 @@ TERM
 
  /* The following function creates the graph representation of a */
  /* lambda-abstraction */
-TERM
-*buildlambdaterm(level,id,body)
-	int             level;
-	STBUCKET	*id;
-	TERM            *body;
+static TERM *buildlambdaterm(int level, STBUCKET *id, TERM *body)
 {
 	TERM 	*t;         /* pointer to the new term to be created */
 	FORM    *newf1;     /* pointer to the new form to be created */
@@ -803,11 +797,6 @@ FORM
 {
        FORM       *newroot;
        if(t!=NULL){
-	   if(level==1)
-		is_global_var=true;
-	   else
-		is_global_var=false;
-
 	   allocate_form(&newroot,ROOT,0);
 
 	   connect1(newroot,0,t->rootf,t->rootp);
@@ -1414,17 +1403,6 @@ TERM     *t;
   vl->next=NULL;
   vl->id=bid;
   return vl;
-}
-
-TERM *maketerm(f)
-FORM *f;
-{
-  TERM *t;
-  t=(TERM*)malloc(sizeof(TERM));
-  t->rootf=f;
-  t->rootp=0;
-  t->vars=NULL;
-  return t;
 }
 
 TERM *buildvoidterm(level)

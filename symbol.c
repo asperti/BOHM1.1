@@ -70,8 +70,6 @@
 /*		       onto the scope stack;			*/
 /* - pop_local_env(): it pops a local environment entry off the	*/
 /*		      scope stack;				*/
-/* - pop_all_local_env(): it pops all local environment entry 	*/
-/*			  off the scope stack;			*/
 /* - create_variable_binding(): it creates an entry for 	*/
 /*				a variable declaration          */
 /* - allocate_bucket(): it allocates a bucket for an		*/
@@ -109,17 +107,16 @@
 /* 3. Definitions of variables to be exported.			*/
 /****************************************************************/
 
-STBUCKET		*dictionary[DICTSIZE];
-			       /* pointers to bucket lists */
-
-LOCALENVENTRY		*curr_local_env;
-			       /* pointer to the entry for the */
-			       /* current local environment */
-
-
 /****************************************************************/
 /* 4. Definitions strictly local to the module.                 */
 /****************************************************************/
+
+static LOCALENVENTRY *curr_local_env;
+			       /* pointer to the entry for the */
+			       /* current local environment */
+
+static STBUCKET *dictionary[DICTSIZE];
+			       /* pointers to bucket lists */
 
 static LOCALENVENTRY	*external_env;
 			       /* pointer to the entry for the */
@@ -300,15 +297,6 @@ void pop_local_env()
 	 curr_nesting_depth--;
 }
 
- /* The following function pops all local environment entry off */
- /* the scope stack. */
-void pop_all_local_env()
-{
-  while (curr_nesting_depth>NONESTING)
-    pop_local_env();
-}
-
-
  /* The following function creates entries for a variable binding */
 void create_variable_binding(st,rootform,type)
 	STBUCKET	*st;
@@ -325,24 +313,6 @@ void create_variable_binding(st,rootform,type)
 {
 	allocate_binding_entry(st,curr_local_env,rootform,type);
 }
-
- /* The following function creates an entry for a binding concerning */
- /* an identifier used but not defined. The entry for the binding is */
- /* inserted into the binding entry list for the external environment. */
-
-void create_binding_for_undef_id(st,rootform)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier which is to be bound */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-{
-	allocate_binding_entry(st,external_env,rootform,LOCAL);
-}
-
-
 
 /****************************************************************/
 /* 6. Definitions of functions strictly local to the module.	*/

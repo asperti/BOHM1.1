@@ -28,10 +28,11 @@
 /* Declarations of functions strictly local to the module    	*/
 /****************************************************************/
 
+static FORM *inspect();
+
 /****************************************************************/
 /* Definitions of functions to be exported.			*/
 /****************************************************************/
-FORM      *inspect();
 
 void inspect_driver(f)
      FORM  *f;
@@ -61,9 +62,7 @@ void inspect_driver(f)
     }
 }      
 
-FORM *inspect(p,f)
-     int     p;
-     FORM    *f;
+static FORM *inspect(int p, FORM *f)
 {
 	bool ok=true;
 	switch(p)
