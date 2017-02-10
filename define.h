@@ -1,32 +1,10 @@
 #ifndef _DEFINE_H
 #define _DEFINE_H
 
-/* constants concerning keywords */
-#define KEYWORDNUM			27
-#define FIRSTKEYWORD			400
-
-/* constants concerning the symbol table */
-#define DICTSIZE			211
-#define HASH1				4
-#define HASH2				0xf0000000
-#define HASH3				24
-
-/* constants concerning the machine stack */
-#ifndef         STACK_SIZE
-#define STACK_SIZE			(unsigned int)10000000
-#endif
-
-/* constants concerning scope analysis */
-#define NONESTING			-2
-
 /* constants concerning compile time error messages */
 #define ILLEGALCHAR			0
 #define NUMOVERFLOW			1
 #define UNBOUND_VARIABLE         	14
-
-/* constants concerning garbage */
-#define EXISTENT		3
-#define NOTEXISTENT		4
 
 /* constant concerning form names */
 #define ROOT                            0
@@ -76,18 +54,5 @@
 #define CDR1			       48
 #define CAR1			       49
 #define CONS1			       50
-
-/* constants concerning crash handling */
-#define COMPILERCRASH			2
-#define NOTENOUGHMEMORY			0
-
-/* constants concerning readback */
-#define PRINT_MAX	100
-
-/* constants concerning allocate form */
-#define FORM_NUM	1000
-
-/* constants concerning copy */
-#define DIM_REL		256
 
 #endif

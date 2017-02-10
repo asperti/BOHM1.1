@@ -106,6 +106,19 @@
 /* 4. Definitions strictly local to the module.                 */
 /****************************************************************/
 
+/* constants concerning keywords */
+#define KEYWORDNUM			27
+#define FIRSTKEYWORD			400
+
+/* constants concerning the symbol table */
+#define DICTSIZE			211
+#define HASH1				4
+#define HASH2				0xf0000000
+#define HASH3				24
+
+/* constants concerning scope analysis */
+#define NONESTING			-2
+
 static LOCALENVENTRY *curr_local_env;
 			       /* pointer to the entry for the */
 			       /* current local environment */

@@ -43,6 +43,10 @@
 /* 3. Declaration of names strictly local to the module.                 */
 /*************************************************************************/
 
+/* constants concerning garbage */
+#define EXISTENT		3
+#define NOTEXISTENT		4
+
 static void     garbage();
 
 /*************************************************************************/

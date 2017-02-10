@@ -71,31 +71,17 @@
 /*  - remv(): it removes a variable from a list.                */
 /****************************************************************/
 
-
-
-/****************************************************************/
-/* 1. Inclusion of header files.				*/
-/****************************************************************/
-
 #include "bohm.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-/****************************************************************/
-/* 2. Inclusion of declarations that are being imported.        */
-/****************************************************************/
-
-/****************************************************************/
-/* 3. Definitions of variables to be exported.			*/
-/****************************************************************/
+/* constants concerning allocate form */
+#define FORM_NUM	1000
 
 unsigned num_nodes,max_nodes;
 
 unsigned length_list = 0;
-/****************************************************************/
-/* 4. Declaration of functions strictly local to the module.	*/
-/****************************************************************/
 
 static TERM             *makebox();
 static VARENTRY         *addbrackets(),
@@ -108,11 +94,6 @@ static void             allocate_var(),
                         closeglobalvars(),
 			intelligent_connect(),
 			inspect_connect();
-
-/****************************************************************/
-/* 5. Definitions of functions to be exported.			*/
-/****************************************************************/
-
 
  /* The following function creates the graph representation of */
  /* a variable */

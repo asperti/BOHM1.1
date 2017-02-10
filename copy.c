@@ -28,23 +28,12 @@
 /*  - end_copy(): Eliminates hash table.			*/
 /****************************************************************/
 
-
-/****************************************************************/
-/* 1. Inclusion of header files.				*/
-/****************************************************************/
-
 #include "bohm.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-/****************************************************************/
-/* 2. Inclusion of declarations that are being imported.        */
-/****************************************************************/
-
-/****************************************************************/
-/* 3. Declaration of names strictly local to the module.	*/
-/****************************************************************/
+#define DIM_REL 256
 
 static COPY_FORM  *copy_relation[DIM_REL];
 static void       put_relation(),
@@ -53,10 +42,6 @@ static void       put_relation(),
 static FORM	  *is_in_relation(),
 		  *copy_aux();
 static int	  entry();
-
-/****************************************************************/
-/* 4. Definitions of functions to be exported.			*/
-/****************************************************************/
 
 /* The following function initialises the hash table, calls 	*/
 /* function copy_aux and eliminates the table.			*/
@@ -74,11 +59,6 @@ FORM
   end_copy();
   return risul;
 }
-
-/****************************************************************/
-/* 5. Definitions of functions strictly local to the module.	*/
-/****************************************************************/
-
 
 /* The following function duplicates the input graph and 	*/
 /* returns it as output.					*/

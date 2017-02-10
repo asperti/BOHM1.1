@@ -63,6 +63,11 @@ static void    reduce_redex();
 static void    reduce_form();
 static FORM    *lo_redex();
 static int     auxnext;
+
+#ifndef STACK_SIZE
+#define STACK_SIZE 10000000
+#endif
+
 static FORM    *auxstack[STACK_SIZE];
 
 static FORM *pop()
