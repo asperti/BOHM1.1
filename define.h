@@ -1,11 +1,6 @@
 #ifndef _DEFINE_H
 #define _DEFINE_H
 
-/* constants concerning compile time error messages */
-#define ILLEGALCHAR			0
-#define NUMOVERFLOW			1
-#define UNBOUND_VARIABLE         	14
-
 /* constant concerning form names */
 #define ROOT                            0
 #define T				-1

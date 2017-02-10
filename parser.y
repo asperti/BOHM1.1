@@ -132,6 +132,8 @@ FORM                    *lastinputterm;
  /***************************************************************/
 
 %{
+#define UNBOUND_VARIABLE "scoping error: undefined variable"
+
 int                    app_nesting_depth;
 PATTERN                *pattmp;
 

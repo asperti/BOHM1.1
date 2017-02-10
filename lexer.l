@@ -180,7 +180,7 @@ string                  [^\"]*\"
 {illegal_char}	{
 			/* detection of an illegal character */
                         if (loading_mode == 1) ECHO; 
-			signal_error(ILLEGALCHAR);
+			signal_error("lexical error: illegal character");
                 }
 
 %%
@@ -197,7 +197,7 @@ static int to_nat_s(char *s)
 		n = 10 * n + (*s - '0');
 
 	if (n > MAXINT)
-		signal_error(NUMOVERFLOW);
+		signal_error("lexical error: numerical constant overflow");
 
 	return n;
 }
