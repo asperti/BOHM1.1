@@ -1,11 +1,6 @@
 #ifndef _DEFINE_H
 #define _DEFINE_H
 
-/* constants concerning numbers */
-#define MAXINT				2147483647
-#define NUMBASE				10
-#define NUMOUTOFRANGE			-1
-
 /* constants concerning keywords */
 #define KEYWORDNUM			27
 #define FIRSTKEYWORD			400
