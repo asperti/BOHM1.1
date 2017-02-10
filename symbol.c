@@ -78,8 +78,7 @@
 /*		    in which it lies;				*/
 /* - hash_pjw(): it computes the hash function;			*/
 /* - allocate_local_env_entry(): it allocates a local		*/
-/*				 environment entry;		*/
-/* - allocate_binding_entry(): it allocates a binding entry.	*/
+/*				 environment entry.		*/
 /****************************************************************/
 
 
@@ -119,7 +118,6 @@ static int		curr_nesting_depth;
 
 static int              hash_pjw();
 static void             allocate_local_env_entry();
-static void             allocate_binding_entry();
 static void             move_bucket();
 static void             allocate_bucket();
 
@@ -294,7 +292,15 @@ void create_variable_binding(st,rootform)
 				/* term associated with the identifier */
 				/* (for global declarations only) */
 {
-	allocate_binding_entry(st,curr_local_env,rootform);
+	BINDINGENTRY	*b;
+
+	b = (BINDINGENTRY *)malloc_da(sizeof(BINDINGENTRY));
+	b->st_bucket = st;
+	b->root = rootform;
+	b->prev_id_binding = st->curr_binding;
+	st->curr_binding = b;
+	b->prev_local_binding = curr_local_env->last_local_binding;
+	curr_local_env->last_local_binding = b;
 }
 
 /****************************************************************/
@@ -364,30 +370,4 @@ void allocate_local_env_entry()
 	le->last_local_binding = NULL;
 	le->prev_local_env = curr_local_env;
 	curr_local_env = le;
-}
-
- /* The following function allocates a binding entry. */
-static 
-void allocate_binding_entry(st,le,rootform)
-	STBUCKET	*st;
-				/* pointer to the bucket for the */
-				/* identifier involved in the binding */
-	LOCALENVENTRY	*le;
-				/* pointer to the entry for the */
-				/* environment in which the binding */
-				/* is to be created */
-	FORM            *rootform;
-				/* pointer to the rootform of the */
-				/* term associated with the identifier */
-				/* (for global declarations only) */
-{
-	BINDINGENTRY	*b;
-
-	b = (BINDINGENTRY *)malloc_da(sizeof(BINDINGENTRY));
-	b->st_bucket = st;
-	b->root = rootform;
-	b->prev_id_binding = st->curr_binding;
-	st->curr_binding = b;
-	b->prev_local_binding = le->last_local_binding;
-	le->last_local_binding = b;
 }
