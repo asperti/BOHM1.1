@@ -37,16 +37,11 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <sys/times.h>
-#include <sys/types.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
-
-extern clock_t usr_garb_time;
-extern clock_t sys_garb_time;
 
 /****************************************************************/
 /* 3. Definitions strictly local to the module.                 */
