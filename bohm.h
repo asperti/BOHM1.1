@@ -1,7 +1,7 @@
 #ifndef _BOHM_H
 #define _BOHM_H
 
-#include "define.h"
+#include "form.h"
 #include "struct.h"
 
 #include <stdbool.h>

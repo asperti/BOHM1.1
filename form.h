@@ -1,7 +1,6 @@
-#ifndef _DEFINE_H
-#define _DEFINE_H
+#ifndef _FORM_H
+#define _FORM_H
 
-/* constant concerning form names */
 #define ROOT                            0
 #define T				-1
 #define F				-2
