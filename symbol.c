@@ -284,7 +284,7 @@ void pop_local_env()
 }
 
  /* The following function creates entries for a variable binding */
-void create_variable_binding(st,rootform,type)
+void create_variable_binding(st,rootform)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
 				/* identifier which is to be bound */
@@ -293,11 +293,8 @@ void create_variable_binding(st,rootform,type)
 				/* pointer to the rootform of the */
 				/* term associated with the identifier */
 				/* (for global declarations only) */
-	int		type;
-				/* indicates DEF, SHARE or LOCAL */
-				/* type entry */
 {
-	allocate_binding_entry(st,curr_local_env,rootform,type);
+	allocate_binding_entry(st,curr_local_env,rootform);
 }
 
 /****************************************************************/
@@ -371,7 +368,7 @@ void allocate_local_env_entry()
 
  /* The following function allocates a binding entry. */
 static 
-void allocate_binding_entry(st,le,rootform,type)
+void allocate_binding_entry(st,le,rootform)
 	STBUCKET	*st;
 				/* pointer to the bucket for the */
 				/* identifier involved in the binding */
@@ -383,9 +380,6 @@ void allocate_binding_entry(st,le,rootform,type)
 				/* pointer to the rootform of the */
 				/* term associated with the identifier */
 				/* (for global declarations only) */
-	int		type;
-				/* indicates DEF, SHARE or LOCAL */
-				/* type entry */
 {
 	BINDINGENTRY	*b;
 
@@ -396,5 +390,4 @@ void allocate_binding_entry(st,le,rootform,type)
 	st->curr_binding = b;
 	b->prev_local_binding = le->last_local_binding;
 	le->last_local_binding = b;
-	b->entry_type = type;
 }

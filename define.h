@@ -4,8 +4,6 @@
 /* constants concerning keywords */
 #define KEYWORDNUM			27
 #define FIRSTKEYWORD			400
-#define DEF				1
-#define LOCAL				0
 
 /* constants concerning the symbol table */
 #define DICTSIZE			211
