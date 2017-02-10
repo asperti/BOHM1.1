@@ -7,9 +7,6 @@
 #define DEF				1
 #define LOCAL				0
 
-/* constants concerning P I/O library procedures */
-#define LIBRARYPROCNUM			0
-
 /* constants concerning the symbol table */
 #define DICTSIZE			211
 #define HASH1				4

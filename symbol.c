@@ -77,10 +77,6 @@
 /* - move_bucket(): it moves a bucket to the head of the list	*/
 /*		    in which it lies;				*/
 /* - hash_pjw(): it computes the hash function;			*/
-/* - push_external_env(): it pushes the entry for the external	*/
-/*			  environment onto the scope stack;	*/
-/* - push_global_env(): it pushes the entry for the global	*/
-/*			environment onto the scope stack;	*/
 /* - allocate_local_env_entry(): it allocates a local		*/
 /*				 environment entry;		*/
 /* - allocate_binding_entry(): it allocates a binding entry.	*/
@@ -118,24 +114,14 @@ static LOCALENVENTRY *curr_local_env;
 static STBUCKET *dictionary[DICTSIZE];
 			       /* pointers to bucket lists */
 
-static LOCALENVENTRY	*external_env;
-			       /* pointer to the entry for the */
-			       /* external environment */
-
 static int		curr_nesting_depth;
 		               /* current nesting depth */
 
-static void             push_external_env();
-static void             push_global_env();
 static int              hash_pjw();
 static void             allocate_local_env_entry();
 static void             allocate_binding_entry();
 static void             move_bucket();
 static void             allocate_bucket();
-
-/* I/O library procedure names */
-static char *		library_proc_names[] = {"empty"
-					       };
 
 /* keywords */
 static char *		keywords[] =
@@ -206,8 +192,8 @@ void init_symbol_table()
 	curr_local_env = NULL;
 	curr_nesting_depth = NONESTING;
 
-	push_external_env();
-	push_global_env();
+	push_local_env();
+	push_local_env();
 }
 
  /* The following function searches the symbol table for an identifier */
@@ -367,32 +353,6 @@ hash_pjw(id)
 			h = h ^ (g >> HASH3) ^ g;
 	}
 	return(h % DICTSIZE);
-}
-
- /* The following function pushes the entry for the external environment */
- /* onto the scope stack. */
-static
-void push_external_env()
-{
-	STBUCKET	*st;
-	int		i;
-
-	push_local_env(NULL);
-	external_env = curr_local_env;
-	for (i = 0; i < LIBRARYPROCNUM; i++)
-	{
-		search_bucket(&st,
-			      library_proc_names[i]);
-		allocate_binding_entry(st,external_env,NULL,DEF);
-	}
-}
-
- /* The following function pushes the entry for the global environment */
- /* onto the scope stack. */
-static
-void push_global_env()
-{
-	push_local_env();
 }
 
  /* The following function allocates a local environment entry. */
