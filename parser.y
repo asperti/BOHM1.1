@@ -169,7 +169,6 @@ static bool defined();
 %token				LEQUAL         261
 %token				MEQUAL         262
 %token				NOTEQUAL       263
-%token				EOFKW          264
 %token				LETKW	       400
 %token				INKW           401
 %token                          INSPECTKW      402
@@ -191,7 +190,6 @@ static bool defined();
 %token				TAILKW         418
 %token				TESTNILKW      419
 %token				DEFKW          420
-%token				SHAREKW        421
 %token				NILKW          422
 %token				GARBAGEKW      423
 %token				OPTIONKW       424
