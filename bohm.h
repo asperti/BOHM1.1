@@ -80,6 +80,7 @@ extern void reduce_term();
 extern void reset_garbage();
 extern void save();
 extern void search_bucket();
+extern void show_garb_stat();
 extern void signal_error();
 extern void user();
 

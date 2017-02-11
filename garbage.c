@@ -423,3 +423,12 @@ void reset_garbage()
 	usr_garb_time = 0;
 	sys_garb_time = 0;
 }
+
+void show_garb_stat()
+{
+	printf("Total number of garbage calls      %lu\n", cl_count);
+	printf("Total number of garbage operations %lu\n", er_count);
+	printf("Garbage collection done in %.2f:usr %.2f:sys seconds\n",
+		(double)usr_garb_time / 60, (double)sys_garb_time / 60);
+	printf("*****************************************************\n");
+}

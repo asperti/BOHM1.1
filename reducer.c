@@ -168,12 +168,7 @@ void reduce_term(root)
 	    printf("*****************************************************\n");
 	}
 	if((option!=3)&&(seegarb))
-	  {
-	    printf("Total number of garbage calls      %lu\n",cl_count);
-	    printf("Total number of garbage operations %lu\n",er_count);
-	    printf("Garbage collection done in %.2f:usr %.2f:sys seconds\n",(double) usr_garb_time/60, (double)sys_garb_time/60);
-	    printf("*****************************************************\n");
-	  }
+		show_garb_stat();
 	if(seenode)
 	  {
 	    printf("Max. number of nodes seen up to this time %u\n",max_nodes);
