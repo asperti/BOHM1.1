@@ -416,7 +416,10 @@ FORM *erase;
 	}
 }
 
-
-
-
-
+void reset_garbage()
+{
+	er_count = 0;
+	cl_count = 0;
+	usr_garb_time = 0;
+	sys_garb_time = 0;
+}

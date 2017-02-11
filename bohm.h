@@ -77,6 +77,7 @@ extern void pop_local_env();
 extern void push_local_env();
 extern void rdbk();
 extern void reduce_term();
+extern void reset_garbage();
 extern void save();
 extern void search_bucket();
 extern void signal_error();

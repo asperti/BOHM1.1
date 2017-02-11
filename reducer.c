@@ -119,8 +119,6 @@ void reduce_term(root)
      eq=0;
      redexes = 0;
      type_error = false;
-     er_count=0;
-     cl_count=0;
      max_index=0;
      if(seenode){
 	 printf("\n*****************************************************\n");
@@ -132,8 +130,7 @@ void reduce_term(root)
      sys_time = time.tms_stime;
      init_stack();
      f1 = lo_redex(root);
-     usr_garb_time = 0;
-     sys_garb_time = 0;
+     reset_garbage();
      while ((f1 != root) && (!type_error))
 	{
 	   if (f1->nport[0]==0) {
