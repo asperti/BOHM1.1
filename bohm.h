@@ -5,7 +5,6 @@
 #include "struct.h"
 
 #include <stdbool.h>
-#include <time.h>
 
 extern bool error_detected;
 extern bool loading_mode;
@@ -14,15 +13,11 @@ extern bool seegarb;
 extern bool seenode;
 extern bool seetime;
 extern char *include_file;
-extern clock_t sys_garb_time;
-extern clock_t usr_garb_time;
 extern FORM *del_head;
 extern FORM *headfree;
 extern FORM *lastinputterm;
 extern int lines;
 extern int option;
-extern long unsigned cl_count;
-extern long unsigned er_count;
 extern unsigned limit;
 extern unsigned max_nodes;
 extern unsigned num_nodes;

@@ -45,17 +45,18 @@
 #define EXISTENT		3
 #define NOTEXISTENT		4
 
+static long unsigned er_count; /* counter for erasing operations */
+static long unsigned cl_count; /* counter for clean() calls */
+static clock_t usr_garb_time;
+static clock_t sys_garb_time;
+
 static void     garbage();
 
 /*************************************************************************/
 /* 4. Definitions of variables to be exported.                           */
 /*************************************************************************/
 
-long unsigned	er_count;	     /* counter for erasing operations */
-long unsigned   cl_count;	     /* counter for clean() calls.     */
 FORM *del_head=NULL;        	     /* head of erases list */
-clock_t      usr_garb_time;
-clock_t      sys_garb_time;
 struct tms partial_time, final_time;
 
 /*************************************************************************/
