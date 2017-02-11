@@ -32,6 +32,10 @@
 /* 4. Definitions strictly local to the module.                 */
 /****************************************************************/
 
+/* constants concerning crash handling */
+#define COMPILERCRASH			2
+#define NOTENOUGHMEMORY			0
+
 /* The following function signals errors causing abort. */
 static void signal_crash(crash_type)
 	int crash_type; /* crash type */

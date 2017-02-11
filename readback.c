@@ -18,21 +18,12 @@
 #include <stdint.h>
 #include <stdio.h>
 
-/****************************************************************/
-/* Declaration of variables strictly local to the module.	*/
-/****************************************************************/
+#define PRINT_MAX 100
+
 static int left_to_print;
                   /* maximum number of characters yet to print */
 
-/****************************************************************/
-/* Declaration of functions strictly local to the module.	*/
-/****************************************************************/
 static void rdbk_1(), rdbk_list();
-
-
-/****************************************************************/
-/* Definitions of functions to be exported.			*/
-/****************************************************************/
 
  /* the following function prints on the standard output the */
  /* standard syntactical representation of the graphical term */

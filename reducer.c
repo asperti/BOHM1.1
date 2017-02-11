@@ -37,16 +37,11 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <sys/times.h>
-#include <sys/types.h>
 
 /****************************************************************/
 /* 2. Inclusion of declarations that are being imported.        */
 /****************************************************************/
-
-extern clock_t usr_garb_time;
-extern clock_t sys_garb_time;
 
 /****************************************************************/
 /* 3. Definitions strictly local to the module.                 */
@@ -63,6 +58,11 @@ static void    reduce_redex();
 static void    reduce_form();
 static FORM    *lo_redex();
 static int     auxnext;
+
+#ifndef STACK_SIZE
+#define STACK_SIZE 10000000
+#endif
+
 static FORM    *auxstack[STACK_SIZE];
 
 static FORM *pop()

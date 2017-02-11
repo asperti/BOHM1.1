@@ -1,10 +1,11 @@
 #ifndef _BOHM_H
 #define _BOHM_H
 
-#include "define.h"
+#include "form.h"
 #include "struct.h"
 
 #include <stdbool.h>
+#include <time.h>
 
 extern bool error_detected;
 extern bool loading_mode;
@@ -13,6 +14,8 @@ extern bool seegarb;
 extern bool seenode;
 extern bool seetime;
 extern char *include_file;
+extern clock_t sys_garb_time;
+extern clock_t usr_garb_time;
 extern FORM *del_head;
 extern FORM *headfree;
 extern FORM *lastinputterm;

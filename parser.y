@@ -132,6 +132,8 @@ FORM                    *lastinputterm;
  /***************************************************************/
 
 %{
+#define UNBOUND_VARIABLE "scoping error: undefined variable"
+
 int                    app_nesting_depth;
 PATTERN                *pattmp;
 
@@ -169,7 +171,6 @@ static bool defined();
 %token				LEQUAL         261
 %token				MEQUAL         262
 %token				NOTEQUAL       263
-%token				EOFKW          264
 %token				LETKW	       400
 %token				INKW           401
 %token                          INSPECTKW      402
@@ -191,7 +192,6 @@ static bool defined();
 %token				TAILKW         418
 %token				TESTNILKW      419
 %token				DEFKW          420
-%token				SHAREKW        421
 %token				NILKW          422
 %token				GARBAGEKW      423
 %token				OPTIONKW       424
@@ -358,7 +358,7 @@ global_decl	:    DEFKW ID '='
 				  app_nesting_depth--;
 				  lastinputterm = closeterm(1,$5);
 				  $$ = lastinputterm;
-				  create_variable_binding($2,$$,DEF);
+				  create_variable_binding($2,$$);
 				}
 		;
 
@@ -488,7 +488,7 @@ expr0           : 	TRUEKW
 				{
 				  app_nesting_depth--;
 				  push_local_env();
-				  create_variable_binding($2,NULL,LOCAL);
+				  create_variable_binding($2, NULL);
 				}
 			expr
 				{
@@ -499,7 +499,7 @@ expr0           : 	TRUEKW
 		 |	LETRECKW ID '='
 				{
 				  push_local_env();
-				  create_variable_binding($2,NULL,LOCAL);
+				  create_variable_binding($2, NULL);
 				  app_nesting_depth++;
 				 }
 			expr
@@ -648,9 +648,7 @@ pattern         :       CONSKW '(' pattern ',' pattern ')'
                                   pattmp=(PATTERN *)malloc(sizeof(PATTERN));
                                   pattmp->term=
                                     buildvoidterm(app_nesting_depth);
-                                  create_variable_binding($1,
-                                                          NULL,
-                                                          LOCAL);
+                                  create_variable_binding($1, NULL);
                                   pattmp->var_list=
                                     makevarlist($1,pattmp->term);
                                   $$=pattmp;

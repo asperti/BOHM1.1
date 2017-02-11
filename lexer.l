@@ -141,8 +141,6 @@ string                  [^\"]*\"
 			/* integer */
                         if (loading_mode == 1) ECHO; 
 			yylval.num_const = to_nat_s(yytext);
-			if (yylval.num_const == NUMOUTOFRANGE)
-				signal_error(NUMOVERFLOW);
 			return(NUMCONST);
 		   }
 
@@ -182,22 +180,24 @@ string                  [^\"]*\"
 {illegal_char}	{
 			/* detection of an illegal character */
                         if (loading_mode == 1) ECHO; 
-			signal_error(ILLEGALCHAR);
+			signal_error("lexical error: illegal character");
                 }
 
 %%
+
+#define MAXINT 2147483647
 
 /* The following function turns a given string of digits into a natural */
 /* and checks for presence of overflow. */
 static int to_nat_s(char *s)
 {
-	long n;
+	long long n;
 
 	for (n = 0; (n <= MAXINT) && (*s != '\0'); s++)
-		n = n * NUMBASE + (*s - '0');
+		n = 10 * n + (*s - '0');
 
 	if (n > MAXINT)
-		return(NUMOUTOFRANGE);
-	else
-		return((int)n);
+		signal_error("lexical error: numerical constant overflow");
+
+	return n;
 }

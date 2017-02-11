@@ -31,8 +31,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <sys/types.h>
 #include <sys/times.h>
 
 /*************************************************************************/
@@ -42,6 +40,10 @@
 /*************************************************************************/
 /* 3. Declaration of names strictly local to the module.                 */
 /*************************************************************************/
+
+/* constants concerning garbage */
+#define EXISTENT		3
+#define NOTEXISTENT		4
 
 static void     garbage();
 

@@ -58,9 +58,6 @@ typedef struct binding_entry
 					/* pointer to the entry for the */
 					/* binding previously enforced */
 					/* in the same local environment */
-	  int			entry_type;
-					/* indicates DEF, SHARE or LOCAL */
-					/* type entry */
 	}		BINDINGENTRY;
 
 /* graphical form descriptor type */
