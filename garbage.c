@@ -57,7 +57,6 @@ static void     garbage();
 /*************************************************************************/
 
 FORM *del_head=NULL;        	     /* head of erases list */
-struct tms partial_time, final_time;
 
 /*************************************************************************/
 /* 5. Definitions of functions to be exported.                           */
@@ -89,6 +88,7 @@ FORM *d;
 void clean()
 {
 	FORM *q;
+	struct tms partial_time, final_time;
 	if (seegarb)
 	  times(&partial_time);
 	cl_count++;
