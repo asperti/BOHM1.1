@@ -45,18 +45,18 @@
 #define EXISTENT		3
 #define NOTEXISTENT		4
 
+static long unsigned er_count; /* counter for erasing operations */
+static long unsigned cl_count; /* counter for clean() calls */
+static clock_t usr_garb_time;
+static clock_t sys_garb_time;
+
 static void     garbage();
 
 /*************************************************************************/
 /* 4. Definitions of variables to be exported.                           */
 /*************************************************************************/
 
-long unsigned	er_count;	     /* counter for erasing operations */
-long unsigned   cl_count;	     /* counter for clean() calls.     */
 FORM *del_head=NULL;        	     /* head of erases list */
-clock_t      usr_garb_time;
-clock_t      sys_garb_time;
-struct tms partial_time, final_time;
 
 /*************************************************************************/
 /* 5. Definitions of functions to be exported.                           */
@@ -88,6 +88,7 @@ FORM *d;
 void clean()
 {
 	FORM *q;
+	struct tms partial_time, final_time;
 	if (seegarb)
 	  times(&partial_time);
 	cl_count++;
@@ -416,7 +417,19 @@ FORM *erase;
 	}
 }
 
+void reset_garbage()
+{
+	er_count = 0;
+	cl_count = 0;
+	usr_garb_time = 0;
+	sys_garb_time = 0;
+}
 
-
-
-
+void show_garb_stat()
+{
+	printf("Total number of garbage calls      %lu\n", cl_count);
+	printf("Total number of garbage operations %lu\n", er_count);
+	printf("Garbage collection done in %.2f:usr %.2f:sys seconds\n",
+		(double)usr_garb_time / 60, (double)sys_garb_time / 60);
+	printf("*****************************************************\n");
+}

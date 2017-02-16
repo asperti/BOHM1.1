@@ -119,8 +119,6 @@ void reduce_term(root)
      eq=0;
      redexes = 0;
      type_error = false;
-     er_count=0;
-     cl_count=0;
      max_index=0;
      if(seenode){
 	 printf("\n*****************************************************\n");
@@ -132,8 +130,7 @@ void reduce_term(root)
      sys_time = time.tms_stime;
      init_stack();
      f1 = lo_redex(root);
-     usr_garb_time = 0;
-     sys_garb_time = 0;
+     reset_garbage();
      while ((f1 != root) && (!type_error))
 	{
 	   if (f1->nport[0]==0) {
@@ -171,12 +168,7 @@ void reduce_term(root)
 	    printf("*****************************************************\n");
 	}
 	if((option!=3)&&(seegarb))
-	  {
-	    printf("Total number of garbage calls      %lu\n",cl_count);
-	    printf("Total number of garbage operations %lu\n",er_count);
-	    printf("Garbage collection done in %.2f:usr %.2f:sys seconds\n",(double) usr_garb_time/60, (double)sys_garb_time/60);
-	    printf("*****************************************************\n");
-	  }
+		show_garb_stat();
 	if(seenode)
 	  {
 	    printf("Max. number of nodes seen up to this time %u\n",max_nodes);
