@@ -131,9 +131,9 @@ string                  [^\"]*\"
 
 {id}		   {
 			/* identifier */
-                        if (loading_mode == 1) ECHO; 
+                        if (loading_mode == 1) ECHO;
 			search_bucket(&(yylval.st_bucket),
-				      yytext);
+				       yytext);
 			return(yylval.st_bucket->token);
 		   }
 

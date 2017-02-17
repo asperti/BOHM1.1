@@ -71,7 +71,7 @@ typedef struct form
 					/* Integer value for numeric */
 					/* forms or indicator of safeness */
 					/* for other forms  */
-	  short int             index;
+	  int                   index;
 					/* index of the form */
 	  char                  nport[3];
 					/* numbers of the ports */
@@ -89,7 +89,7 @@ typedef struct form
 					/* BRACKET only the first two */
 					/* fields are meaningful; for */
 		                        /* ROOT only the first one is) */
-	  short int             nlevel[3];
+	  int                   nlevel[3];
 
 	  struct form           *next;
 	  struct form           *prev;

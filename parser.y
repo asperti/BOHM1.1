@@ -122,9 +122,11 @@ bool			quit,
 			       /* flag indicating if parsing is */
 			       /* done after a load directive */
 char                    *include_file;
-FORM                    *lastinputterm;
+FORM                    *lastinputterm,
 			       /* pointer to the root of the */
 			       /* term in input */
+                        *current_pos;
+ 			       /* for inspection mode */
 %}
 
  /***************************************************************/
@@ -197,8 +199,8 @@ static bool defined();
 %token				OPTIONKW       424
 %token				INFOKW         425
 %token				SAVEKW         426
-%token <astring>                ASTRING        427
-
+%token				TRAVELKW       427
+%token <astring>                ASTRING        428
 
 
  /***************************************************************/
@@ -218,6 +220,8 @@ static bool defined();
 %type	<term>			list
 %type   <pattern>               pattern
 %type   <pattern>               comlistpat
+%type   <astring>               optstring
+%type   <num_const>             optint
 
 
  /***************************************************************/
@@ -266,8 +270,15 @@ input           :      directive
 
 directive       :      '#' INSPECTKW arg EXPRDELIM
 				{
+				   if ($3 == NULL) $3=lastinputterm;
 				   $$ = $3;
 				   inspect_driver($3);
+				   YYACCEPT;
+				}
+                |      '#' TRAVELKW arg NUMCONST EXPRDELIM
+				{
+				   if ($3 == NULL) $3=current_pos;
+				   current_pos = inspect($4,$3);
 				   YYACCEPT;
 				}
 		|      '#' QUITKW EXPRDELIM
@@ -287,14 +298,14 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 				   user();
 				   YYACCEPT;
 				}
-		|       '#' OPTIONKW EXPRDELIM
+		|       '#' OPTIONKW optint EXPRDELIM
 				{
-				   menu();
+				   menu($3);
 				   YYACCEPT;
 				}
-		|       '#' INFOKW EXPRDELIM
+		|       '#' INFOKW optstring EXPRDELIM
 				{
-				   info();
+				   info($3);
 				   YYACCEPT;
 				}
 		|       '#' SAVEKW ASTRING EXPRDELIM
@@ -319,7 +330,7 @@ directive       :      '#' INSPECTKW arg EXPRDELIM
 
 arg             :
 				{
-				   $$ = lastinputterm;
+				   $$ = NULL;
 				}
 		|       ID
 				{
@@ -333,9 +344,28 @@ arg             :
 				 }
 		;
 
+optstring       :
+				{
+				   $$ = "";
+				}
+                |       ASTRING
+                                {
+				   $$ = $1;
+				}
+
+optint          :
+				{
+				   $$ = -1;
+				}
+                |       NUMCONST
+                                {
+				   $$ = $1;
+				}
+
 term            :       expr EXPRDELIM
 				{
 				  lastinputterm = closeterm(0,$1);
+				  current_pos = lastinputterm;
 				  $$ = lastinputterm;
 				  reduce_term($$);
 				  YYACCEPT;

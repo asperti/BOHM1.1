@@ -1,7 +1,7 @@
 {This file contains some examples of programs over lists}
 
-{lenght of a list}
-def lenght = rec l = \x.if isnil(x) then 0 
+{length of a list}
+def length = rec l = \x.if isnil(x) then 0 
                                        else 1 + (l tail(x));;
 
 {append}
@@ -60,21 +60,12 @@ def insert = rec ins = \e.\l. if isnil(l)
 
 def quicksort = rec qs = \l. if isnil(l) 
                 then nil 
-                else if (lenght l) == 1 
-                  then l 
-                  else let l1 = head((partition \x.head(l) <= x tail(l))) 
-                       in let l2 = head(tail((partition \y.head(l) < y tail(l)))) 
-                          in (append (qs l1) cons(head(l),(qs l2)));;  
+                else let l1 = head((partition \x.head(l) <= x tail(l))) 
+                  in let l2 = head(tail((partition \y.head(l) < y tail(l)))) 
+                  in (append (qs l1) cons(head(l),(qs l2)));;  
 
 {genlist takes an integer n and generates the list of integers 
  from n to 0 in decreasing order}
 
 def genlist = rec gen = \n.if n == 0 then nil else cons(n,(gen (n-1)));;
-
- 
-
-
-
-
-
 

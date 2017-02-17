@@ -1,0 +1,43 @@
+#info "nyyy";;
+
+{pure lambda terms}
+#load "examples/purelambda";;
+(ten two I I);;
+(ten two \x.x+1 0);;
+(ten two I I);;
+(two two two two \x.x+1 0);;
+(two two two two two I I);;
+(two (ten two) I I);;
+(two (ten two) \x.1+x 0);;
+(ten two two I I);;
+(two two ten I I);;
+(two two ten \x.1+x 0);;
+
+(Factprim eight I I);;
+(Factprim eight \x.x+1 0);;
+
+(Comp (Factprim five) (Factrec five) 1 0);;
+
+(Fiboprim seven I I);;
+(Fiboprim seven \x.x+1 0);;
+
+(Comp (Fiboprim six) (Fiborec six) 1 0);;
+
+{lists}
+#load "examples/lists";;
+def list100 = (genlist 100);;
+(length list100);;
+
+(length (quicksort list100));;
+
+{tartaglia (binomial coefficients)}
+#load "examples/tartaglia";;
+
+(tartaglia 7 4);; {binomial coefficient (7 4)}
+(tartaglia1 7 4);;
+
+
+(tartaglia 15 8);; 
+(tartaglia1 15 8);; {on large numbers this is faster}
+
+

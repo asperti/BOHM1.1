@@ -107,7 +107,7 @@
 /****************************************************************/
 
 /* constants concerning keywords */
-#define KEYWORDNUM			27
+#define KEYWORDNUM			28
 #define FIRSTKEYWORD			400
 
 /* constants concerning the symbol table */
@@ -164,6 +164,7 @@ static char *		keywords[] =
 					"option",
 					"info",
 					"save",
+					"travel",
 				};
 
 /* The following function turns a given string into a lower case one. */

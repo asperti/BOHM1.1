@@ -141,8 +141,8 @@ void reduce_term(root)
 		  max_index = f2->index;}
 	     else
 	       {reduce_redex(f2,f1);
-	        if (f2->index > max_index)
-		  max_index = f2->index;}
+	        if (f1->index > max_index)
+		  max_index = f1->index;}
 	   }
 	   else
 	     reduce_form(f1);
@@ -158,6 +158,10 @@ void reduce_term(root)
 	    printf("*****************************************************\n");
 	    printf("Reduction done in %.2f:user    ",((double)usr_time / 60));
 	    printf("%.2f:system seconds\n", ((double)sys_time / 60));
+	    printf("*****************************************************\n");
+	}
+	if(seenumber){
+	    printf("*****************************************************\n");
 	    printf("Total number of interactions: %u\n", counter);
 	    printf("Total number of APP-LAMBDA redexes: %u\n", redexes);
 	    printf("Proper Interactions:%d\n",eq);
@@ -168,7 +172,7 @@ void reduce_term(root)
 	    printf("*****************************************************\n");
 	}
 	if((option!=3)&&(seegarb))
-		show_garb_stat();
+		show_garb_stat(seetime);
 	if(seenode)
 	  {
 	    printf("Max. number of nodes seen up to this time %u\n",max_nodes);

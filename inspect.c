@@ -25,12 +25,6 @@
 #include <stdio.h>
 
 /****************************************************************/
-/* Declarations of functions strictly local to the module    	*/
-/****************************************************************/
-
-static FORM *inspect();
-
-/****************************************************************/
 /* Definitions of functions to be exported.			*/
 /****************************************************************/
 
@@ -62,7 +56,7 @@ void inspect_driver(f)
     }
 }      
 
-static FORM *inspect(int p, FORM *f)
+extern FORM *inspect(int p, FORM *f)
 {
 	bool ok=true;
 	switch(p)

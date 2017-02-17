@@ -11,7 +11,7 @@
 /* The external functions are:                                             */
 /* - do_menu1(): It prints the first menu, asking the user which strategy  */
 /*               he wants to use.                                          */
-/* - do_menu2(): If the second strategie has been chosen, this function    */
+/* - do_menu2(): If the second strategyhas been chosen, this function      */
 /*               shows some possible limits for memory occupation and asks */
 /*               the user to select one of them.                           */
 /* - do_menu3(): It is used to insert a limit different from the ones      */
@@ -30,8 +30,8 @@
 
 static bool do_menu1();
 static bool do_menu2();
-static void    do_menu3();
-static int     take_char();
+static void do_menu3();
+static int  take_char();
   
 /***************************************************************************/
 /* 2. Definitions of variables to be exported.                             */
@@ -40,6 +40,7 @@ static int     take_char();
 int	 option;  /* Initial option selected */
 unsigned limit;   /* Limit for allocable operators (only for option 2) */
 bool  seetime;
+bool  seenumber;
 bool  seenode;
 bool  seegarb;
 
@@ -49,9 +50,15 @@ bool  seegarb;
 /* 3. Definitions of functions to be exported.                              */
 /****************************************************************************/
 
-void menu()
+void menu(choice)
+    int choice;
 {
-    if(do_menu1())
+    if (choice == 1) option = 1;
+    else if (choice > 1) /* we interpret this value as max  */
+                         /* allocation before invoking g.c. */
+      {option = 2; limit = choice;}
+    else
+      if(do_menu1())
 	if(do_menu2())
 	    do_menu3();
 
@@ -61,28 +68,53 @@ void menu()
 }
 
 
-void info()
+void info(choices)
+    char *choices;
 {
-    int select='x';
+    bool nomoreargs; 
+    int select;
+        nomoreargs = choices[0] == '\0';
+    if (nomoreargs) select = 'x'; else select = choices[0];
     while((select!='y')&&(select!='n')){
-	printf("Display time and number of interactions?\n");
+	printf("Display time?\n");
 	printf("Please answer 'y' or 'n' (type 'h' for help).\n\n>");
 	select = take_char();
 	printf("\n");
 	switch(select){
-	    case 'y':
-		seetime=true;
+	    case 'y': break;
+	    case 'n': break;
+	    case 'h':
+		printf("HELP . . .\n\n");
+		printf("Answering 'y', the interpreter will display, after\n");
+		printf("each reduction, the elapsed time, divided into:\n");
+		printf("-     User   time (given in seconds).\n");
+		printf("-     System time (given in seconds).\n");
 		break;
-	    case 'n':
-		seetime=false;
-		break;
+	    default:
+		printf("Illegal answer (type 'h' for help) . . .\n");
+	}
+    printf("\n");
+    }
+    switch(select){
+       case 'y':
+	 seetime=true; break;
+       case 'n':
+	 seetime=false;
+    }
+    nomoreargs = nomoreargs || choices[1] == '\0';
+    if (nomoreargs) select = 'x'; else select = choices[1];
+    while((select!='y')&&(select!='n')){
+	printf("Display number of interactions?\n");
+	printf("Please answer 'y' or 'n' (type 'h' for help).\n\n>");
+	select = take_char();
+	printf("\n");
+	switch(select){
+	    case 'y': break;
+	    case 'n': break;
 	    case 'h':
 		printf("HELP . . .\n\n");
 		printf("Answering 'y', the interpreter will display,\n");
 		printf("after each reduction, the following informations:\n");
-		printf("- Time taken by reduction, divided into:\n");
-		printf("-     User   time (given in seconds).\n");
-		printf("-     System time (given in seconds).\n");
 		printf("- Total number of interactions.\n");
 		printf("  (but the garbage ones)\n");
 		printf("- Total number of family redex reductions.\n");
@@ -91,23 +123,25 @@ void info()
 		break;
 	    default:
 		printf("Illegal answer (type 'h' for help) . . .\n");
-		break;
 	}
     printf("\n");
     }
-    select = 'x';
+    switch(select){
+       case 'y':
+	 seenumber=true; break;
+       case 'n':
+	 seenumber=false;
+    }
+    nomoreargs = nomoreargs || choices[2] == '\0';
+    if (nomoreargs) select = 'x'; else select = choices[2]; 
     while((select!='y')&&(select!='n')){
 	printf("Display memory occupation informations ?\n");
 	printf("Please answer 'y' or 'n' (type 'h' for help).\n\n>");
 	select = take_char();
 	printf("\n");
 	switch(select){
-	    case 'y':
-		seenode=true;
-		break;
-	    case 'n':
-		seenode=false;
-		break;
+	    case 'y': break;
+	    case 'n': break;
 	    case 'h':
 		printf("HELP . . .\n\n");
 		printf("Answering 'y', the program will display\n");
@@ -124,20 +158,23 @@ void info()
 		printf("Illegal answer (type 'h' for help) . . .\n");
 	}
     printf("\n");
-    }
-    select = 'x';
+    };
+    switch(select){
+      case 'y':
+        seenode=true; break;
+      case 'n':
+	seenode=false;
+    };
+    nomoreargs = nomoreargs || choices[3] == '\0';
+    if (nomoreargs) select = 'x'; else select = choices[3];
     while((select!='y')&&(select!='n')){
 	printf("Display garbage collection informations ?\n");
 	printf("Please answer 'y' or 'n' (type 'h' for help).\n\n>");
 	select = take_char();
 	printf("\n");
 	switch(select){
-	    case 'y':
-		seegarb=true;
-		break;
-	    case 'n':
-		seegarb=false;
-		break;
+	    case 'y': break;
+	    case 'n': break;
 	    case 'h':
 		printf("HELP . . .\n\n");
 		printf("Answering 'y' the program will display\n");
@@ -157,12 +194,17 @@ void info()
 		printf("Illegal answer (type 'h' for help) . . .\n");
 	}
     printf("\n");
-    }
+    };
+    switch(select){
+      case 'y':
+        seegarb=true; break;
+      case 'n':
+        seegarb=false; 
+    };
     system("clear");
     printf("***********************************************************\n");
     printf("* O.K. Your choice has been recorded . . .                *\n");
     printf("***********************************************************\n\n");
-
 }
 
 
